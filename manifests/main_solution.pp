@@ -30,7 +30,7 @@ define pentaho::main_solution (
 		default					=>	undef,
 	}
 
-	$dialect = $dbtype ? {
+	$delegate = $dbtype ? {
 		/(mysql|mysql5)/		=>	"StdJDBCDelegate",
 		'postgresql'			=>	"PostgreSQLDelegate",
 		/(oracle|oracle10g)/	=>	"oracle.OracleDelegate",
@@ -72,7 +72,7 @@ define pentaho::main_solution (
 	# Configuring the database related file for hibernate
 	#
 
-	File { require => [Exec["Get files Pentaho ${version} for  ${instance}"], Exec["Update pentaho solution systeamd & admin folder for  Pentaho ${version} for  ${instance}"]], }
+	File { require => [Exec["Get files Pentaho ${version} for  ${name}"], Exec["Update pentaho solution systeamd & admin folder for  Pentaho ${version} for  ${name}"]], }
 	file {"${pentaho_solution}/system/applicationContext-spring-security-hibernate.properties" :
 		ensure => present,
 		content => template("pentaho/system/applicationContext-spring-security-hibernate-${version}.properties"),
@@ -86,6 +86,11 @@ define pentaho::main_solution (
 	file {"${pentaho_solution}/system/hibernate/${dbtype}.hibernate.cfg.xml" :
 		ensure => present,
 		content => template("pentaho/system/${dbtype}.hibernate.cfg-${version}.xml"),
+	}
+
+	file {"${pentaho_solution}/system/hibernate/hibernate-settings.xml" :
+		ensure => present,
+		content => template("pentaho/system/hibernate-settings-${version}.xml"),
 	}
 
 	file {"${pentaho_solution}/system/quartz/quartz.properties" :

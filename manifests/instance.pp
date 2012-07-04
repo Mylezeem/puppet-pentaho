@@ -1,11 +1,12 @@
 define pentaho::instance (
                           $version = '3.8.0',
                           $pentaho_solution = '/opt/pentaho/itestyanis/pentaho_solutionstest',
+						  $hsqldb_path = '/opt/hsqldb',
 						  $sample = 'false',
 						  $dbtype = 'mysql5',
 						  $user = 'root',
-						  $pass = 'bitfocus',
-						  $ip = '192.168.1.1',
+						  $pass = '0996UX',
+						  $ip = '127.0.0.1',
 						  $port = '3306',
                           ) {
 
@@ -21,6 +22,13 @@ define pentaho::instance (
   #
 
   pentaho::main_solution {"${name}" :
+  }
+
+  #
+  # Installing the underlying pentaho system bases
+  #
+
+  pentaho::backend {"${name}" :
   }
 
   #
