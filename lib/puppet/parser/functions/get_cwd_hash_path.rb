@@ -1,7 +1,7 @@
 module Puppet::Parser::Functions
   newfunction(:get_cwd_hash_path, :type => :rvalue) do |args|
 
-    folder_array = args[0].split("/")
+    folder_array = File.dirname(args[0]).split("/")
     cpath = ''
     fs = Hash.new()
     folder_array.each do |x|

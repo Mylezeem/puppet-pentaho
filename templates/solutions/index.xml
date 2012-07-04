@@ -1,0 +1,7 @@
+<index>
+	<name><%= name %></name>
+	<description><%= description %></description>
+	<icon><%= icon %></icon>
+	<visible><%= visible %></visible>
+	<display-type><%= displaytype %></display-type>
+</index>
