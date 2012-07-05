@@ -97,4 +97,15 @@ define pentaho::main_solution (
 		ensure => present,
 		content => template("pentaho/system/quartz-${version}.properties"),
 	}
+
+	file {"${pentaho_solution}/system/simple-jndi/jdbc.properties" :
+		ensure => present,
+		content => template("pentaho/system/jdbc.properties"),
+	}
+
+	file {"${pentaho_solution}/system/logs" :
+		ensure	=>	directory,
+		group	=>	tomcat6,
+		mode	=>	'0775',
+	}
 }	

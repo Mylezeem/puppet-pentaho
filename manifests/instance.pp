@@ -7,7 +7,7 @@ define pentaho::instance (
 						  $dbtype = 'mysql5',
 						  $user = 'root',
 						  $pass = '0996UX',
-						  $ip = '127.0.0.1',
+						  $ip = 'localhost',
 						  $port = '3306',
                           ) {
 

@@ -40,4 +40,11 @@ define pentaho::webapps() {
 		ensure => directory,
 	}
 
+	exec {"mv /tmp/pentaho_${name}/pentaho_${name} /var/lib/tomcat6/webapps/" :
+		cwd		=> "/tmp",
+		path	=> ["/usr/bin", "/bin", "/usr/sbin"],
+		unless  => "ls /var/lib/tomcat6/webapps/pentaho_${name}",
+		require =>  File["/tmp/pentaho_${name}/pentaho_${name}/WEB-INF/web.xml"],
+	}
+
 }
