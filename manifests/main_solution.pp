@@ -14,6 +14,10 @@ define pentaho::main_solution (
 	#
 	#
 
+	$instance  = $name
+	$dbtype = hiera('dbtype')
+	$pentaho_solution = hiera('pentaho_solution')
+
 	$driver = $dbtype ? {
 		/(mysql|mysql5)/		=>	"com.mysql.jdbc.Driver",
 		'postgresql'			=>	"org.postgresql.Driver",
@@ -106,6 +110,7 @@ define pentaho::main_solution (
 	file {"${pentaho_solution}/system/logs" :
 		ensure	=>	directory,
 		group	=>	tomcat6,
-		mode	=>	'0775',
+		mode	=>	'0777',
+		recurse	=> true,
 	}
 }	
