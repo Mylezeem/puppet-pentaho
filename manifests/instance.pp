@@ -51,31 +51,41 @@ define pentaho::instance (
 
   $dirname = pentaho_dirname(hiera('pentaho_solution'))
 
-	pentaho::main_solution {"${name}" :
-		require => File["${dirname}"],
-	}
+  pentaho::main_solution {"${name}" :
+	require => File["${dirname}"],
+  } 
 
   #
   # Installing the underlying pentaho system tables
   #
 
-	pentaho::backend {"${name}" :
-		require => Pentaho::Main_solution["${name}"],
-	}
+  pentaho::backend {"${name}" :
+    require => Pentaho::Main_solution["${name}"],
+  }
+
+  #
+  # Creating Pentaho Roles
+  #
+  create_resources('pentaho::role', hiera_hash('role'))
+
+  #
+  # Creating Pentaho Users
+  #
+  create_resources('pentaho::user', hiera_hash('user'))
 
   #
   # Creating the solutions folders 
   #
 
-#  create_resources(pentaho::solution, {'clarity' => {}, 'montgomery' => {visible => 'false',}})
+  create_resources(pentaho::solution, {'clarity' => {}, 'montgomery' => {visible => 'false',}})
 
 
   #
   # Creating the Pentaho instance
   #
 
-	pentaho::webapps{"${name}" :
-		require => Pentaho::Backend["${name}"],
-	}
+  pentaho::webapps{"${name}" :
+   require => Pentaho::Backend["${name}"],
+ }
 
 }

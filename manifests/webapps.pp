@@ -5,7 +5,7 @@ define pentaho::webapps() {
 	$dbtype = hiera('dbtype')
 	$port = hiera('port')
 
-	if $dbtype == 'hsql' {
+	if $dbtype == "hsql" {
 		$hsql_extra_1 = "<context-param>
 							<param-name>hsqldb-databases</param-name>
 							<param-value>sampledata${instance}@${hsqldb_path}/${instance}/sampledata${instance},hibernate${instance}@${hsqldb_path}/${instance}/hibernate${instance},quartz${instance}@${hsqldb_path}/${instance}/quartz${instance}</param-value>
@@ -18,11 +18,10 @@ define pentaho::webapps() {
 		$hsql_extra_2 = "<listener>
 							<listener-class>org.pentaho.platform.web.http.context.HsqldbStartupListener</listener-class>
 						</listener>"
-	}
-
-	if $dbtype == 'hsql' {
 		$validationQuery = "select count(*) from INFORMATION_SCHEMA.SYSTEM_SEQUENCES"
 	} else {
+		$hsql_extra_1 = ""
+		$hsql_extra_2 = ""
 		$validationQuery = "select 1"
 	}
 
