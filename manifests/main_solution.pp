@@ -16,6 +16,7 @@ define pentaho::main_solution (
 
 	$instance  = $name
 	$dbtype = hiera('dbtype')
+	$version = hiera('version')
 	$pentaho_solution = hiera('pentaho_solution')
 
 	$driver = $dbtype ? {
@@ -126,12 +127,6 @@ define pentaho::main_solution (
 	file {"${pentaho_solution}/bi-developers/launch/learn_more_waqr.htm" :
 		content => template("pentaho/system/pentaho-style-${version}/learn_more_waqr.htm"),
 	}
-	file {"${pentaho_solution}/steel-wheels/charts/flash_parameter_template.html" :
-		content => template("pentaho/system/pentaho-style-${version}/flash_parameter_template.html"),
-	}
-	file {"${pentaho_solution}/steel-wheels/charts/parameter_template.html" :
-		content => template("pentaho/system/pentaho-style-${version}/parameter_template.html"),
-	}
 	file {"${pentaho_solution}/system/ui/templates/viewActionErrorTemplate.html" : 
 		content => template("pentaho/system/pentaho-style-${version}/viewActionErrorTemplate.html"),
 	}
@@ -215,7 +210,6 @@ define pentaho::main_solution (
 	}
 
 	if $version == "4.5.0" {
-		File { ensure => present, require => [Exec["Get files Pentaho ${version} for  ${name}"], Exec["Update pentaho solution systeamd & admin folder for  Pentaho ${version} for  ${name}"]], }
 		file {"${pentaho_solution}/system/pentaho-cdf/template-dashboard-clean.html" :
 			content => template("pentaho/system/pentaho-style-${version}/template-dashboard-clean.html"),
 		}
@@ -229,6 +223,13 @@ define pentaho::main_solution (
 			content => template("pentaho/system/pentaho-style-${version}/glasspanetest.html"),
 		}
 
+	} elsif $version == "3.8.0" {
+		file {"${pentaho_solution}/steel-wheels/charts/flash_parameter_template.html" :
+			content => template("pentaho/system/pentaho-style-${version}/flash_parameter_template.html"),
+		}
+		file {"${pentaho_solution}/steel-wheels/charts/parameter_template.html" :
+			content => template("pentaho/system/pentaho-style-${version}/parameter_template.html"),
+		}
 	}
 
 
