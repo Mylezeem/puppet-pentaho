@@ -3,6 +3,7 @@ define pentaho::backend() {
 	$instance = $name
 	$dbtype = hiera('dbtype')
 	$port = hiera('port')
+	$version = hiera('version')
 
 	file {"/tmp/pentaho_${name}" : 
 		ensure => directory,

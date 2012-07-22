@@ -4,6 +4,7 @@ define pentaho::webapps() {
 	$pentaho_solution = hiera('pentaho_solution')
 	$dbtype = hiera('dbtype')
 	$port = hiera('port')
+	$version = hiera('version')
 
 	if $dbtype == "hsql" {
 		$hsql_extra_1 = "<context-param>
@@ -61,7 +62,7 @@ define pentaho::webapps() {
 
     file {"/tmp/pentaho_${name}/pentaho_${name}/WEB-INF/web.xml" :
 		ensure  => present,
-		content =>  template('pentaho/webapps/web.xml'),
+		content =>  template("pentaho/webapps/web-${version}.xml"),
 		require =>  File["/tmp/pentaho_${name}/pentaho_${name}/WEB-INF/classes/log4j.xml"],
 	}
 

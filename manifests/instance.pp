@@ -1,5 +1,4 @@
 define pentaho::instance (
-                          $version = '3.8.0',
 						  $log_path = '/var/log',
 						  $hsqldb_path = '/opt/hsqldb',
 						  $sample = 'false',
@@ -10,6 +9,7 @@ define pentaho::instance (
 
 	$instance = $name
 	$port = hiera('port')
+	$version = hiera('version')
 
 	# Setting the correct variable value to use in the template
 	#
@@ -77,7 +77,7 @@ define pentaho::instance (
   # Creating the solutions folders 
   #
 
-  create_resources(pentaho::solution, {'clarity' => {}, 'montgomery' => {visible => 'false',}})
+  create_resources(pentaho::solution, hiera_hash('solution'))
 
 
   #
