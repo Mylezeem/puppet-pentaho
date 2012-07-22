@@ -66,18 +66,20 @@ define pentaho::instance (
   #
   # Creating Pentaho Roles
   #
-  create_resources('pentaho::role', hiera_hash('role'))
+  $pentaho_roles = append_instance_name(hiera_hash('role'), $instance)
+  create_resources('pentaho::role', $pentaho_roles)
 
   #
   # Creating Pentaho Users
   #
-  create_resources('pentaho::user', hiera_hash('user'))
+  $pentaho_users = append_instance_name(hiera_hash('user'), $instance)
+  create_resources('pentaho::user', $pentaho_users)
 
   #
   # Creating the solutions folders 
   #
-
-  create_resources(pentaho::solution, hiera_hash('solution'))
+  $pentaho_solutions = append_instance_name(hiera_hash('solution'), $instance)
+  create_resources('pentaho::solution', $pentaho_solutions)
 
 
   #

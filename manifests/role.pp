@@ -15,7 +15,7 @@ define pentaho::role () {
 		default					=>	undef,
 	}
 
-	$pentaho_role = $name
+	$pentaho_role = remove_instance_name($name, $instance)
 	$desc = hiera('description')
 
 	$insert_string = "INSERT INTO AUTHORITIES VALUES('${pentaho_role}', '${desc}')"

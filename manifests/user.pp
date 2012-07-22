@@ -19,7 +19,7 @@ define pentaho::user () {
 	# Getting the user relative information to be inserted.
 	#
 
-	$pentaho_user = $name
+	$pentaho_user = remove_instance_name($name, $instance)
 	$b64pass = pentaho_base64(hiera('password'))
 	$desc = hiera('description')
 	$enabled = hiera('enabled')
