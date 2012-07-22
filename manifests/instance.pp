@@ -81,7 +81,6 @@ define pentaho::instance (
   $pentaho_solutions = append_instance_name(hiera_hash('solution'), $instance)
   create_resources('pentaho::solution', $pentaho_solutions)
 
-
   #
   # Installing the pentaho-style folder related to the ${instance} value
   #
