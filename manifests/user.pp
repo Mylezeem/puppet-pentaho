@@ -1,6 +1,6 @@
-define pentaho::user () {
+define pentaho::user ($dbtype) {
 
-	$cmd = hiera('dbtype') ? {
+	$cmd = $dbtype ? {
 		/(mysql|mysql5)/		=>	"mysql -u${user} -p${pass} -h${ip} ",
 		'postgresql'			=>	"psql -U ${user} -W ${pass} -h ${ip} ",
 		/(oracle|oracle10g)/	=>	undef,
@@ -8,7 +8,7 @@ define pentaho::user () {
 	}
 
 
-	$exe_sql = hiera('dbtype') ? {
+	$exe_sql = $dbtype ? {
 		/(mysql|mysql5)/		=>	"-e",
 		'postgresql'			=>	"-c",
 		/(oracle|oracle10g)/	=>	undef,
@@ -24,8 +24,10 @@ define pentaho::user () {
 	$desc = hiera('description')
 	$enabled = hiera('enabled')
 
-	$insert_string = "INSERT INTO USERS (USERNAME,PASSWORD,DESCRIPTION,ENABLED) VALUES('${pentaho_user}', '${b64pass}', '${desc}', '${enabled}')"
-
+	$insert_string = $dbtype ? {
+		/(mysql|mysql5)/		=>	"INSERT INTO USERS (USERNAME,PASSWORD,DESCRIPTION,ENABLED) VALUES('${pentaho_user}', '${b64pass}', '${desc}', '${enabled}') ON DUPLICATE KEY UPDATE PASSWORD='${b64pass}', ENABLED = '${enabled}', DESCRIPTION = '${desc}'",
+		default					=>	"INSERT INTO USERS (USERNAME,PASSWORD,DESCRIPTION,ENABLED) VALUES('${pentaho_user}', '${b64pass}', '${desc}', '${enabled}')",
+	}
 
 	exec {"${cmd} hibernate${instance} ${exe_sql} \"${insert_string}\"" :
 		cwd		=> '/',

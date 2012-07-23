@@ -68,13 +68,14 @@ define pentaho::instance (
   # Creating Pentaho Roles
   #
   $pentaho_roles = append_instance_name(hiera_hash('role'), $instance)
-  create_resources('pentaho::role', $pentaho_roles)
-
+  create_resources('pentaho::role', $pentaho_roles,
+		{'dbtype'		=> $dbtype})
   #
   # Creating Pentaho Users
   #
   $pentaho_users = append_instance_name(hiera_hash('user'), $instance)
-  create_resources('pentaho::user', $pentaho_users)
+  create_resources('pentaho::user', $pentaho_users,
+		{'dbtype'		=> $dbtype})
 
   #
   # Creating Pentaho Datasources

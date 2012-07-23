@@ -34,8 +34,10 @@ define pentaho::datasource($instance,
 	$ds_db = hiera('db') 
 	$ds_options = stringify_array(hiera_array('options'), '&')
 
-	$ds_insert_string = "INSERT INTO DATASOURCE VALUES ('${pentaho_datasource}', ${max_conn}, '${driver}', ${idle}, '${ds_user}', '${ds_pass}', '${cntstring}${ds_host}:${ds_port}/${ds_db}?${ds_options}', '${query}', $max_wait)"
-
+	$ds_insert_string = $dbtype ? {
+		/(mysql|mysql5)/		=>	 "INSERT INTO DATASOURCE VALUES ('${pentaho_datasource}', ${max_conn}, '${driver}', ${idle}, '${ds_user}', '${ds_pass}', '${cntstring}${ds_host}:${ds_port}/${ds_db}?${ds_options}', '${query}', ${max_wait}) ON DUPLICATE KEY UPDATE MAXACTCONN = ${max_conn}, DRIVERCLASS = '${driver}', IDLECONN = ${idle}, USERNAME = '${ds_user}', PASSWORD = '${ds_pass}', URL = '${cntstring}${ds_host}:${ds_port}/${ds_db}?${ds_options}', QUERY = '${query}', WAIT = ${max_wait}",
+		default					=>  "INSERT INTO DATASOURCE VALUES ('${pentaho_datasource}', ${max_conn}, '${driver}', ${idle}, '${ds_user}', '${ds_pass}', '${cntstring}${ds_host}:${ds_port}/${ds_db}?${ds_options}', '${query}', ${max_wait})",
+	}
 
 	exec {"${cmd} hibernate${instance} ${exe_sql} \"${ds_insert_string}\"" :
 		cwd		=> '/',
