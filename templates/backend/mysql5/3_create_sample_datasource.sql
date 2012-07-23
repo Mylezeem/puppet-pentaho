@@ -5,6 +5,6 @@ USE hibernate<%= name %>;
 
 --  Create HSQLDB Sample Data Source
 
-INSERT INTO DATASOURCE VALUES('SampleData',20,'com.mysql.jdbc.Driver',5,'pentaho_user','cGFzc3dvcmQ=','jdbc:mysql://<%= ip %>:<%= port %>/sampledata<%= name %>','select 1',1000);
+INSERT INTO DATASOURCE VALUES('SampleData',20,'com.mysql.jdbc.Driver',5,'pentaho_user','cGFzc3dvcmQ=','jdbc:mysql://<%= host %>:<%= port %>/sampledata<%= name %>','select 1',1000);
 
 commit;

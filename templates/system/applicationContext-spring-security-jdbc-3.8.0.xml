@@ -39,7 +39,7 @@
 		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
 		<property name="driverClassName" value="<%= driver %>" />
 		<property name="url"
-			value="<%= cntstring %><%= ip %>:<%= port %>/hibernate<%= name %>" />
+			value="<%= cntstring %><%= host %>:<%= port %>/hibernate<%= name %>" />
 		<property name="username" value="hibuser" />
 		<property name="password" value="password" />
 	</bean>

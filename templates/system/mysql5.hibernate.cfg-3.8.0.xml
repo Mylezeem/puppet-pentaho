@@ -12,7 +12,7 @@
   
     <!--  MySQL Configuration -->
     <property name="connection.driver_class">com.mysql.jdbc.Driver</property>
-	<property name="connection.url">jdbc:mysql://<%= ip %>:<%= port %>/hibernate<%= name %></property>
+	<property name="connection.url">jdbc:mysql://<%= host %>:<%= port %>/hibernate<%= name %></property>
     <property name="dialect">org.hibernate.dialect.MySQL5InnoDBDialect</property>
     <property name="connection.username">hibuser</property>
     <property name="connection.password">password</property>

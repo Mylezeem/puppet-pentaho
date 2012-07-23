@@ -3,12 +3,12 @@
 	<Resource name="jdbc/Hibernate" auth="Container" type="javax.sql.DataSource"
 		factory="org.apache.commons.dbcp.BasicDataSourceFactory" maxActive="20" maxIdle="5"
 		maxWait="10000" username="hibuser" password="password"
-		driverClassName="<%= driver %>" url="<%= cntstring %><%= ip %>:<%= port %>/hibernate<%= name %>"
+		driverClassName="<%= driver %>" url="<%= cntstring %><%= host %>:<%= port %>/hibernate<%= name %>"
 		validationQuery="<%= validationQuery %>" />
 		
 	<Resource name="jdbc/Quartz" auth="Container" type="javax.sql.DataSource"
 		factory="org.apache.commons.dbcp.BasicDataSourceFactory" maxActive="20" maxIdle="5"
 		maxWait="10000" username="pentaho_user" password="password"
-		driverClassName="<%= driver %>" url="<%= cntstring %><%= ip %>:<%= port %>/quartz<%= name %>"
+		driverClassName="<%= driver %>" url="<%= cntstring %><%= host %>:<%= port %>/quartz<%= name %>"
 		validationQuery="<%= validationQuery %>"/>
 </Context>

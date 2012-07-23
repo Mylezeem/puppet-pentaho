@@ -1,4 +1,5 @@
 define pentaho::solution(
+						$instance,
 						$icon = 'reporting.png',
 						$visible = 'true',
 						$displaytype = 'list',

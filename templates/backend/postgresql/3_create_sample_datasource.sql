@@ -6,6 +6,6 @@
 
 begin;
 
-INSERT INTO DATASOURCE VALUES('SampleData',20,'org.postgresql.Driver',5,'pentaho_user','cGFzc3dvcmQ=','jdbc:postgresql://<%= ip %>:<%= port %>/sampledata<%= name %>','select 1',1000);
+INSERT INTO DATASOURCE VALUES('SampleData',20,'org.postgresql.Driver',5,'pentaho_user','cGFzc3dvcmQ=','jdbc:postgresql://<%= host %>:<%= port %>/sampledata<%= name %>','select 1',1000);
 
 commit;

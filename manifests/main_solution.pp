@@ -1,55 +1,17 @@
-define pentaho::main_solution (
+define pentaho::main_solution ($instance,
+								$dbtype,
+								$user,
+								$pass,
+								$host,
+								$port,
+								$version,
+								$driver,
+								$dialect,
+								$delegate,
+								$cntstring,
 								) {
 
-
-	#
-	# Setting the correct variable value to use in the template
-	#
-	# As for now handling :
-	#
-	#						- HyperSonic (hsql)
-	#						- MySQL (mysql5)
-	#						- Postgresql (postgresql)
-	#						- Oracle (oracle10g)
-	#
-	#
-
-	$instance  = $name
-	$dbtype = hiera('dbtype')
-	$version = hiera('version')
 	$pentaho_solution = hiera('pentaho_solution')
-
-	$driver = $dbtype ? {
-		/(mysql|mysql5)/		=>	"com.mysql.jdbc.Driver",
-		'postgresql'			=>	"org.postgresql.Driver",
-		/(oracle|oracle10g)/	=>	"oracle.jdbc.driver.OracleDriver",
-		'hsql'					=>	"org.hsqldb.jdbcDriver",
-		default					=>	undef,
-	}
-
-	$dialect = $dbtype ? {
-		/(mysql|mysql5)/		=>	"MySQL5InnoDBDialect",
-		'postgresql'			=>	"PostgreSQLDialect",
-		/(oracle|oracle10g)/	=>	"Oracle10gDialect",
-		'hsql'					=>	"HSQLDialect",
-		default					=>	undef,
-	}
-
-	$delegate = $dbtype ? {
-		/(mysql|mysql5)/		=>	"StdJDBCDelegate",
-		'postgresql'			=>	"PostgreSQLDelegate",
-		/(oracle|oracle10g)/	=>	"oracle.OracleDelegate",
-		'hsql'					=>	"StdJDBCDelegate",
-		default					=>	undef,
-	}
-
-	$cntstring = $dbtype ? {
-		/(mysql|mysql5)/		=>	"jdbc:mysql://",
-		'postgresql'			=>	"jdbc:postgresql://",
-		/(oracle|oracle10g)/	=>	"jdbc:oracle:thin:@",
-		'hsql'					=>	"jdbc:hsqldb:hsql://",
-		default					=>	undef,
-	}
 
 	#
 	# Getting the system and admin folders on a public repo (GitHub)
@@ -232,17 +194,11 @@ define pentaho::main_solution (
 		}
 	}
 
-
-
 	file {"${pentaho_solution}/system/logs" :
 		ensure	=>	directory,
 		group	=>	tomcat6,
 		mode	=>	'0777',
 		recurse	=> true,
 	}
-
-
-
-
 
 }	

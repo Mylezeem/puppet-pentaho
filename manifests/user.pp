@@ -1,19 +1,7 @@
-define pentaho::user ($dbtype) {
-
-	$cmd = $dbtype ? {
-		/(mysql|mysql5)/		=>	"mysql -u${user} -p${pass} -h${ip} ",
-		'postgresql'			=>	"psql -U ${user} -W ${pass} -h ${ip} ",
-		/(oracle|oracle10g)/	=>	undef,
-		default					=>	undef,
-	}
-
-
-	$exe_sql = $dbtype ? {
-		/(mysql|mysql5)/		=>	"-e",
-		'postgresql'			=>	"-c",
-		/(oracle|oracle10g)/	=>	undef,
-		default					=>	undef,
-	}
+define pentaho::user ($instance,
+					  $dbtype,
+					  $cmd,
+					  $exe_sql) {
 
 	#
 	# Getting the user relative information to be inserted.

@@ -1,10 +1,16 @@
-define pentaho::webapps() {
+define pentaho::webapps(
+						$instance,
+						$dbtype,
+						$host,
+						$port,
+						$driver,
+						$cntstring,
+						$version,
+						$hsqldb_path,
+						$log_path
+						) {
 
-	$instance = $name
 	$pentaho_solution = hiera('pentaho_solution')
-	$dbtype = hiera('dbtype')
-	$port = hiera('port')
-	$version = hiera('version')
 
 	if $dbtype == "hsql" {
 		$hsql_extra_1 = "<context-param>
