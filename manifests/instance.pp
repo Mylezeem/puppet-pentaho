@@ -9,6 +9,7 @@ define pentaho::instance (
 
 	$instance = $name
 	$port = hiera('port')
+	$dbtype = hiera('dbtype')
 	$version = hiera('version')
 
 	# Setting the correct variable value to use in the template
@@ -22,7 +23,7 @@ define pentaho::instance (
 	#
 	#
 
-	$driver = hiera('dbtype') ? {
+	$driver = $dbtype ? {
 		/(mysql|mysql5)/		=>	"com.mysql.jdbc.Driver",
 		'postgresql'			=>	"org.postgresql.Driver",
 		/(oracle|oracle10g)/	=>	"oracle.jdbc.driver.OracleDriver",
@@ -30,7 +31,7 @@ define pentaho::instance (
 		default					=>	undef,
 	}
 
-	$cntstring = hiera('dbtype') ? {
+	$cntstring = $dbtype ? {
 		/(mysql|mysql5)/		=>	"jdbc:mysql://",
 		'postgresql'			=>	"jdbc:postgresql://",
 		/(oracle|oracle10g)/	=>	"jdbc:oracle:thin:@",
@@ -74,6 +75,20 @@ define pentaho::instance (
   #
   $pentaho_users = append_instance_name(hiera_hash('user'), $instance)
   create_resources('pentaho::user', $pentaho_users)
+
+  #
+  # Creating Pentaho Datasources
+  #
+  $pentaho_datasources = append_instance_name(hiera_hash('datasource'), $instance)
+  create_resources('pentaho::datasource', $pentaho_datasources,
+		{'instance'		=> $instance,
+		 'dbtype'		=> $dbtype,
+		 'user'			=> $user,
+		 'pass'			=> $pass,
+		 'ip'			=> $ip,
+		 'port'			=> $port,
+		 'driver'		=> $driver,
+		 'cntstring'	=> $cntstring})
 
   #
   # Creating the solutions folders 
