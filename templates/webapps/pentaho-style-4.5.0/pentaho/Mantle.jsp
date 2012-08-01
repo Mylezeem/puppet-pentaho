@@ -1,13 +1,13 @@
-<%@page import="java.util.Locale"%>
-<%@page import="org.apache.commons.lang.StringUtils"%>
-<%@page import="org.pentaho.platform.util.messages.LocaleHelper"%>
-<%@page import="java.net.URLClassLoader"%>
-<%@page import="java.net.URL"%>
-<%@page import="java.util.ResourceBundle"%>
-<%@page import="java.io.File"%>
-<%@page import="org.owasp.esapi.ESAPI"%>
+<%%%@page import="java.util.Locale"%>
+<%%%@page import="org.apache.commons.lang.StringUtils"%>
+<%%%@page import="org.pentaho.platform.util.messages.LocaleHelper"%>
+<%%%@page import="java.net.URLClassLoader"%>
+<%%%@page import="java.net.URL"%>
+<%%%@page import="java.util.ResourceBundle"%>
+<%%%@page import="java.io.File"%>
+<%%%@page import="org.owasp.esapi.ESAPI"%>
 
-<%
+<%%%
   Locale effectiveLocale = request.getLocale();
   if (!StringUtils.isEmpty(request.getParameter("locale"))) {
     effectiveLocale = new Locale(request.getParameter("locale"));
@@ -27,7 +27,7 @@
 	<head>
 		<title>Pentaho User Console</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-		<meta name="gwt:property" content="locale=<%=ESAPI.encoder().encodeForHTMLAttribute(effectiveLocale.toString())%>">
+		<meta name="gwt:property" content="locale=<%%%=ESAPI.encoder().encodeForHTMLAttribute(effectiveLocale.toString())%>">
 		<link rel="shortcut icon" href="/pentaho-style<%= instance %>/favicon.ico" />
 		<link rel='stylesheet' href='mantle/MantleStyle.css'/>
     <link rel="stylesheet" href="content/data-access/resources/gwt/datasourceEditorDialog.css"/>
@@ -97,8 +97,8 @@
 
 	<div id="loading">
     		<div class="loading-indicator">
-    			<img src="mantle/large-loading.gif" width="32" height="32"/><%= properties.getString("loadingConsole") %><a href="http://www.pentaho.com"></a><br/>
-    			<span id="loading-msg"><%= properties.getString("pleaseWait") %></span>
+    			<img src="mantle/large-loading.gif" width="32" height="32"/><%%%= properties.getString("loadingConsole") %><a href="http://www.pentaho.com"></a><br/>
+    			<span id="loading-msg"><%%%= properties.getString("pleaseWait") %></span>
     		</div>
 	</div>
 

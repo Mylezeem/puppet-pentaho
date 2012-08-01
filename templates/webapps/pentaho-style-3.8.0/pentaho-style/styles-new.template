@@ -1,22 +1,22 @@
 A:link {
-	font: <% "anchor.link.font", "normal 1em Tahoma, \"Trebuchet MS\", Arial" %>;
-	color: <% "anchor.link.color", "#949e3e" %>;
-	text-decoration: <% "anchor.link.text.decoration", "none" %>;
+	font: <%% "anchor.link.font", "normal 1em Tahoma, \"Trebuchet MS\", Arial" %>;
+	color: <%% "anchor.link.color", "#949e3e" %>;
+	text-decoration: <%% "anchor.link.text.decoration", "none" %>;
 }
 A:visited {
-	font: <% "anchor.visited.font", "normal 1em Tahoma, \"Trebuchet MS\", Arial" %>;
-	color: <% "anchor.visited.color", "#949e3e" %>;
-	text-decoration: <% "anchor.visited.text.decoration", "none" %>;
+	font: <%% "anchor.visited.font", "normal 1em Tahoma, \"Trebuchet MS\", Arial" %>;
+	color: <%% "anchor.visited.color", "#949e3e" %>;
+	text-decoration: <%% "anchor.visited.text.decoration", "none" %>;
 }
 A:hover {
-	font: <% "anchor.hover.font", "normal 1em Tahoma, \"Trebuchet MS\", Arial" %>;
-	color: <% "anchor.hover.color", "#ef8033" %>;
-	text-decoration: <% "anchor.hover.text.decoration", "none" %>;
+	font: <%% "anchor.hover.font", "normal 1em Tahoma, \"Trebuchet MS\", Arial" %>;
+	color: <%% "anchor.hover.color", "#ef8033" %>;
+	text-decoration: <%% "anchor.hover.text.decoration", "none" %>;
 }
 A:active {
-	font: <% "anchor.active.font", "normal 1em Tahoma, \"Trebuchet MS\", Arial" %>;
-	color: <% "", "#ef8033" %>;
-	text-decoration: <% "anchor.active.text.decoration", "none" %>;
+	font: <%% "anchor.active.font", "normal 1em Tahoma, \"Trebuchet MS\", Arial" %>;
+	color: <%% "", "#ef8033" %>;
+	text-decoration: <%% "anchor.active.text.decoration", "none" %>;
 }
 
 
@@ -28,12 +28,12 @@ A:active {
 
 
 .body {
-	font: <% "body.font", "normal .85em Tahoma, \"Trebuchet MS\", Arial" %>;
-	color: <% "body.color", "#000000" %>;
-	background-color: <% "body.background.color", "#ffffff" %>;
-	background-image: url(<% "body.background.image", "" %>);
-	background-repeat: <% "body.background.image.repeat", "repeat" %>;
-	background-position: <% "body.background.image.position", "top left" %>;
+	font: <%% "body.font", "normal .85em Tahoma, \"Trebuchet MS\", Arial" %>;
+	color: <%% "body.color", "#000000" %>;
+	background-color: <%% "body.background.color", "#ffffff" %>;
+	background-image: url(<%% "body.background.image", "" %>);
+	background-repeat: <%% "body.background.image.repeat", "repeat" %>;
+	background-position: <%% "body.background.image.position", "top left" %>;
 	margin: 0px;
 	padding: 0px;
 }
@@ -49,16 +49,16 @@ A:active {
 
 
 .banner {
-	height: <% "banner.height", "103px" %>;
-	width: <% "banner.width", "100%" %>;
+	height: <%% "banner.height", "103px" %>;
+	width: <%% "banner.width", "100%" %>;
 	vertical-align: top;
 	padding: 0px;
 	margin: 0px;
 	text-align: right;
-	background-color: <% "banner.background.color", "#87944c" %>;
-	background-image: url(<% "banner.background.image", "/pentaho-style<%= instance %>/images/bg_home.png" %>);
-	background-repeat: <% "banner.background.repeat", "no-repeat" %>;
-	background-position: <% "banner.background.position", "right" %>;
+	background-color: <%% "banner.background.color", "#87944c" %>;
+	background-image: url(<%% "banner.background.image", "/pentaho-style<%= instance %>/images/bg_home.png" %>);
+	background-repeat: <%% "banner.background.repeat", "no-repeat" %>;
+	background-position: <%% "banner.background.position", "right" %>;
 	position:relative;
 	top: 0;
 	left: 0;
@@ -92,12 +92,12 @@ A:active {
 
 /* shown on icon view/navigate, */
 .content_container {
-	border-top: <% "content.container.border", "1px solid #818f49" %>;
+	border-top: <%% "content.container.border", "1px solid #818f49" %>;
 }
 
 /* shown on admin, about */
 .content_container2 {
-	border-top: <% "content.container2.border", "1px solid #818f49" %>;
+	border-top: <%% "content.container2.border", "1px solid #818f49" %>;
 	width: 100%;
 	padding: 0px;
 }
@@ -105,7 +105,7 @@ A:active {
 
 /* shown on home (in home.jsp) */
 .content_container3 {
-	border-top: <% "content.container3.border", "1px solid #818f49" %>;
+	border-top: <%% "content.container3.border", "1px solid #818f49" %>;
 }
 
 
@@ -131,16 +131,16 @@ A:active {
 
 /* commonly used */
 .content_header {
-	font: <% "content.header.font", "normal 1em Tahoma, \"Trebuchet MS\", Arial" %>;
+	font: <%% "content.header.font", "normal 1em Tahoma, \"Trebuchet MS\", Arial" %>;
 	margin: 9px 0px 3px 0px;
-	color: <% "content.header.color", "#ef6507" %>;
+	color: <%% "content.header.color", "#ef6507" %>;
 }
 
 /* commonly used */
 .content_header_line {
-	font: <% "content.header.font", "normal 1.25em Tahoma, \"Trebuchet MS\", Arial" %>;
+	font: <%% "content.header.font", "normal 1.25em Tahoma, \"Trebuchet MS\", Arial" %>;
 	margin: 0px 0px 3px 0px;
-	color: <% "content.header.color", "#ef6507" %>;
+	color: <%% "content.header.color", "#ef6507" %>;
 }
 
 
@@ -149,89 +149,89 @@ A:active {
 
 /* files-list.xsl, publishers.xsl */
 .list_table {
-	width: <% "navigator.table.width", "98%" %>;
-	border-top: <% "navigator.table.border", "1px solid #818f49" %>;
-	border-right: <% "navigator.table.border", "1px solid #818f49" %>;
-	border-left: <% "navigator.table.border", "1px solid #818f49" %>;
-	margin: <% "navigator.table.margin", "0px 0px 0px 5px" %>;
+	width: <%% "navigator.table.width", "98%" %>;
+	border-top: <%% "navigator.table.border", "1px solid #818f49" %>;
+	border-right: <%% "navigator.table.border", "1px solid #818f49" %>;
+	border-left: <%% "navigator.table.border", "1px solid #818f49" %>;
+	margin: <%% "navigator.table.margin", "0px 0px 0px 5px" %>;
 }
 
 /* files-list.xsl */
 .list_colHead_first {
-	font: <% "navigator.columnheader.font", "normal .85em Tahoma, \"Trebuchet MS\", Arial" %>;
-	background-color: <% "navigator.columnheader.background", "#c2cfa2" %>;
-	color: <% "navigator.columnheader.color", "#000000" %>;
-	padding: <% "navigator.columnheader.padding", "0px 5px 1px 5px" %>;
-	border-right: <% "navigator.columnheader.right.border", "1px solid #ffffff" %>;
-	border-left: <% "navigator.table.border", "1px solid #818f49" %>;
-	border-bottom: <% "navigator.table.border", "1px solid #818f49" %>;
+	font: <%% "navigator.columnheader.font", "normal .85em Tahoma, \"Trebuchet MS\", Arial" %>;
+	background-color: <%% "navigator.columnheader.background", "#c2cfa2" %>;
+	color: <%% "navigator.columnheader.color", "#000000" %>;
+	padding: <%% "navigator.columnheader.padding", "0px 5px 1px 5px" %>;
+	border-right: <%% "navigator.columnheader.right.border", "1px solid #ffffff" %>;
+	border-left: <%% "navigator.table.border", "1px solid #818f49" %>;
+	border-bottom: <%% "navigator.table.border", "1px solid #818f49" %>;
 	white-space:nowrap;
 }
 
 /* files-list.xsl */
 .list_colHead_fill {
-	font: <% "navigator.columnheader.font", "normal .85em Tahoma, \"Trebuchet MS\", Arial" %>;
-	background-color: <% "navigator.columnheader.background", "#c2cfa2" %>;
-	color: <% "navigator.columnheader.color", "#000000" %>;
-	padding: <% "navigator.columnheader.padding", "0px 5px 1px 5px" %>;
-	border-right: <% "navigator.columnheaderfill.right.border", "1px solid #ffffff" %>;
-	border-left: <% "navigator.columnheaderfill.left.border", "1px solid #778645" %>;
-	border-bottom: <% "navigator.table.border", "1px solid #818f49" %>;
+	font: <%% "navigator.columnheader.font", "normal .85em Tahoma, \"Trebuchet MS\", Arial" %>;
+	background-color: <%% "navigator.columnheader.background", "#c2cfa2" %>;
+	color: <%% "navigator.columnheader.color", "#000000" %>;
+	padding: <%% "navigator.columnheader.padding", "0px 5px 1px 5px" %>;
+	border-right: <%% "navigator.columnheaderfill.right.border", "1px solid #ffffff" %>;
+	border-left: <%% "navigator.columnheaderfill.left.border", "1px solid #778645" %>;
+	border-bottom: <%% "navigator.table.border", "1px solid #818f49" %>;
 	white-space:nowrap;
 }
 
 
 /* files-list.xsl */
 .listrow_file {
-	background-color: <% "navigator.filerow.background.color", "#FFFFFF" %>;
-	color: <% "navigator.filerow.color", "#ef6507" %>;
-	font:  <% "navigator.filerow.font", "normal 1em Tahoma, \"Trebuchet MS\", Arial" %>;
-	height: <% "navigator.filerow.height", "40px" %>;
+	background-color: <%% "navigator.filerow.background.color", "#FFFFFF" %>;
+	color: <%% "navigator.filerow.color", "#ef6507" %>;
+	font:  <%% "navigator.filerow.font", "normal 1em Tahoma, \"Trebuchet MS\", Arial" %>;
+	height: <%% "navigator.filerow.height", "40px" %>;
 	text-decoration: none;
 }
 
 /* files-list.xsl */
 .list_col_first {
-	padding: <% "navigator.filerow.cell.first.padding", "6px 6px 8px 5px" %>;
+	padding: <%% "navigator.filerow.cell.first.padding", "6px 6px 8px 5px" %>;
 	text-decoration: none;
 	text-align:left;
 	vertical-align: top;
-	border-bottom: <% "navigator.table.border", "1px solid #818f49" %>;
+	border-bottom: <%% "navigator.table.border", "1px solid #818f49" %>;
 }
 
 /* files-list.xsl */
 .list_col_fill {
-	padding: <% "navigator.filerow.cell.fill.padding", "0px 6px 0px 5px" %>;
+	padding: <%% "navigator.filerow.cell.fill.padding", "0px 6px 0px 5px" %>;
 	text-decoration: none;
 	text-align:right;
 	vertical-align: top;
-	border-bottom: <% "navigator.table.border", "1px solid #818f49" %>;
-	border-left: <% "navigator.filerow.cell.fill.left.border", "1px solid #e0e7d0" %>;
+	border-bottom: <%% "navigator.table.border", "1px solid #818f49" %>;
+	border-left: <%% "navigator.filerow.cell.fill.left.border", "1px solid #e0e7d0" %>;
 }
 
 /* files-list.xsl, portal-files.xsl */
 .list_description {
-	color: <% "navigator.description.color", "#000000" %>;
-	font: <% "navigator.description.font", "normal 1em Tahoma, \"Trebuchet MS\", Arial" %>;
-	text-decoration: <% "navigator.description.text.decoration", "none" %>;
+	color: <%% "navigator.description.color", "#000000" %>;
+	font: <%% "navigator.description.font", "normal 1em Tahoma, \"Trebuchet MS\", Arial" %>;
+	text-decoration: <%% "navigator.description.text.decoration", "none" %>;
 }
 
 
 .fileFolderDefault {
-	border:  <% "navigator.folder.border", "1px solid #808080" %>;
-	padding: <% "navigator.folder.padding", "5px" %>;
-	background-color: <% "navigator.folder.background.color", "#eeeeee" %>;
+	border:  <%% "navigator.folder.border", "1px solid #808080" %>;
+	padding: <%% "navigator.folder.padding", "5px" %>;
+	background-color: <%% "navigator.folder.background.color", "#eeeeee" %>;
 }
 
 .fileFolderHover {
-	border:  <% "navigator.folder.hover.border", "1px solid #808080" %>;
-	padding: <% "navigator.folder.hover.padding", "5px" %>;
-	background-color: <% "navigator.folder.hover.background.color", "#dddddd" %>;
+	border:  <%% "navigator.folder.hover.border", "1px solid #808080" %>;
+	padding: <%% "navigator.folder.hover.padding", "5px" %>;
+	background-color: <%% "navigator.folder.hover.background.color", "#dddddd" %>;
 }
 
 .navigation_table {
-	background-color: <% "navigator.filerow.background.color", "#FFFFFF" %>;
-	border:  <% "navigator.table.border", "1px solid #808080" %>;
+	background-color: <%% "navigator.filerow.background.color", "#FFFFFF" %>;
+	border:  <%% "navigator.table.border", "1px solid #808080" %>;
 }
 
 /* End Large Browse list */
@@ -420,20 +420,20 @@ A:active {
 
 /* BEGIN bread crumbs, portal-files.xsl, PropertiesEditor.jsp, AuditReport.jsp */
 .icon_folder_sm A {
-	padding: <% "icon.folder.padding", "0px 10px 0px 25px" %>;
+	padding: <%% "icon.folder.padding", "0px 10px 0px 25px" %>;
 	display: block;
-	background: url(<% "icon.folder.background.image", "/pentaho-style<%= instance %>/images/icon_folder_sm.png" %>) no-repeat 0px 0px;
-	font: <% "icon.folder.font", "normal 1em Tahoma, \"Trebuchet MS\", Arial" %>;
-	height: <% "icon.folder.height", "18px" %>;
-	text-decoration: <% "icon.folder.text.decoration", "underline" %>;
-	color: <% "icon.folder.color", "#778645" %>;
-	text-align: <% "icon.folder.text.align", "left" %>;
+	background: url(<%% "icon.folder.background.image", "/pentaho-style<%= instance %>/images/icon_folder_sm.png" %>) no-repeat 0px 0px;
+	font: <%% "icon.folder.font", "normal 1em Tahoma, \"Trebuchet MS\", Arial" %>;
+	height: <%% "icon.folder.height", "18px" %>;
+	text-decoration: <%% "icon.folder.text.decoration", "underline" %>;
+	color: <%% "icon.folder.color", "#778645" %>;
+	text-align: <%% "icon.folder.text.align", "left" %>;
 	white-space:nowrap;
-	vertical-align: <% "icon.folder.vertical.align", "top" %>;
+	vertical-align: <%% "icon.folder.vertical.align", "top" %>;
 }
 .icon_folder_sm A:hover {
-	background-position: 0px -<% "icon.folder.height", "18px" %>;
-	color: <% "icon.folder.hover.color", "#ef6507" %>;
+	background-position: 0px -<%% "icon.folder.height", "18px" %>;
+	color: <%% "icon.folder.hover.color", "#ef6507" %>;
 }
 /* END bread crumbs, portal-files.xsl, PropertiesEditor.jsp, AuditReport.jsp */
 
@@ -442,8 +442,8 @@ A:active {
 
 /* used in Pivot.jsp and template-dialog.html */
 div#dialog01_footer {
-	border-top: <% "dialog.footer.border", "#ef6507" %>;
-	background-color: <% "dialog.footer.background.color", "#f2f2f2" %>;
+	border-top: <%% "dialog.footer.border", "#ef6507" %>;
+	background-color: <%% "dialog.footer.background.color", "#f2f2f2" %>;
 	position:absolute;
 	bottom:0;
 	left:0;
@@ -564,8 +564,8 @@ td.portlet-table-header {
 #messagebox td {
 	vertical-align:top;
 	padding: 0px 0px 3px 0px;
-	font: <% "messagebox.content.font", "normal .85em Tahoma, Arial, Helvetica, sans-sarif" %>;
-	color: <% "messagebox.content.color", "#000000" %>;
+	font: <%% "messagebox.content.font", "normal .85em Tahoma, Arial, Helvetica, sans-sarif" %>;
+	color: <%% "messagebox.content.color", "#000000" %>;
 	line-height: 1.45em;
 	padding:0px 0px 5px 0px;
 	width: 100%;
@@ -577,53 +577,53 @@ td.portlet-table-header {
 }
 
 .messagebox_title {
-	color: <% "messagebox.title.color", "#5e5e5e" %>;
+	color: <%% "messagebox.title.color", "#5e5e5e" %>;
 	padding: 0px 0px 10px 0px;
-	font: <% "messagebox.title.font", "normal 1.5em Tahoma, Arial, Helvetica, sans-sarif" %>;
+	font: <%% "messagebox.title.font", "normal 1.5em Tahoma, Arial, Helvetica, sans-sarif" %>;
 }
 
 .message_top_left {
-	background-image: url(<% "messagebox.top.left.image", "/pentaho-style<%= instance %>/images/fly-top-left1.png" %>);
+	background-image: url(<%% "messagebox.top.left.image", "/pentaho-style<%= instance %>/images/fly-top-left1.png" %>);
 }
 .message_top_right {
-	background-image: url(<% "messagebox.top.right.image", "/pentaho-style<%= instance %>/images/fly-top-right1.png" %>);
+	background-image: url(<%% "messagebox.top.right.image", "/pentaho-style<%= instance %>/images/fly-top-right1.png" %>);
 }
 
 .message_bottom_left {
-	background-image: url(<% "messagebox.bottom.left.image", "/pentaho-style<%= instance %>/images/fly-bot-left1.png" %>);
+	background-image: url(<%% "messagebox.bottom.left.image", "/pentaho-style<%= instance %>/images/fly-bot-left1.png" %>);
 }
 
 .message_bottom_right {
-	background-image: url(<% "messagebox.bottom.right.image", "/pentaho-style<%= instance %>/images/fly-bot-right1.png" %>);
+	background-image: url(<%% "messagebox.bottom.right.image", "/pentaho-style<%= instance %>/images/fly-bot-right1.png" %>);
 }
 
 .message_middle {
-	background-image: url(<% "messagebox.middle.image", "/pentaho-style<%= instance %>/images/fly-middle1.png" %>);
+	background-image: url(<%% "messagebox.middle.image", "/pentaho-style<%= instance %>/images/fly-middle1.png" %>);
 	background-repeat: repeat;
 }
 
 .message_middle_top {
-	background-image: url(<% "messagebox.middle.top.image", "/pentaho-style<%= instance %>/images/fly-middle1.png" %>);
+	background-image: url(<%% "messagebox.middle.top.image", "/pentaho-style<%= instance %>/images/fly-middle1.png" %>);
 	background-repeat: repeat;
-	border-top: <% "messagebox.border", "1px solid #cecece" %>;
+	border-top: <%% "messagebox.border", "1px solid #cecece" %>;
 }
 
 .message_middle_left {
-	background-image: url(<% "messagebox.middle.left.image", "/pentaho-style<%= instance %>/images/fly-middle1.png" %>);
+	background-image: url(<%% "messagebox.middle.left.image", "/pentaho-style<%= instance %>/images/fly-middle1.png" %>);
 	background-repeat: repeat;
-	border-left: <% "messagebox.border", "1px solid #cecece" %>;
+	border-left: <%% "messagebox.border", "1px solid #cecece" %>;
 }
 
 .message_middle_right {
-	background-image: url(<% "messagebox.middle.right.image", "/pentaho-style<%= instance %>/images/fly-middle1.png" %>);
+	background-image: url(<%% "messagebox.middle.right.image", "/pentaho-style<%= instance %>/images/fly-middle1.png" %>);
 	background-repeat: repeat;
-	border-right: <% "messagebox.border", "1px solid #cecece" %>;
+	border-right: <%% "messagebox.border", "1px solid #cecece" %>;
 }
 
 .message_middle_bottom {
-	background-image: url(<% "messagebox.middle.bottom.image", "/pentaho-style<%= instance %>/images/fly-middle1.png" %>);
+	background-image: url(<%% "messagebox.middle.bottom.image", "/pentaho-style<%= instance %>/images/fly-middle1.png" %>);
 	background-repeat: repeat;
-	border-bottom: <% "messagebox.border", "1px solid #cecece" %>;
+	border-bottom: <%% "messagebox.border", "1px solid #cecece" %>;
 }
 
 .message_spacer {
@@ -647,53 +647,53 @@ width: 100%;
 }
 
 .alertbox_title {
-	color: <% "alertbox.title.color", "#d46464" %>;
+	color: <%% "alertbox.title.color", "#d46464" %>;
 	padding: 0px 0px 10px 0px;
-	font: <% "alertbox.title.font", "normal 1.5em Tahoma, Arial, Helvetica, sans-sarif" %>;
+	font: <%% "alertbox.title.font", "normal 1.5em Tahoma, Arial, Helvetica, sans-sarif" %>;
 }
 
 .alert_top_left {
-	background-image: url(<% "alertbox.top.left.image", "/pentaho-style<%= instance %>/images/alert-top-left.png" %>);
+	background-image: url(<%% "alertbox.top.left.image", "/pentaho-style<%= instance %>/images/alert-top-left.png" %>);
 }
 .alert_top_right {
-	background-image: url(<% "alertbox.top.right.image", "/pentaho-style<%= instance %>/images/alert-top-right.png" %>);
+	background-image: url(<%% "alertbox.top.right.image", "/pentaho-style<%= instance %>/images/alert-top-right.png" %>);
 }
 
 .alert_bottom_left {
-	background-image: url(<% "alertbox.bottom.left.image", "/pentaho-style<%= instance %>/images/alert-bot-left.png" %>);
+	background-image: url(<%% "alertbox.bottom.left.image", "/pentaho-style<%= instance %>/images/alert-bot-left.png" %>);
 }
 
 .alert_bottom_right {
-	background-image: url(<% "alertbox.bottom.right.image", "/pentaho-style<%= instance %>/images/alert-bot-right.png" %>);
+	background-image: url(<%% "alertbox.bottom.right.image", "/pentaho-style<%= instance %>/images/alert-bot-right.png" %>);
 }
 
 .alert_middle {
-	background-image: url(<% "alertbox.middle.image", "/pentaho-style<%= instance %>/images/alert-middle.png" %>);
+	background-image: url(<%% "alertbox.middle.image", "/pentaho-style<%= instance %>/images/alert-middle.png" %>);
 	background-repeat: repeat;
 }
 
 .alert_middle_top {
-	background-image: url(<% "alertbox.middle.top.image", "/pentaho-style<%= instance %>/images/alert-middle.png" %>);
+	background-image: url(<%% "alertbox.middle.top.image", "/pentaho-style<%= instance %>/images/alert-middle.png" %>);
 	background-repeat: repeat;
-	border-top: <% "alertbox.border", "1px solid #f99898" %>;
+	border-top: <%% "alertbox.border", "1px solid #f99898" %>;
 }
 
 .alert_middle_left {
-	background-image: url(<% "alertbox.middle.left.image", "/pentaho-style<%= instance %>/images/alert-middle.png" %>);
+	background-image: url(<%% "alertbox.middle.left.image", "/pentaho-style<%= instance %>/images/alert-middle.png" %>);
 	background-repeat: repeat;
-	border-left: <% "alertbox.border", "1px solid #f99898" %>;
+	border-left: <%% "alertbox.border", "1px solid #f99898" %>;
 }
 
 .alert_middle_right {
-	background-image: url(<% "alertbox.middle.right.image", "/pentaho-style<%= instance %>/images/alert-middle.png" %>);
+	background-image: url(<%% "alertbox.middle.right.image", "/pentaho-style<%= instance %>/images/alert-middle.png" %>);
 	background-repeat: repeat;
-	border-right: <% "alertbox.border", "1px solid #f99898" %>;
+	border-right: <%% "alertbox.border", "1px solid #f99898" %>;
 }
 
 .alert_middle_bottom {
-	background-image: url(<% "alertbox.middle.bottom.image", "/pentaho-style<%= instance %>/images/alert-middle.png" %>);
+	background-image: url(<%% "alertbox.middle.bottom.image", "/pentaho-style<%= instance %>/images/alert-middle.png" %>);
 	background-repeat: repeat;
-	border-bottom: <% "alertbox.border", "1px solid #f99898" %>;
+	border-bottom: <%% "alertbox.border", "1px solid #f99898" %>;
 }
 
 .alert_spacer {
@@ -713,34 +713,34 @@ width: 100%;
 
 
 .footer_source_forge_and_disclaimer {
-	font: <% "footer.sfdisc.font", "normal .8em Tahoma, \"Trebuchet MS\", Arial" %>;
-	color: <% "footer.sfdisc.color", "#888888" %>;
-	border-top: <% "footer.sfdisc.border", "1px solid #818f49" %>;
-	vertical-align: <% "footer.sfdisc.vertical.align", "top" %>;
-	padding: <% "footer.sfdisc.padding", "5px 5px 0px 0px" %>;
-	margin: <% "footer.sfdisc.margin", "15px 0px 0px 0px" %>;
+	font: <%% "footer.sfdisc.font", "normal .8em Tahoma, \"Trebuchet MS\", Arial" %>;
+	color: <%% "footer.sfdisc.color", "#888888" %>;
+	border-top: <%% "footer.sfdisc.border", "1px solid #818f49" %>;
+	vertical-align: <%% "footer.sfdisc.vertical.align", "top" %>;
+	padding: <%% "footer.sfdisc.padding", "5px 5px 0px 0px" %>;
+	margin: <%% "footer.sfdisc.margin", "15px 0px 0px 0px" %>;
 }
 
 
 /* sniffy stuff */
 .flyTitle { 
 	padding-bottom: 2px; 
-	color: <% "flyover.title.color", "#ef8033" %>;
-	font: <% "flyover.title.font", "normal 1em Tahoma, \"Trebuchet MS\", Arial" %>;
+	color: <%% "flyover.title.color", "#ef8033" %>;
+	font: <%% "flyover.title.font", "normal 1em Tahoma, \"Trebuchet MS\", Arial" %>;
 }
 
 
 .flyDesc {
 	padding-top: 5px; 
-	color: <% "flyover.desc.color", "#000000" %>;
-	font: <% "flyover.desc.font", "normal .85em Tahoma, \"Trebuchet MS\", Arial" %>;
+	color: <%% "flyover.desc.color", "#000000" %>;
+	font: <%% "flyover.desc.font", "normal .85em Tahoma, \"Trebuchet MS\", Arial" %>;
 }
 
 .flyContent {
-	background-color: <% "flyover.background.color", "#e6e9db" %>;
+	background-color: <%% "flyover.background.color", "#e6e9db" %>;
 }
 
 .content_pagehead {
-	color: <% "page.header.font.color", "#000000" %>;
-	font: <% "page.header.font", "normal 1em Tahoma, \"Trebuchet MS\", Arial" %>;
+	color: <%% "page.header.font.color", "#000000" %>;
+	font: <%% "page.header.font", "normal 1em Tahoma, \"Trebuchet MS\", Arial" %>;
 }

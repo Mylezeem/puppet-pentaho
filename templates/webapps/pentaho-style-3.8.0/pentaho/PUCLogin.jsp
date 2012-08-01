@@ -1,11 +1,11 @@
-<%@ taglib prefix='c' uri='http://java.sun.com/jstl/core'%>
-<%@
+<%%@ taglib prefix='c' uri='http://java.sun.com/jstl/core'%>
+<%%@
     page language="java"
 	import="org.springframework.security.ui.AbstractProcessingFilter,org.springframework.security.ui.webapp.AuthenticationProcessingFilter,org.springframework.security.ui.savedrequest.SavedRequest,org.springframework.security.AuthenticationException,org.pentaho.platform.uifoundation.component.HtmlComponent,org.pentaho.platform.engine.core.system.PentahoSystem,org.pentaho.platform.util.messages.LocaleHelper,org.pentaho.platform.api.engine.IPentahoSession,org.pentaho.platform.web.http.WebTemplateHelper,org.pentaho.platform.api.engine.IUITemplater,org.pentaho.platform.web.jsp.messages.Messages,java.util.List,java.util.ArrayList,java.util.StringTokenizer,org.apache.commons.lang.StringEscapeUtils,org.pentaho.platform.web.http.PentahoHttpSessionHelper"%>
 
 
 
-<%!// List of request URL strings to look for to send 401
+<%%!// List of request URL strings to look for to send 401
 
 	private List<String> send401RequestList;
 
@@ -25,7 +25,7 @@
 		}
 	}%>
 
-<%
+<%%
 	response.setCharacterEncoding(LocaleHelper.getSystemEncoding());
 	String path = request.getContextPath();
 
@@ -269,7 +269,7 @@ A:hover {
 }
 -->
 </style>
-<meta name="gwt:property" content="locale=<%=request.getLocale()%>">
+<meta name="gwt:property" content="locale=<%%=request.getLocale()%>">
 <link rel="shortcut icon" href="/pentaho-style<%= instance %>/favicon.ico" />
 <link href="/pentaho-style<%= instance %>/styles-new.css" rel="stylesheet"
 	type="text/css" />
@@ -285,7 +285,7 @@ A:hover {
 			var responseHandler = function(){
 			 if(req.readyState == 4){
 			   if(req.status == 200){
-			     openLoginDialog('<%=requestedURL%>');
+			     openLoginDialog('<%%=requestedURL%>');
 			    } else {
 			      window.location.href = window.location.href; 
 			    }
@@ -337,10 +337,10 @@ A:hover {
 							onMouseOver="this.className='btn_login_box-hover'"
 							onMouseOut="this.className='btn_login_box'"
 							onBlur="this.className='btn_login_box'"
-							onClick="this.className='btn_login_box';<%if (null != remoteUser && remoteUser.length() > 0) {%>logout()<%} else {%>openLoginDialog('<%=requestedURL%>')<%}%>">
+							onClick="this.className='btn_login_box';<%%if (null != remoteUser && remoteUser.length() > 0) {%>logout()<%%} else {%>openLoginDialog('<%%=requestedURL%>')<%%}%>">
 
 
-							<%
+							<%%
 								if (null != remoteUser && remoteUser.length() > 0) {
 							%>
 							<tr>
@@ -349,16 +349,16 @@ A:hover {
 							<tr>
 								<td class="btn_login_text">Restart Session</td>
 							</tr>
-							<%
+							<%%
 								} else {
 							%>
 							<tr>
 								<td class="btn_login_title">Pentaho User Console</td>
 							</tr>
 							<tr>
-								<td class="btn_login_text"><%=Messages.getString("UI.USER_LOGIN")%></td>
+								<td class="btn_login_text"><%%=Messages.getString("UI.USER_LOGIN")%></td>
 							</tr>
-							<%
+							<%%
 								}
 							%>
 						</table>
@@ -432,7 +432,7 @@ A:hover {
 							width="50" onMouseOver="this.className='button_over'"
 							onMouseOut="this.className='button'" align="right"
 							style="margin-top: 6px;"
-							onClick="window.open(window.location.href.replace('Login', '<%=PentahoSystem.getSystemSetting("documentation-url",
+							onClick="window.open(window.location.href.replace('Login', '<%%=PentahoSystem.getSystemSetting("documentation-url",
 							"docs/community_user_guide.pdf")%>'), '_blank');">
 							<tr>
 								<td width="7" height="27" class="button_left"><img
@@ -467,7 +467,7 @@ A:hover {
 					href="http://www.pentaho.com/products/enterprise" target="_blank">Consider
 				the Pentaho Enterprise Edition</a>: Save time, resources, money and
 				mitigate risk. <br />
-				&#169; 2005-<%= year %> Pentaho Corporation. All rights reserved.</td>
+				&#169; 2005-<%%= year %> Pentaho Corporation. All rights reserved.</td>
 			</tr>
 		</table>
 		</td>
@@ -479,7 +479,7 @@ A:hover {
 <script language='javascript' src='mantleLogin/mantleLogin.nocache.js'></script>
 
 </html>
-<%!// reads the exception stored by AbstractProcessingFilter
+<%%!// reads the exception stored by AbstractProcessingFilter
 	private String getUserMessage(final AuthenticationException e) {
 		String userMessage = Messages
 				.getString("UI.USER_LOGIN_FAILED_DEFAULT_REASON");

@@ -1,5 +1,5 @@
-<%@ taglib prefix='c' uri='http://java.sun.com/jstl/core'%>
-<%@
+<%%@ taglib prefix='c' uri='http://java.sun.com/jstl/core'%>
+<%%@
     page language="java"
   import="org.springframework.security.ui.AbstractProcessingFilter,
             org.springframework.security.ui.webapp.AuthenticationProcessingFilter,
@@ -18,7 +18,7 @@
             org.apache.commons.lang.StringEscapeUtils,
             org.pentaho.platform.web.http.PentahoHttpSessionHelper,
             org.owasp.esapi.ESAPI"%>
-<%!
+<%%!
     // List of request URL strings to look for to send 401
 
     private List<String> send401RequestList;
@@ -39,7 +39,7 @@
       }
     }
   %>
-<%
+<%%
     response.setCharacterEncoding(LocaleHelper.getSystemEncoding());
     String path = request.getContextPath();
 
@@ -147,7 +147,7 @@ a {
 }
 -->
 </style>
-<meta name="gwt:property" content="locale=<%=ESAPI.encoder().encodeForHTMLAttribute(request.getLocale().toString())%>">
+<meta name="gwt:property" content="locale=<%%=ESAPI.encoder().encodeForHTMLAttribute(request.getLocale().toString())%>">
 <link rel="shortcut icon" href="/pentaho-style<%= instance %>/favicon.ico" />
 <script language="javascript" type="text/javascript" src="webcontext.js"></script>
 </head>
@@ -162,7 +162,7 @@ a {
       <tbody>
         <tr>
           <td>
-            <span class="label"><%=Messages.getString("UI.PUC.LOGIN.ERROR")%></span>
+            <span class="label"><%%=Messages.getString("UI.PUC.LOGIN.ERROR")%></span>
           </td>
         </tr>
       </tbody>
@@ -173,7 +173,7 @@ a {
       <tr>
         <td style="width: 100%;"> </td>
         <td>
-           <button class="pentaho-button" onclick="document.getElementById('loginError').style.display='none'"><%=Messages.getString("UI.PUC.LOGIN.OK")%></button>
+           <button class="pentaho-button" onclick="document.getElementById('loginError').style.display='none'"><%%=Messages.getString("UI.PUC.LOGIN.OK")%></button>
         </td>
       </tr>
     </tbody>
@@ -181,13 +181,13 @@ a {
 </div>
 <table width="100%" height="100%" border="0" cellspacing="0" cellpadding="0">
   <tr height="94">
-    <td bgcolor="#FFFFFF"><div id="container_header"><div id="links"><a href="http://www.pentaho.com" target="_blank">www.pentaho.com</a> | <a href="http://www.pentaho.com/contact/?puc=y" target="_blank"><%=Messages.getString("UI.PUC.LOGIN.CONTACT_US")%></a></div>
+    <td bgcolor="#FFFFFF"><div id="container_header"><div id="links"><a href="http://www.pentaho.com" target="_blank">www.pentaho.com</a> | <a href="http://www.pentaho.com/contact/?puc=y" target="_blank"><%%=Messages.getString("UI.PUC.LOGIN.CONTACT_US")%></a></div>
         <div class="pentaho-rounded-panel" style="width: 323px; padding: 20px 20px 20px 20px; position: absolute; margin: 199px 0 0 380px;">
           <table width="100%" border="0" cellspacing="0" cellpadding="0">
             <form name="login" id="login" action="j_spring_security_check" method="POST">
               <tr>
                 <td colspan="1" rowspan="7" style="padding: 20px 20px 0 0;"><img src="/pentaho-style<%= instance %>/images/login/lock.png" width="100" height="172"></td>
-                <td colspan="2" ><span style="color: #FFF; font-size: 1.7em; font-family: &quot;Franklin Gothic Demi&quot;, Tahoma, Arial; "><%=Messages.getString("UI.PUC.LOGIN.LOGIN")%></span></td>
+                <td colspan="2" ><span style="color: #FFF; font-size: 1.7em; font-family: &quot;Franklin Gothic Demi&quot;, Tahoma, Arial; "><%%=Messages.getString("UI.PUC.LOGIN.LOGIN")%></span></td>
               </tr>
               <tr>
                 <td colspan="2" style="padding: 10px 0 4px 0;"><select style="display:none;" id="locale" name="locale">
@@ -197,7 +197,7 @@ a {
                     <option value="fr">French</option>
                     <option value="ja">Japanese</option>
                   </select>
-                <label style="color: #FFF; font-size:.85em; font-family: Tahoma, Arial, sans-serif; text-shadow: 0px 1px 1px #000;" for="userid"><%=Messages.getString("UI.PUC.LOGIN.USERNAME")%></label></td>
+                <label style="color: #FFF; font-size:.85em; font-family: Tahoma, Arial, sans-serif; text-shadow: 0px 1px 1px #000;" for="userid"><%%=Messages.getString("UI.PUC.LOGIN.USERNAME")%></label></td>
               </tr>
               <tr>
                 <td colspan="2">
@@ -206,7 +206,7 @@ a {
               </tr>
               <tr>
                 <td colspan="2" style="padding: 5px 0 4px 0;">
-          <label style="padding: 15px 0 2px 0; color: #FFF; font-size:.85em; font-family: Tahoma, Arial, sans-serif; text-shadow: 0px 1px 1px #000;" for="password"><%=Messages.getString("UI.PUC.LOGIN.PASSWORD")%></label>
+          <label style="padding: 15px 0 2px 0; color: #FFF; font-size:.85em; font-family: Tahoma, Arial, sans-serif; text-shadow: 0px 1px 1px #000;" for="password"><%%=Messages.getString("UI.PUC.LOGIN.PASSWORD")%></label>
         </td>
               </tr>
               <tr>
@@ -217,49 +217,49 @@ a {
               <tr>
                 <td colspan="2" align="left" style="padding:5px 0 2px 0px;">
           <input id="launchInNewWindow" name="Launch in new window" type="checkbox" value="" />
-          <span style="padding:0px 0 2px 0px; color:#fff; font-size:.8em; font-family: Tahoma, Arial, sans-serif;"><%=Messages.getString("UI.PUC.LOGIN.NEW_WINDOW")%></span>
+          <span style="padding:0px 0 2px 0px; color:#fff; font-size:.8em; font-family: Tahoma, Arial, sans-serif;"><%%=Messages.getString("UI.PUC.LOGIN.NEW_WINDOW")%></span>
         </td>
               </tr>
               <tr>
                 <td style="padding:4px 0 0 0px;">
-                <%
+                <%%
                 if (showUsers) {
                 %>
           <img src="/pentaho-style<%= instance %>/images/login/about.png" width="18" height="16" align="absmiddle"/>
-          <a style="color: #fff; padding: 0 4px 0px 4px; font-size: .8em;" href="#" onClick="toggleEvalPanel()"><%=Messages.getString("UI.PUC.LOGIN.EVAL_LOGIN")%></a>
-        <%
+          <a style="color: #fff; padding: 0 4px 0px 4px; font-size: .8em;" href="#" onClick="toggleEvalPanel()"><%%=Messages.getString("UI.PUC.LOGIN.EVAL_LOGIN")%></a>
+        <%%
         } else {
         %>
           &nbsp;
-        <%
+        <%%
         }
         %>
                 </td>       
                 <td style="padding:4px 0 0 0px;">
-                  <input class="pentaho-button" value="<%=Messages.getString("UI.PUC.LOGIN.LOGIN")%>" type="submit" style="float:right; clear: both;"/>
+                  <input class="pentaho-button" value="<%%=Messages.getString("UI.PUC.LOGIN.LOGIN")%>" type="submit" style="float:right; clear: both;"/>
                 </td>
               </tr>
-              <%
+              <%%
                 if (showUsers) {
               %>
               <tr>
                 <td id="evaluationPanel" colspan="3" style="padding: 30px 20px 0 0; display: none;">
           <table width="100%" border="0" cellspacing="0" cellpadding="0">
                     <tr>
-                      <td style="font-size: .8em;"><strong><%=Messages.getString("UI.PUC.LOGIN.ADMIN_USER")%></strong><br>
-                        <%=Messages.getString("UI.PUC.LOGIN.USERNAME")%> joe<br>
-                        <%=Messages.getString("UI.PUC.LOGIN.PASSWORD")%> password</td>
-                      <td style="font-size: .8em;"><strong><%=Messages.getString("UI.PUC.LOGIN.BUSINESS_USER")%></strong><br>
-                        <%=Messages.getString("UI.PUC.LOGIN.USERNAME")%> suzy<br>
-                        <%=Messages.getString("UI.PUC.LOGIN.PASSWORD")%> password</td>
+                      <td style="font-size: .8em;"><strong><%%=Messages.getString("UI.PUC.LOGIN.ADMIN_USER")%></strong><br>
+                        <%%=Messages.getString("UI.PUC.LOGIN.USERNAME")%> joe<br>
+                        <%%=Messages.getString("UI.PUC.LOGIN.PASSWORD")%> password</td>
+                      <td style="font-size: .8em;"><strong><%%=Messages.getString("UI.PUC.LOGIN.BUSINESS_USER")%></strong><br>
+                        <%%=Messages.getString("UI.PUC.LOGIN.USERNAME")%> suzy<br>
+                        <%%=Messages.getString("UI.PUC.LOGIN.PASSWORD")%> password</td>
                     </tr>
                     <tr>
-                    <td colspan="3" style="padding: 4px 20px 0 0; font-size: .8em;"><a href="http://www.pentaho.com/helpmeout/" target="_blank"><%=Messages.getString("UI.PUC.LOGIN.REQUEST_SUPPORT")%></a><img src="/pentaho-style<%= instance %>/images/login/help_link.png" width="20" height="20" align="absbottom"></td>
+                    <td colspan="3" style="padding: 4px 20px 0 0; font-size: .8em;"><a href="http://www.pentaho.com/helpmeout/" target="_blank"><%%=Messages.getString("UI.PUC.LOGIN.REQUEST_SUPPORT")%></a><img src="/pentaho-style<%= instance %>/images/login/help_link.png" width="20" height="20" align="absbottom"></td>
                     </tr>
                   </table>
         </td>
               </tr>
-              <%
+              <%%
         }
         %>
             </form>
@@ -269,11 +269,11 @@ a {
   </tr>
   <tr height="334">
     <td class="dark"><div id="container_content"><img src="/pentaho-style<%= instance %>/images/login/title_text.png">
-        <div id="message"><%=Messages.getString("UI.PUC.LOGIN.MESSAGE")%></div>
+        <div id="message"><%%=Messages.getString("UI.PUC.LOGIN.MESSAGE")%></div>
       </div></td>
   </tr>
   <tr height="100%">
-    <td bgcolor="#FFFFFF" valign="top"><div id="container_footer" style="padding: 4px 20px 0 80px; height:200px;"><%=Messages.getString("UI.PUC.LOGIN.COPYRIGHT", String.valueOf(year))%></div></td>
+    <td bgcolor="#FFFFFF" valign="top"><div id="container_footer" style="padding: 4px 20px 0 80px; height:200px;"><%%=Messages.getString("UI.PUC.LOGIN.COPYRIGHT", String.valueOf(year))%></div></td>
   </tr>
 </table>
 
@@ -288,7 +288,7 @@ function DisplayAlert(id,left,top) {
 
 document.getElementById('j_username').focus();
 
-<%
+<%%
 if (showUsers) {
 %>
 
@@ -301,7 +301,7 @@ function toggleEvalPanel() {
     evaluationPanel.style.display = "none";
   }
 }
-<%
+<%%
 }
 %>
 
@@ -309,7 +309,7 @@ function bounceToReturnLocation() {
   // pass
   var locale = document.login.locale.options[document.login.locale.selectedIndex].value;
   
-  var returnLocation = '<%=ESAPI.encoder().encodeForJavaScript(requestedURL)%>';
+  var returnLocation = '<%%=ESAPI.encoder().encodeForJavaScript(requestedURL)%>';
 
   if(/(iPad|iPod|iPhone)/.test(navigator.userAgent) || window.orientation !== undefined){
     returnLocation = CONTEXT_PATH+"content/analyzer/selectSchema";
@@ -347,7 +347,7 @@ function doLogin() {
     return false;
   }
   
-  if (<%=loggedIn%>) {
+  if (<%%=loggedIn%>) {
     bounceToReturnLocation();
     return false;
   }
@@ -385,7 +385,7 @@ function doLogin() {
 $(document).ready(function(){
     $("#login").submit(doLogin);
 
-  if (<%=loggedIn%>) {
+  if (<%%=loggedIn%>) {
     bounceToReturnLocation();
   }
 });

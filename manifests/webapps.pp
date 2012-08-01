@@ -84,9 +84,9 @@ define pentaho::webapps(
 	file {"/tmp/pentaho_${name}/pentaho_${name}/adhoc/waqr.html" :
 		content => template("pentaho/webapps/pentaho-style-${version}/pentaho/waqr.html"),
 	}
-#file {"/tmp/pentaho_${name}/pentaho_${name}/jsp/PUCLogin.jsp" :
-#		content => template("pentaho/webapps/pentaho-style-${version}/pentaho/PUCLogin.jsp"),
-#	}
+	file {"/tmp/pentaho_${name}/pentaho_${name}/jsp/PUCLogin.jsp" :
+		content => template("pentaho/webapps/pentaho-style-${version}/pentaho/PUCLogin.jsp"),
+	}
 #file {"/tmp/pentaho_${name}/pentaho_${name}/jsp/PropertiesPanel.jsp" :
 #		content => template("pentaho/webapps/pentaho-style-${version}/pentaho/PropertiesPanel.jsp"),
 #	}

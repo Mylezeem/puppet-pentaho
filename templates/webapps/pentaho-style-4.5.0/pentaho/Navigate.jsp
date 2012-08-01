@@ -1,4 +1,4 @@
-<%@ page language="java" 
+<%%%@ page language="java" 
   import="java.util.ArrayList,
     java.util.Locale,
     org.pentaho.platform.util.web.SimpleUrlFactory,
@@ -15,7 +15,7 @@
 	org.pentaho.platform.api.repository.ISolutionRepository,
   org.pentaho.platform.web.http.PentahoHttpSessionHelper,
   org.pentaho.platform.api.engine.IMessageFormatter"
-	 %><%/*
+	 %><%%%/*
  * Copyright 2006 Pentaho Corporation.  All rights reserved. 
  * This software was developed by Pentaho Corporation and is provided under the terms 
  * of the Mozilla Public License, Version 1.1, or any later version. You may not use 
@@ -106,11 +106,11 @@
 		}
 	} else {
 		intro = Messages.getString( "UI.ERROR_0002_BAD_TEMPLATE_OBJECT" );
-	}%><%= intro %>
-<%= content %>
-<%= footer %>
+	}%><%%%= intro %>
+<%%%= content %>
+<%%%= footer %>
 
-<% if( doSplash ) { %>
+<%%% if( doSplash ) { %>
 
 <div id="splash" style="width:100%;height:340px;position:absolute;top:150px;z-index:10;display:block">
   <center>
@@ -142,5 +142,5 @@
 			document.getElementById("splash").style.display="none";
 		}
 	</script>
-<% } %>
+<%%% } %>
 

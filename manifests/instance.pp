@@ -117,38 +117,38 @@ define pentaho::instance (
   #
   # Creating Pentaho Roles
   #
-  $pentaho_roles = append_instance_name(hiera_hash('role'), $instance)
-  create_resources('pentaho::role', $pentaho_roles,
-		{'instance'		=> $instance,
-		 'dbtype'		=> $dbtype,
-		 'cmd'			=> $cmd,
-		 'exe_sql'		=> $exe_sql})
+# $pentaho_roles = append_instance_name(hiera_hash('role'), $instance)
+# create_resources('pentaho::role', $pentaho_roles,
+#		{'instance'		=> $instance,
+#		 'dbtype'		=> $dbtype,
+#		 'cmd'			=> $cmd,
+#		 'exe_sql'		=> $exe_sql})
   #
   # Creating Pentaho Users
   #
-  $pentaho_users = append_instance_name(hiera_hash('user'), $instance)
-  create_resources('pentaho::user', $pentaho_users,
-		{'instance'		=> $instance,
-		 'dbtype'		=> $dbtype,
-		 'cmd'			=> $cmd,
-		 'exe_sql'		=> $exe_sql})
+# $pentaho_users = append_instance_name(hiera_hash('user'), $instance)
+# create_resources('pentaho::user', $pentaho_users,
+#		{'instance'		=> $instance,
+#		 'dbtype'		=> $dbtype,
+#		 'cmd'			=> $cmd,
+#		 'exe_sql'		=> $exe_sql})
 
   #
   # Creating Pentaho Datasources
   #
-  $pentaho_datasources = append_instance_name(hiera_hash('datasource'), $instance)
-  create_resources('pentaho::datasource', $pentaho_datasources,
-		{'instance'		=> $instance,
-		 'dbtype'		=> $dbtype,
-		 'cmd'			=> $cmd,
-		 'exe_sql'		=> $exe_sql})
+#$pentaho_datasources = append_instance_name(hiera_hash('datasource'), $instance)
+# create_resources('pentaho::datasource', $pentaho_datasources,
+#		{'instance'		=> $instance,
+#		 'dbtype'		=> $dbtype,
+#		 'cmd'			=> $cmd,
+#		 'exe_sql'		=> $exe_sql})
 
   #
   # Creating the solutions folders 
   #
-  $pentaho_solutions = append_instance_name(hiera_hash('solution'), $instance)
-  create_resources('pentaho::solution', $pentaho_solutions,
-		  {'instance'	=> $instance})
+#  $pentaho_solutions = append_instance_name(hiera_hash('solution'), $instance)
+# create_resources('pentaho::solution', $pentaho_solutions,
+#		  {'instance'	=> $instance})
 
   #
   # Installing the pentaho-style folder related to the ${instance} value

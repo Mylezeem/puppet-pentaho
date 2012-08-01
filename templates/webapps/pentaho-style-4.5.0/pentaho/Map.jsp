@@ -1,4 +1,4 @@
-<%@ page language="java"
+<%%%@ page language="java"
 	import="org.pentaho.platform.engine.core.system.PentahoSystem,
 			org.pentaho.platform.api.engine.IPentahoSession,
 			org.pentaho.platform.api.repository.ISolutionRepository,
@@ -20,7 +20,7 @@
 			org.pentaho.platform.engine.services.solution.SolutionHelper,
 			java.util.ArrayList,
       org.pentaho.platform.web.http.PentahoHttpSessionHelper
-			" %><%
+			" %><%%%
 
 /*
  * Copyright 2006 Pentaho Corporation.  All rights reserved. 
@@ -133,22 +133,22 @@
 
 %>
 
-<%= intro %>
+<%%%= intro %>
 
-<% 
+<%%% 
 	if( defaultKeyInvalid ) { 
 		// The default key is not valid so we put out a nice message about it.
 %>
 
 The Google Maps API key that ships with the Pentaho Pre-Configured Installation will only work with a server address of 'http://localhost:8080'. 
 <p/> 
-To use Google Maps with this server address ( <%= serverName %>:<%= serverPort %> ) you need to apply to Google for a new key.
+To use Google Maps with this server address ( <%%%= serverName %>:<%%%= serverPort %> ) you need to apply to Google for a new key.
 <p/>
 Once you have the new key you need to add it to the Google settings file in the Pentaho system (.../pentaho-solutions/system/google/googlesettings.xml)
 <p/>
 <a target='google-map-api-key' href='http://www.google.com/apis/maps/signup.html'>Click here</a> to get a Google Maps API Key for this server.
 
-<% 
+<%%% 
 	} else { 
 		// embed the customer data into the web page
 %>
@@ -159,7 +159,7 @@ Once you have the new key you need to add it to the Google settings file in the 
 
 	function addPoints() {
     		if (GBrowserIsCompatible()) {
-		<%
+		<%%%
 			// Add all of the customer data into the web page
 			int n = results.getRowCount();
 			for( int row=0; row<n; row++ ) {
@@ -172,11 +172,11 @@ Once you have the new key you need to add it to the Google settings file in the 
 				// create a javascript call that passes the customer's details
 				%>
 				try {
-					showAddress( "<%= city %>,<%= state %>", "<%= customer %>", "<%= customerNum %>", <%= value %>, false );
+					showAddress( "<%%%= city %>,<%%%= state %>", "<%%%= customer %>", "<%%%= customerNum %>", <%%%= value %>, false );
 				} catch (e) {
 					e.printStackTrace();
 				}
-				<%
+				<%%%
 			}
 		%>
      	}
@@ -372,4 +372,4 @@ Once you have the new key you need to add it to the Google settings file in the 
 	<!-- define the Google Map area -->
     <div id="map" style="position:absolute;width: 640px; height: 580px;top:40px;left:350px;border:1px solid #808080"></div>
 
-<% } %>
+<%%% } %>
