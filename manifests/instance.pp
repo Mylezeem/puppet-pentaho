@@ -1,3 +1,17 @@
+class sample::data {
+	$port				=	'9001'
+	$dbtype				=	'hsql'
+	$version			=	'3.8.0'
+	$pentaho_solution	=	'/opt/pentaho_test/pentaho-solutions/'
+	$role				=	{}
+	$user				=	{}
+	$datasource			=	{}
+	$solution			=	{}
+}
+
+class sample {
+}
+
 define pentaho::instance (
 						  $log_path = '/var/log',
 						  $hsqldb_path = '/opt/hsqldb',
@@ -44,6 +58,7 @@ define pentaho::instance (
 		/(mysql|mysql5)/		=>	"mysql -u${user} -p${pass} -h${host} ",
 		'postgresql'			=>	"psql -U ${user} -W ${pass} -h ${host} ",
 		/(oracle|oracle10g)/	=>	undef,
+		'hsql'					=>  "org.hsql.jar",
 		default					=>	undef,
 	}
 
@@ -52,6 +67,7 @@ define pentaho::instance (
 		/(mysql|mysql5)/		=>	"-e",
 		'postgresql'			=>	"-c",
 		/(oracle|oracle10g)/	=>	undef,
+		'hsql'					=>	"-udnno",
 		default					=>	undef,
 	}
 
@@ -82,20 +98,22 @@ define pentaho::instance (
   #
 
   $dirname = pentaho_dirname(hiera('pentaho_solution'))
+  $pentaho_solution = hiera('pentaho_solution')
 
   pentaho::main_solution {"${name}" :
-	instance	=> $instance,
-	dbtype		=> $dbtype,
-	user		=> $user,
-	pass		=> $pass,
-	host		=> $host,
-	port		=> $port,
-	version		=> $version,
-	driver		=> $driver,
-	dialect		=> $dialect,
-	delegate	=> $delegate,
-	cntstring	=> $cntstring,
-	require		=> File["${dirname}"],
+	instance			=> $instance,
+	pentaho_solution	=> $pentaho_solution,
+	dbtype				=> $dbtype,
+	user				=> $user,
+	pass				=> $pass,
+	host				=> $host,
+	port				=> $port,
+	version				=> $version,
+	driver				=> $driver,
+	dialect				=> $dialect,
+	delegate			=> $delegate,
+	cntstring			=> $cntstring,
+	require				=> File["${dirname}"],
   } 
 
   #
@@ -117,38 +135,39 @@ define pentaho::instance (
   #
   # Creating Pentaho Roles
   #
-# $pentaho_roles = append_instance_name(hiera_hash('role'), $instance)
-# create_resources('pentaho::role', $pentaho_roles,
-#		{'instance'		=> $instance,
-#		 'dbtype'		=> $dbtype,
-#		 'cmd'			=> $cmd,
-#		 'exe_sql'		=> $exe_sql})
+$pentaho_roles = append_instance_name(hiera_hash('role'), $instance)
+ create_resources('pentaho::role', $pentaho_roles,
+		{'instance'		=> $instance,
+		 'dbtype'		=> $dbtype,
+		 'cmd'			=> $cmd,
+		 'exe_sql'		=> $exe_sql})
   #
   # Creating Pentaho Users
   #
-# $pentaho_users = append_instance_name(hiera_hash('user'), $instance)
-# create_resources('pentaho::user', $pentaho_users,
-#		{'instance'		=> $instance,
-#		 'dbtype'		=> $dbtype,
-#		 'cmd'			=> $cmd,
-#		 'exe_sql'		=> $exe_sql})
+$pentaho_users = append_instance_name(hiera_hash('user'), $instance)
+ create_resources('pentaho::user', $pentaho_users,
+		{'instance'		=> $instance,
+		 'dbtype'		=> $dbtype,
+		 'cmd'			=> $cmd,
+		 'exe_sql'		=> $exe_sql})
 
   #
   # Creating Pentaho Datasources
   #
-#$pentaho_datasources = append_instance_name(hiera_hash('datasource'), $instance)
-# create_resources('pentaho::datasource', $pentaho_datasources,
-#		{'instance'		=> $instance,
-#		 'dbtype'		=> $dbtype,
-#		 'cmd'			=> $cmd,
-#		 'exe_sql'		=> $exe_sql})
+$pentaho_datasources = append_instance_name(hiera_hash('datasource'), $instance)
+ create_resources('pentaho::datasource', $pentaho_datasources,
+		{'instance'		=> $instance,
+		 'dbtype'		=> $dbtype,
+		 'cmd'			=> $cmd,
+		 'exe_sql'		=> $exe_sql})
 
   #
   # Creating the solutions folders 
   #
-#  $pentaho_solutions = append_instance_name(hiera_hash('solution'), $instance)
-# create_resources('pentaho::solution', $pentaho_solutions,
-#		  {'instance'	=> $instance})
+  $pentaho_solutions = append_instance_name(hiera_hash('solution'), $instance)
+ create_resources('pentaho::solution', $pentaho_solutions,
+		  {'instance'	=> $instance,
+		   'pentaho_solution'	=> $pentaho_solution})
 
   #
   # Installing the pentaho-style folder related to the ${instance} value

@@ -1,10 +1,20 @@
+define pentaho::datasource::data {
+	$ds_user		= 'pentaho_user'
+	$ds_pass		= 'password'
+	$ds_host		= 'localhost'
+	$ds_port		= '9001'
+	$ds_driver		= 'org.hsqldb.jdbcDriver'
+	$ds_cntstring	= 'jdbc:hsqldb:hsql://'
+	$ds_db			= 'sampledata'
+	$ds_options		= ''
+}
+
 define pentaho::datasource($instance,
 						   $dbtype,
 						   $cmd,
 						   $exe_sql,
 						   $max_conn = 30,
 						   $idle = 10,
-						   $query = "SELECT 1",
 						   $max_wait = 10000) {
 
 	$pentaho_datasource = remove_instance_name($name, $instance)
@@ -16,6 +26,11 @@ define pentaho::datasource($instance,
 	$ds_cntstring = hiera('cntstring')
 	$ds_db = hiera('db') 
 	$ds_options = stringify_array(hiera_array('options'), '&')
+
+	$query = $ds_driver ? {
+			'org.hsqldb.jdbcDriver'	=> "select count(*) from INFORMATION_SCHEMA.SYSTEM_SEQUENCES",
+			default					=> "SELECT 1",
+	}
 
 	$ds_insert_string = $dbtype ? {
 		/(mysql|mysql5)/		=>	 "INSERT INTO DATASOURCE VALUES ('${pentaho_datasource}', ${max_conn}, '${ds_driver}', ${idle}, '${ds_user}', '${ds_pass}', '${ds_cntstring}${ds_host}:${ds_port}/${ds_db}?${ds_options}', '${query}', ${max_wait}) ON DUPLICATE KEY UPDATE MAXACTCONN = ${max_conn}, DRIVERCLASS = '${ds_driver}', IDLECONN = ${idle}, USERNAME = '${ds_user}', PASSWORD = '${ds_pass}', URL = '${ds_cntstring}${ds_host}:${ds_port}/${ds_db}?${ds_options}', QUERY = '${query}', WAIT = ${max_wait}",

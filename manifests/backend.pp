@@ -39,6 +39,12 @@ define pentaho::backend($instance,
 		file{"${hsqldb_path}/${instance}/quartz${instance}.script" : 
 			content => template('pentaho/hsqldb/quartz.script'),
 		}
+		file{"${hsqldb_path}/${instance}/sampledata${instance}.properties" : 
+			content => template('pentaho/hsqldb/sampledata.properties'),
+		}
+		file{"${hsqldb_path}/${instance}/sampledata${instance}.script" : 
+			content => template('pentaho/hsqldb/sampledata.script'),
+		}
 	} else {
 
 		$extra = $dbtype ? {

@@ -1,4 +1,5 @@
 define pentaho::main_solution ($instance,
+								$pentaho_solution,
 								$dbtype,
 								$user,
 								$pass,
@@ -11,7 +12,6 @@ define pentaho::main_solution ($instance,
 								$cntstring,
 								) {
 
-	$pentaho_solution = hiera('pentaho_solution')
 
 	#
 	# Getting the system and admin folders on a public repo (GitHub)

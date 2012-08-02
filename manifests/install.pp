@@ -1,3 +1,8 @@
+class pentaho::install::data {
+	$port	= '9001'
+	$instance = {"sample" => {}}	
+}
+
 class pentaho::install {
 
   $node = 'pentaho_0X1RC32'

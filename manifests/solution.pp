@@ -1,5 +1,6 @@
 define pentaho::solution(
 						$instance,
+						$pentaho_solution,
 						$icon = 'reporting.png',
 						$visible = 'true',
 						$displaytype = 'list',
@@ -7,7 +8,6 @@ define pentaho::solution(
 
   $solution_name = remove_instance_name($name, $instance)
   $description = $solution_name
-  $pentaho_solution = hiera('pentaho_solution')
 
   File { require => Pentaho::Main_solution["${instance}"], }
   file {"${pentaho_solution}/${solution_name}" :
