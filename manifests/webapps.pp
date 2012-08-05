@@ -32,6 +32,13 @@ define pentaho::webapps(
 		$validationQuery = "select 1"
 	}
 
+	$jdbc_driver_name = $dbtype ? {
+		/(mysql|mysql5)/		=>	"mysql-connector-java-5.1.17-bin.jar",
+		'postgresql'			=>	"postgresql-8.4-703.jdbc4.jar",
+		/(oracle|oracle10g)/	=>	"oracle.jdbc.driver.OracleDriver",
+		'hsql'					=>	"hsqldb-1.8.0.jar",
+		default					=>	undef,
+	}
 
 	exec {"git clone git://github.com/Spredzy/pentaho-${version}.git pentaho_${name}" :
 		cwd     =>  "/tmp/pentaho_${name}",
@@ -48,6 +55,7 @@ define pentaho::webapps(
 		require => File["/tmp/pentaho_${name}"],
 	}
 
+
 	file {"/tmp/pentaho_${name}/pentaho_${name}/META-INF/context.xml" :
 		ensure  => present,
 		content =>  template('pentaho/webapps/context.xml'),
@@ -60,10 +68,16 @@ define pentaho::webapps(
 		recurse => true,
 	}
 
+	file {"/tmp/pentaho_${name}/pentaho_${name}/WEB-INF/lib/${jdbc_driver_name}" :
+		ensure	=>	present,
+		source	=>  "puppet:///modules/pentaho/connectors/${dbtype}/${jdbc_driver_name}",
+		require =>  [File["/tmp/pentaho_${name}/pentaho_${name}/META-INF/context.xml"], File["${log_path}/pentaho_${name}"]],
+	}
+
    file {"/tmp/pentaho_${name}/pentaho_${name}/WEB-INF/classes/log4j.xml" :
 		ensure  => present,
 		content =>  template('pentaho/webapps/log4j.xml'),
-		require =>  [File["/tmp/pentaho_${name}/pentaho_${name}/META-INF/context.xml"], File["${log_path}/pentaho_${name}"]],
+		require =>  File["/tmp/pentaho_${name}/pentaho_${name}/WEB-INF/lib/${jdbc_driver_name}"],
 	}
 
     file {"/tmp/pentaho_${name}/pentaho_${name}/WEB-INF/web.xml" :
@@ -87,30 +101,30 @@ define pentaho::webapps(
 	file {"/tmp/pentaho_${name}/pentaho_${name}/jsp/PUCLogin.jsp" :
 		content => template("pentaho/webapps/pentaho-style-${version}/pentaho/PUCLogin.jsp"),
 	}
-#file {"/tmp/pentaho_${name}/pentaho_${name}/jsp/PropertiesPanel.jsp" :
-#		content => template("pentaho/webapps/pentaho-style-${version}/pentaho/PropertiesPanel.jsp"),
-#	}
-#	file {"/tmp/pentaho_${name}/pentaho_${name}/jsp/ChartSamplesDashboard.jsp" :
-#		content => template("pentaho/webapps/pentaho-style-${version}/pentaho/ChartSamplesDashboard.jsp"),
-#	}
-#	file {"/tmp/pentaho_${name}/pentaho_${name}/jsp/NewAnalysisView.jsp" :
-#		content => template("pentaho/webapps/pentaho-style-${version}/pentaho/NewAnalysisView.jsp"),
-#	}
-#	file {"/tmp/pentaho_${name}/pentaho_${name}/jsp/Map.jsp" :
-#		content => template("pentaho/webapps/pentaho-style-${version}/pentaho/Map.jsp"),
-#	}
-#	file {"/tmp/pentaho_${name}/pentaho_${name}/jsp/Navigate.jsp" :
-#		content => template("pentaho/webapps/pentaho-style-${version}/pentaho/Navigate.jsp"),
-#	}
-#	file {"/tmp/pentaho_${name}/pentaho_${name}/jsp/Pivot.jsp" :
-#		content => template("pentaho/webapps/pentaho-style-${version}/pentaho/Pivot.jsp"),
-#	}
+	file {"/tmp/pentaho_${name}/pentaho_${name}/jsp/PropertiesPanel.jsp" :
+		content => template("pentaho/webapps/pentaho-style-${version}/pentaho/PropertiesPanel.jsp"),
+	}
+	file {"/tmp/pentaho_${name}/pentaho_${name}/jsp/ChartSamplesDashboard.jsp" :
+		content => template("pentaho/webapps/pentaho-style-${version}/pentaho/ChartSamplesDashboard.jsp"),
+	}
+	file {"/tmp/pentaho_${name}/pentaho_${name}/jsp/NewAnalysisView.jsp" :
+		content => template("pentaho/webapps/pentaho-style-${version}/pentaho/NewAnalysisView.jsp"),
+	}
+	file {"/tmp/pentaho_${name}/pentaho_${name}/jsp/Map.jsp" :
+		content => template("pentaho/webapps/pentaho-style-${version}/pentaho/Map.jsp"),
+	}
+	file {"/tmp/pentaho_${name}/pentaho_${name}/jsp/Navigate.jsp" :
+		content => template("pentaho/webapps/pentaho-style-${version}/pentaho/Navigate.jsp"),
+	}
+	file {"/tmp/pentaho_${name}/pentaho_${name}/jsp/Pivot.jsp" :
+		content => template("pentaho/webapps/pentaho-style-${version}/pentaho/Pivot.jsp"),
+	}
 	file {"/tmp/pentaho_${name}/pentaho_${name}/mantle/DebugMantle.html" :
 		content => template("pentaho/webapps/pentaho-style-${version}/pentaho/DebugMantle.html"),
 	}
-#	file {"/tmp/pentaho_${name}/pentaho_${name}/mantle/Mantle.jsp" :
-#		content => template("pentaho/webapps/pentaho-style-${version}/pentaho/Mantle.jsp"),
-#	}
+	file {"/tmp/pentaho_${name}/pentaho_${name}/mantle/Mantle.jsp" :
+		content => template("pentaho/webapps/pentaho-style-${version}/pentaho/Mantle.jsp"),
+	}
 	file {"/tmp/pentaho_${name}/pentaho_${name}/ping/adhoc.html" :
 		content => template("pentaho/webapps/pentaho-style-${version}/pentaho/adhoc.html"),
 	}
