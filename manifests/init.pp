@@ -10,5 +10,6 @@ class pentaho::data {
 }
 
 class pentaho() {
- include pentaho::params, pentaho::install
+	require git, tomcat6
+	include pentaho::params, pentaho::install
 }
