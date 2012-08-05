@@ -196,7 +196,6 @@ define pentaho::main_solution ($instance,
 
 	file {"${pentaho_solution}/system/logs" :
 		ensure	=>	directory,
-		group	=>	tomcat6,
 		mode	=>	'0777',
 		recurse	=> true,
 	}
