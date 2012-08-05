@@ -1,4 +1,4 @@
-<%%%@ page language="java"
+<%%@ page language="java"
 	import="org.pentaho.platform.web.jsp.messages.Messages,
 			org.pentaho.platform.util.messages.LocaleHelper,
 			org.pentaho.platform.plugin.action.mondrian.catalog.MondrianCatalogHelper,
@@ -16,7 +16,7 @@
 	 org.pentaho.platform.web.servlet.AnalysisViewService,
    org.pentaho.platform.web.http.PentahoHttpSessionHelper
 	 "%>
-<%%%
+<%%
        /*
        * Copyright 2008 Pentaho Corporation.  All rights reserved. 
        * This software was developed by Pentaho Corporation and is provided under the terms 
@@ -67,7 +67,7 @@
 	
 	var temp;
 	var schemas = [];
-	<%%%
+	<%%
 	
 	
 	if(catalogs != null){
@@ -143,7 +143,7 @@
 <script src="js/pivot/PivotRepositoryBrowserController.js"
 	type="text/javascript"></script>
 
-<%%%=intro%>
+<%%=intro%>
 
 <form name="frm" method="GET" action="AnalysisViewService?"
 	onSubmit="return false"><input type="hidden" name="component"
@@ -155,17 +155,17 @@
 		<td valign="top" align="center" style="padding-top:15px;">
 		<h1>New Pentaho Analysis View</h1>
 
-		<span style="text-align:center; color:red;"> <%%%
+		<span style="text-align:center; color:red;"> <%%
        Object errorMessage = request.getAttribute("errorMessage");
        if (errorMessage != null) {
          out.print("Error: ");
          out.print((String) errorMessage);
        }
- %> </span> <%%%
+ %> </span> <%%
  if (catalogs == null || catalogs.size() == 0) {
  %> <br />
-		<span style="text-align:center"> <%%%=Messages.getString("UI.ANALYSIS_VIEW.NO_CATALOGS_MESSAGE")%>
-		</span> <%%%
+		<span style="text-align:center"> <%%=Messages.getString("UI.ANALYSIS_VIEW.NO_CATALOGS_MESSAGE")%>
+		</span> <%%
  } else {
  %>
 		<table border="0" cellpadding="0" cellspacing="0" width="350">
@@ -186,29 +186,29 @@
 				<table width="100%" border='0' cellpadding='1' cellspacing='1'
 					style="background-color:#dddddd">
 					<tr>
-						<td><%%%=Messages.getString("UI.ANALYSIS_VIEW.TITLE")%></td>
+						<td><%%=Messages.getString("UI.ANALYSIS_VIEW.TITLE")%></td>
 					</tr>
 					<tr>
 						<td><input type="text" name="name" style="width:100%"
-							value="<%%%= (request.getParameter("name") != null) ? request.getParameter("name") : "" %>" />
+							value="<%%= (request.getParameter("name") != null) ? request.getParameter("name") : "" %>" />
 						</td>
 					</tr>
 					<tr>
-						<td><%%%=Messages.getString("UI.ANALYSIS_VIEW.DESCRIPTION")%>
+						<td><%%=Messages.getString("UI.ANALYSIS_VIEW.DESCRIPTION")%>
 						</td>
 					</tr>
 					<tr>
 						<td><input type="text" name="descr" style="width:100%"
-							value="<%%%= (request.getParameter("descr") != null) ? request.getParameter("descr") : "" %>" />
+							value="<%%= (request.getParameter("descr") != null) ? request.getParameter("descr") : "" %>" />
 						</td>
 					</tr>
 
 					<tr>
-						<td><%%%=Messages.getString("UI.ANALYSIS_VIEW.FILENAME")%></td>
+						<td><%%=Messages.getString("UI.ANALYSIS_VIEW.FILENAME")%></td>
 					</tr>
 					<tr>
 						<td><input type="text" name="actionName" style="width:100%"
-							value="<%%%= (request.getParameter("actionName") != null) ? request.getParameter("actionName") : "" %>" />
+							value="<%%= (request.getParameter("actionName") != null) ? request.getParameter("actionName") : "" %>" />
 						</td>
 					</tr>
 					<tr>
@@ -238,7 +238,7 @@
 										<td id="saveDlgWherePrompt" colspan="2"></td>
 									</tr>
 									<tr>
-										<td style="white-space: nowrap"><%%%=Messages.getString("UI.ANALYSIS_VIEW.WHERE")%></td>
+										<td style="white-space: nowrap"><%%=Messages.getString("UI.ANALYSIS_VIEW.WHERE")%></td>
 										<td width="100%">
 										<table style='width:100%;' border="0" cellspacing="0"
 											cellpadding="0">
@@ -252,7 +252,7 @@
 										</td>
 									</tr>
 									<tr style="display:none">
-										<td id="saveDlgSelectSltnTitle" colspan='2'><%%%=Messages.getString("UI.ANALYSIS_VIEW.SELECT_SOLUTION")%></td>
+										<td id="saveDlgSelectSltnTitle" colspan='2'><%%=Messages.getString("UI.ANALYSIS_VIEW.SELECT_SOLUTION")%></td>
 									</tr>
 									<tr>
 										<td id="browser.solutionFolderListTd" height="100%"
@@ -284,7 +284,7 @@
 				<table border='0' cellpadding='1' cellspacing='1'
 					style="background-color:#dddddd">
 					<tr>
-						<td><%%%=Messages.getString("UI.ANALYSIS_VIEW.SCHEMA")%></td>
+						<td><%%=Messages.getString("UI.ANALYSIS_VIEW.SCHEMA")%></td>
 					</tr>
 					<tr>
 						<td><select id="schemas" name="schema" style="width:350"
@@ -293,7 +293,7 @@
 													var schemaSelect = document.getElementById("schemas");
 													for each(schema in schemas){
 														var opt = new Option(schema.name,schema.name);
-														if(schema.name == "<%%%= request.getParameter("schema")%>"){
+														if(schema.name == "<%%= request.getParameter("schema")%>"){
 															opt.selected = true;
 														}
 														schemaSelect.options[schemaSelect.options.length] = opt;
@@ -301,7 +301,7 @@
 												</script></td>
 					</tr>
 					<tr>
-						<td><%%%=Messages.getString("UI.ANALYSIS_VIEW.CUBE")%></td>
+						<td><%%=Messages.getString("UI.ANALYSIS_VIEW.CUBE")%></td>
 					</tr>
 					<tr>
 						<td><select style="width:350" id="cubes" name="cube" />
@@ -311,7 +311,7 @@
 														cubeSelect.options.length = 0;
 														for each(cube in schemas[schemaSelect.value].cubes){
 															var opt = new Option(cube,cube);
-															if(cube== "<%%%= request.getParameter("cube")%>"){
+															if(cube== "<%%= request.getParameter("cube")%>"){
 																opt.selected = true;
 															}
 															cubeSelect.options[cubeSelect.options.length] = opt;
@@ -341,7 +341,7 @@
 					width="10" height="10" /></td>
 			</tr>
 		</table>
-		<%%%
+		<%%
 		}
 		%>
 		</td>
@@ -370,4 +370,4 @@
 		}
 	</script>
 
-<%%%=footer%>
+<%%=footer%>

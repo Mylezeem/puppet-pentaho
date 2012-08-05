@@ -1,4 +1,4 @@
-<%%%@ page session="true" contentType="text/html;"
+<%%@ page session="true" contentType="text/html;"
   import="
   java.util.*,
   java.io.ByteArrayOutputStream,
@@ -56,7 +56,7 @@
   org.owasp.esapi.ESAPI"%>
 <jsp:directive.page
   import="org.pentaho.platform.api.repository.ISolutionRepository" />
-<%%%
+<%%
  // the following code replaces wcf's RequestFilter due to session based
  // synchronization logic that is no longer necessary. (PDB-369)
  MultiPartEnabledRequest mprequest = new MultiPartEnabledRequest((HttpServletRequest) request);
@@ -70,13 +70,13 @@
    Controller controller = WcfController.instance(session);
    controller.request(wcfcontext);
 %>
-<%%%@ 
+<%%@ 
    taglib uri="http://www.tonbeller.com/jpivot" prefix="jp"%>
-<%%%@ 
+<%%@ 
    taglib uri="http://www.tonbeller.com/wcf" prefix="wcf"%>
-<%%%@ 
+<%%@ 
    taglib prefix="c" uri="http://java.sun.com/jstl/core"%>
-<%%%
+<%%
 
 /*
  * Copyright 2006-2009 Pentaho Corporation.  All rights reserved. 
@@ -709,22 +709,22 @@
     if (currDataSource != null) {
       request.setAttribute("currDataSource", currDataSource);
 %>
-<jp:mondrianQuery id="<%%%=queryId%>" dataSource="${currDataSource}"
+<jp:mondrianQuery id="<%%=queryId%>" dataSource="${currDataSource}"
   dynResolver="mondrian.i18n.LocalizingDynamicSchemaProcessor"
-  dynLocale="<%%%= userSession.getLocale().toString() %>"
-  role="<%%%=role%>" catalogUri="<%%%=catalogUri%>">
-  <%%%=query%>
+  dynLocale="<%%= userSession.getLocale().toString() %>"
+  role="<%%=role%>" catalogUri="<%%=catalogUri%>">
+  <%%=query%>
 </jp:mondrianQuery>
-<%%%
+<%%
     } else {
 %>
-<jp:mondrianQuery id="<%%%=queryId%>" dataSource="<%%%=dataSource%>"
+<jp:mondrianQuery id="<%%=queryId%>" dataSource="<%%=dataSource%>"
   dynResolver="mondrian.i18n.LocalizingDynamicSchemaProcessor"
-  dynLocale="<%%%= userSession.getLocale().toString() %>"
-  role="<%%%=role%>" catalogUri="<%%%=catalogUri%>">
-  <%%%=query%>
+  dynLocale="<%%= userSession.getLocale().toString() %>"
+  role="<%%=role%>" catalogUri="<%%=catalogUri%>">
+  <%%=query%>
 </jp:mondrianQuery>
-<%%% 
+<%% 
     }
   }
 
@@ -732,9 +732,9 @@
   session.setAttribute(titleId, pivotTitle);
 %><html>
 <head>
-<title><%%%= Messages.getString("UI.USER_ANALYSIS") %></title>
+<title><%%= Messages.getString("UI.USER_ANALYSIS") %></title>
 <meta http-equiv="Content-Type"
-  content="text/html; charset=<%%%= LocaleHelper.getSystemEncoding() %>">
+  content="text/html; charset=<%%= LocaleHelper.getSystemEncoding() %>">
 <link rel="stylesheet" type="text/css" href="jpivot/table/mdxtable.css">
 <link rel="stylesheet" type="text/css" href="jpivot/navi/mdxnavi.css">
 <link rel="stylesheet" type="text/css" href="wcf/form/xform.css">
@@ -830,7 +830,7 @@
     function doSaveAsPost(postActionName, postActionSolution, postActionPath, postActionTitle) {
       var postForm = document.createElement("form");
       postForm.method="post" ;
-      postForm.action = '<%%%= pageName %>';
+      postForm.action = '<%%= pageName %>';
       var anInput;
       // save-action
       anInput = document.createElement("input");
@@ -855,7 +855,7 @@
       // pivotId
       anInput = document.createElement("input");
       anInput.setAttribute("name", "pivotId");
-      anInput.setAttribute("value",  "<%%%=ESAPI.encoder().encodeForJavaScript(pivotId)%>");
+      anInput.setAttribute("value",  "<%%=ESAPI.encoder().encodeForJavaScript(pivotId)%>");
       postForm.appendChild(anInput);
       
       document.body.appendChild(postForm); // Add the form into the document...
@@ -893,29 +893,29 @@
 //      }  // Uncomment this if above if is uncommented
 
       window.pivot_initialized = true;
-       <%%%    if ("true".equalsIgnoreCase(PentahoSystem.getSystemSetting("kiosk-mode", "false"))) { %>
+       <%%    if ("true".equalsIgnoreCase(PentahoSystem.getSystemSetting("kiosk-mode", "false"))) { %>
                try {
-                 var mdxEditTxtBx = document.getElementById('<%%%=ESAPI.encoder().encodeForJavaScript(mdxEditId)%>.9');
+                 var mdxEditTxtBx = document.getElementById('<%%=ESAPI.encoder().encodeForJavaScript(mdxEditId)%>.9');
                  if (mdxEditTxtBx) {
                    mdxEditTxtBx.readOnly = true;
                  }
                } catch (ignored) {
                }
-       <%%%    }%>
+       <%%    }%>
     }
     
     function save() {
       cursor_wait();
-    <%%%
+    <%%
       ActionInfo actionInfo = ActionInfo.parseActionString( actionReference );
       if (actionInfo != null) {
     %>
-      var nActionName = "<%%%= ESAPI.encoder().encodeForJavaScript(actionInfo.getActionName()) %>";
-      var nSolution = "<%%%= ESAPI.encoder().encodeForJavaScript(actionInfo.getSolutionName()) %>";
-      var nActionPath = "<%%%= ESAPI.encoder().encodeForJavaScript(actionInfo.getPath()) %>";
-      var nActionTitle = "<%%%= ESAPI.encoder().encodeForJavaScript(actionTitle) %>";
+      var nActionName = "<%%= ESAPI.encoder().encodeForJavaScript(actionInfo.getActionName()) %>";
+      var nSolution = "<%%= ESAPI.encoder().encodeForJavaScript(actionInfo.getSolutionName()) %>";
+      var nActionPath = "<%%= ESAPI.encoder().encodeForJavaScript(actionInfo.getPath()) %>";
+      var nActionTitle = "<%%= ESAPI.encoder().encodeForJavaScript(actionTitle) %>";
       doSaveAsPost(nActionName, nSolution, nActionPath, nActionTitle);
-    <%%% } %>
+    <%% } %>
       cursor_clear();
     }
 
@@ -925,9 +925,9 @@
 
   --></script>
 
-<%%%-- ****************************************************************************************** --%>
-<%%%-- ****************************************************************************************** --%>
-<%%%-- ****************************************************************************************** --%>
+<%%-- ****************************************************************************************** --%>
+<%%-- ****************************************************************************************** --%>
+<%%-- ****************************************************************************************** --%>
 
 
 <script type="text/javascript">
@@ -939,11 +939,11 @@
       var target='';
         
       if( action == 'load' ) {
-        submitUrl += '<%%%= pageName %>?subscribe=load&query=SampleData';
+        submitUrl += '<%%= pageName %>?subscribe=load&query=SampleData';
       }
       else 
       if( action == 'delete' ) {
-        submitUrl += '<%%%= pageName %>?subscribe=delete';
+        submitUrl += '<%%= pageName %>?subscribe=delete';
       }
 
       var name= document.getElementById('subscription').value;
@@ -990,14 +990,14 @@
     
   </script>
 
-<%%%-- ****************************************************************************************** --%>
-<%%%-- ****************************************************************************************** --%>
-<%%%-- ****************************************************************************************** --%>
+<%%-- ****************************************************************************************** --%>
+<%%-- ****************************************************************************************** --%>
+<%%-- ****************************************************************************************** --%>
 
 </head>
-<body class="body_dialog01" dir="<%%%= LocaleHelper.getTextDirection() %>" onload="javascript:load();">
+<body class="body_dialog01" dir="<%%= LocaleHelper.getTextDirection() %>" onload="javascript:load();">
 <div class="dialog01_content">
-<%%%
+<%%
   if( subscribeResult != null ) {
     out.println( ESAPI.encoder().encodeForHTML( subscribeResult ));
     out.println( "<br/>" ); //$NON-NLS-1$
@@ -1009,33 +1009,33 @@
   <tr>
     <td class="content_body">
 
-    <form action="<%%%= pageName %>" method="post">
-      <%%%-- this allows us to remember which pivot we're working with --%>
-      <input type="hidden" name="pivotId" value="<%%%=ESAPI.encoder().encodeForHTMLAttribute(pivotId)%>">
-      <%%% if (_olapModel == null) { %>
-        <%%%= Messages.getString("UI.USER_ANALYSIS_INVALID_PAGE") %> 
-      <%%% } else { %>
-      <%%%-- define table, navigator and forms --%> 
+    <form action="<%%= pageName %>" method="post">
+      <%%-- this allows us to remember which pivot we're working with --%>
+      <input type="hidden" name="pivotId" value="<%%=ESAPI.encoder().encodeForHTMLAttribute(pivotId)%>">
+      <%% if (_olapModel == null) { %>
+        <%%= Messages.getString("UI.USER_ANALYSIS_INVALID_PAGE") %> 
+      <%% } else { %>
+      <%%-- define table, navigator and forms --%> 
       <wcf:scroller />
-      <jp:table id="<%%%=tableId%>" query="<%%%=queryId%>" />
-      <jp:navigator id="<%%%=naviId%>" query="<%%%=queryId%>" visible="false" /> 
-      <%%%
+      <jp:table id="<%%=tableId%>" query="<%%=queryId%>" />
+      <jp:navigator id="<%%=naviId%>" query="<%%=queryId%>" visible="false" /> 
+      <%%
       String wrappedQueryId = "#{" + queryId + "}";
       String wrappedTableId = "#{" + tableId + "}";
       String wrappedPrintId = "#{" + printId + "}";
       String chartControllerURL = "?pivotId=" + pivotId;
       %> 
-      <wcf:form id="<%%%=mdxEditId%>" xmlUri="/WEB-INF/jpivot/table/mdxedit.xml"
-        model="<%%%=wrappedQueryId%>" visible="false" />
-      <wcf:form id="<%%%=sortFormId%>" xmlUri="/WEB-INF/jpivot/table/sortform.xml"
-        model="<%%%=wrappedTableId%>" visible="false" />
+      <wcf:form id="<%%=mdxEditId%>" xmlUri="/WEB-INF/jpivot/table/mdxedit.xml"
+        model="<%%=wrappedQueryId%>" visible="false" />
+      <wcf:form id="<%%=sortFormId%>" xmlUri="/WEB-INF/jpivot/table/sortform.xml"
+        model="<%%=wrappedTableId%>" visible="false" />
 
-      <jp:print id="<%%%=printId%>" />
-      <wcf:form id="<%%%=printFormId%>"
+      <jp:print id="<%%=printId%>" />
+      <wcf:form id="<%%=printFormId%>"
         xmlUri="/WEB-INF/jpivot/print/printpropertiesform.xml"
-        model="<%%%=wrappedPrintId%>" visible="false" />
+        model="<%%=wrappedPrintId%>" visible="false" />
       <jp:chart
-      id="<%%%=chartId%>" query="<%%%=wrappedQueryId%>" visible="false" controllerURL="<%%%=chartControllerURL%>"/> <%%% 
+      id="<%%=chartId%>" query="<%%=wrappedQueryId%>" visible="false" controllerURL="<%%=chartControllerURL%>"/> <%% 
       
   // we've reloaded the following session objects
   _table =  (TableComponent) session.getAttribute(tableId);
@@ -1087,14 +1087,14 @@
   
   String wrappedChartId = "#{" + chartId + "}";
 %> 
-    <wcf:form id="<%%%=chartFormId%>"
+    <wcf:form id="<%%=chartFormId%>"
       xmlUri="/WEB-INF/jpivot/chart/chartpropertiesform.xml"
-      model="<%%%=wrappedChartId%>" visible="false" />
+      model="<%%=wrappedChartId%>" visible="false" />
     <wcf:table
-      id="<%%%=drillThroughTableId%>" visible="false"
+      id="<%%=drillThroughTableId%>" visible="false"
       selmode="none" editable="true" />
       
-<%%% 
+<%% 
     // define a toolbar
     
     if( options != null ) {
@@ -1118,173 +1118,173 @@
       String printExcel = "./Print?cube=" + pivotId + "&type=0";
       String printPdf = "./Print?cube=" + pivotId + "&type=1";  
       
- %> <wcf:toolbar id="<%%%=toolbarId%>"
+ %> <wcf:toolbar id="<%%=toolbarId%>"
       bundle="com.tonbeller.jpivot.toolbar.resources">
-      <%%% if( options == null ) {
+      <%% if( options == null ) {
 
         %>
       <wcf:scriptbutton id="cubeNaviButton" tooltip="toolb.cube" img="cube"
-        model="<%%%=wrappedNaviVisible%>" />
+        model="<%%=wrappedNaviVisible%>" />
       <wcf:scriptbutton id="mdxEditButton" tooltip="toolb.mdx.edit"
-        img="mdx-edit" model="<%%%=wrappedMdxEditVisible%>" />
+        img="mdx-edit" model="<%%=wrappedMdxEditVisible%>" />
       <wcf:scriptbutton id="sortConfigButton" tooltip="toolb.table.config"
-        img="sort-asc" model="<%%%=wrappedSortFormVisible%>" />
+        img="sort-asc" model="<%%=wrappedSortFormVisible%>" />
       <wcf:separator />
       <wcf:scriptbutton id="levelStyle" tooltip="toolb.level.style"
-        img="level-style" model="<%%%=wrappedTableLevelStyle%>" />
+        img="level-style" model="<%%=wrappedTableLevelStyle%>" />
       <wcf:scriptbutton id="hideSpans" tooltip="toolb.hide.spans"
-        img="hide-spans" model="<%%%=wrappedTableHideSpans%>" />
+        img="hide-spans" model="<%%=wrappedTableHideSpans%>" />
       <wcf:scriptbutton id="propertiesButton" tooltip="toolb.properties"
-        img="properties" model="<%%%=wrappedTableShowProperties%>" />
+        img="properties" model="<%%=wrappedTableShowProperties%>" />
       <wcf:scriptbutton id="nonEmpty" tooltip="toolb.non.empty"
-        img="non-empty" model="<%%%=wrappedTableNonEmptyButtonPressed%>" />
+        img="non-empty" model="<%%=wrappedTableNonEmptyButtonPressed%>" />
       <wcf:scriptbutton id="swapAxes" tooltip="toolb.swap.axes"
-        img="swap-axes" model="<%%%=wrappedTableSwapAxesButtonPressed%>" />
+        img="swap-axes" model="<%%=wrappedTableSwapAxesButtonPressed%>" />
       <wcf:separator />
-      <wcf:scriptbutton model="<%%%=wrappedTableDrillMemberEnabled%>"
+      <wcf:scriptbutton model="<%%=wrappedTableDrillMemberEnabled%>"
         tooltip="toolb.navi.member" radioGroup="navi" id="drillMember"
         img="navi-member" />
-      <wcf:scriptbutton model="<%%%=wrappedTableDrillPositionEnabled%>"
+      <wcf:scriptbutton model="<%%=wrappedTableDrillPositionEnabled%>"
         tooltip="toolb.navi.position" radioGroup="navi" id="drillPosition"
         img="navi-position" />
-      <wcf:scriptbutton model="<%%%=wrappedTableDrillReplaceEnabled%>"
+      <wcf:scriptbutton model="<%%=wrappedTableDrillReplaceEnabled%>"
         tooltip="toolb.navi.replace" radioGroup="navi" id="drillReplace"
         img="navi-replace" />
-      <wcf:scriptbutton model="<%%%=wrappedTableDrillThroughEnabled%>"
+      <wcf:scriptbutton model="<%%=wrappedTableDrillThroughEnabled%>"
         tooltip="toolb.navi.drillthru" id="drillThrough01"
         img="navi-through" />
       <wcf:separator />
       <wcf:scriptbutton id="chartButton01" tooltip="toolb.chart"
-        img="chart" model="<%%%=wrappedChartVisible%>" />
+        img="chart" model="<%%=wrappedChartVisible%>" />
       <wcf:scriptbutton id="chartPropertiesButton01"
         tooltip="toolb.chart.config" img="chart-config"
-        model="<%%%=wrappedChartFormVisible%>" />
+        model="<%%=wrappedChartFormVisible%>" />
       <wcf:separator />
       <wcf:scriptbutton id="printPropertiesButton01"
         tooltip="toolb.print.config" img="print-config"
-        model="<%%%=wrappedPrintFormVisible%>" />
+        model="<%%=wrappedPrintFormVisible%>" />
       <wcf:imgbutton id="printpdf" tooltip="toolb.print" img="print"
-        href="<%%%= printPdf %>" />
+        href="<%%= printPdf %>" />
       <wcf:imgbutton id="printxls" tooltip="toolb.excel" img="excel"
-        href="<%%%= printExcel %>" />
-      <%%% } else {
+        href="<%%= printExcel %>" />
+      <%% } else {
     Iterator iterator = options.iterator();
     while( iterator.hasNext() ) {
       String optionName = (String) iterator.next();
       if( "cube-nav".equals( optionName ) ) { %>
       <wcf:scriptbutton id="cubeNaviButton" tooltip="toolb.cube" img="cube"
-        model="<%%%=wrappedNaviVisible%>" />
-      <%%%  } else
+        model="<%%=wrappedNaviVisible%>" />
+      <%%  } else
       if( "mdx-edit".equals( optionName ) ) { %>
       <wcf:scriptbutton id="mdxEditButton" tooltip="toolb.mdx.edit"
-        img="mdx-edit" model="<%%%=wrappedMdxEditVisible%>" />
-      <%%%  } else
+        img="mdx-edit" model="<%%=wrappedMdxEditVisible%>" />
+      <%%  } else
       if( "sort-conf".equals( optionName ) ) { %>
       <wcf:scriptbutton id="sortConfigButton" tooltip="toolb.table.config"
-        img="sort-asc" model="<%%%=wrappedSortFormVisible%>" />
-      <%%%  } else
+        img="sort-asc" model="<%%=wrappedSortFormVisible%>" />
+      <%%  } else
       if( "spacer".equals( optionName ) ) { %>
       <wcf:separator />
-      <%%%  } else
+      <%%  } else
       if( "level-style".equals( optionName ) ) { %>
       <wcf:scriptbutton id="levelStyle" tooltip="toolb.level.style"
-        img="level-style" model="<%%%=wrappedTableLevelStyle%>" />
-      <%%%  } else
+        img="level-style" model="<%%=wrappedTableLevelStyle%>" />
+      <%%  } else
       if( "hide-spans".equals( optionName ) ) { %>
       <wcf:scriptbutton id="hideSpans" tooltip="toolb.hide.spans"
-        img="hide-spans" model="<%%%=wrappedTableHideSpans%>" />
-      <%%%  } else
+        img="hide-spans" model="<%%=wrappedTableHideSpans%>" />
+      <%%  } else
       if( "properties".equals( optionName ) ) { %>
       <wcf:scriptbutton id="propertiesButton" tooltip="toolb.properties"
-        img="properties" model="<%%%=wrappedTableShowProperties%>" />
-      <%%%  } else
+        img="properties" model="<%%=wrappedTableShowProperties%>" />
+      <%%  } else
       if( "non-empty".equals( optionName ) ) { %>
       <wcf:scriptbutton id="nonEmpty" tooltip="toolb.non.empty"
-        img="non-empty" model="<%%%=wrappedTableNonEmptyButtonPressed%>" />
-      <%%%  } else
+        img="non-empty" model="<%%=wrappedTableNonEmptyButtonPressed%>" />
+      <%%  } else
       if( "swap-axes".equals( optionName ) ) { %>
       <wcf:scriptbutton id="swapAxes" tooltip="toolb.swap.axes"
-        img="swap-axes" model="<%%%=wrappedTableSwapAxesButtonPressed%>" />
-      <%%%  } else
+        img="swap-axes" model="<%%=wrappedTableSwapAxesButtonPressed%>" />
+      <%%  } else
       if( "drill-member".equals( optionName ) ) { %>
-      <wcf:scriptbutton model="<%%%=wrappedTableDrillMemberEnabled%>"
+      <wcf:scriptbutton model="<%%=wrappedTableDrillMemberEnabled%>"
         tooltip="toolb.navi.member" radioGroup="navi" id="drillMember"
         img="navi-member" />
-      <%%%  } else
+      <%%  } else
       if( "drill-position".equals( optionName ) ) { %>
-      <wcf:scriptbutton model="<%%%=wrappedTableDrillPositionEnabled%>"
+      <wcf:scriptbutton model="<%%=wrappedTableDrillPositionEnabled%>"
         tooltip="toolb.navi.position" radioGroup="navi" id="drillPosition"
         img="navi-position" />
-      <%%%  } else
+      <%%  } else
       if( "drill-replace".equals( optionName ) ) { %>
-      <wcf:scriptbutton model="<%%%=wrappedTableDrillReplaceEnabled%>"
+      <wcf:scriptbutton model="<%%=wrappedTableDrillReplaceEnabled%>"
         tooltip="toolb.navi.replace" radioGroup="navi" id="drillReplace"
         img="navi-replace" />
-      <%%%  } else
+      <%%  } else
       if( "drill-thru".equals( optionName ) ) { %>
-      <wcf:scriptbutton model="<%%%=wrappedTableDrillThroughEnabled%>"
+      <wcf:scriptbutton model="<%%=wrappedTableDrillThroughEnabled%>"
         tooltip="toolb.navi.drillthru" id="drillThrough01"
         img="navi-through" />
-      <%%%  } else
+      <%%  } else
       if( "chart".equals( optionName ) ) { %>
       <wcf:scriptbutton id="chartButton01" tooltip="toolb.chart"
-        img="chart" model="<%%%=wrappedChartVisible%>" />
-      <%%%  } else
+        img="chart" model="<%%=wrappedChartVisible%>" />
+      <%%  } else
       if( "chart-conf".equals( optionName ) ) { %>
       <wcf:scriptbutton id="chartPropertiesButton01"
         tooltip="toolb.chart.config" img="chart-config"
-        model="<%%%=wrappedChartFormVisible%>" />
-      <%%%  } else
+        model="<%%=wrappedChartFormVisible%>" />
+      <%%  } else
     if( "print-conf".equals( optionName ) ) { %>
       <wcf:scriptbutton id="printPropertiesButton01"
         tooltip="toolb.print.config" img="print-config"
-        model="<%%%=wrappedPrintFormVisible%>" />
-      <%%%  } else
+        model="<%%=wrappedPrintFormVisible%>" />
+      <%%  } else
     if( "print-pdf".equals( optionName ) ) { %>
       <wcf:imgbutton id="printpdf" tooltip="toolb.print" img="print"
-        href="<%%%= printPdf %>" />
-      <%%%  } else
+        href="<%%= printPdf %>" />
+      <%%  } else
     if( "excel".equals( optionName ) ) { %>
       <wcf:imgbutton id="printxls" tooltip="toolb.excel" img="excel"
-        href="<%%%= printExcel %>" />
-      <%%%  } 
+        href="<%%= printExcel %>" />
+      <%%  } 
 
   }
    } 
 %>
     </wcf:toolbar> 
-    <%%%-- ****************************************************************************************** --%>
-    <%%%-- ******************                   SAVE BUTTONS               ************************** --%>
-    <%%%-- ****************************************************************************************** --%>
+    <%%-- ****************************************************************************************** --%>
+    <%%-- ******************                   SAVE BUTTONS               ************************** --%>
+    <%%-- ****************************************************************************************** --%>
 
     <div id="folder-options" style="display: block">
     <table cellpadding="0" cellspacing="0">
       <tr>
-        <%%% if( authenticated ) { %>
+        <%% if( authenticated ) { %>
         <td><span id="folder-down" style="display: block"> <img
           src="./jpivot/toolbar/jpivot_save.png" onclick="javascript:save();"
           alt="Save" title="Save" /> </span></td>
         <td><span id="folder-up" style="display: block"> <img
           src="./jpivot/toolbar/jpivot_saveas.png"
           onclick="javascript:saveAs();" alt="Save As" title="Save As" /> </span></td>
-        <%%% } %>
+        <%% } %>
 
-        <%%%-- ****************************************************************************************** --%>
-        <%%%-- ****************************************************************************************** --%>
-        <%%%-- ****************************************************************************************** --%>
+        <%%-- ****************************************************************************************** --%>
+        <%%-- ****************************************************************************************** --%>
+        <%%-- ****************************************************************************************** --%>
 
 
-        <td><%%%-- render toolbar --%> <wcf:render ref="<%%%=toolbarId%>"
+        <td><%%-- render toolbar --%> <wcf:render ref="<%%=toolbarId%>"
           xslUri="/WEB-INF/jpivot/toolbar/htoolbar.xsl" xslCache="true" /></td>
       </tr>
     </table>
     </div>
 
 
-    <%%%-- XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX --%>
+    <%%-- XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX --%>
 
     <div id="browser.modalDiv" class='browser'>
-    <%%%-- ======================================================
+    <%%-- ======================================================
      ==  SAVEAS DIALOG                                   ==
      ====================================================== --%>
     <div id="browser.saveasDialog" style="display: none; position: absolute; top: 100px; left: 200px; height: 25px;">
@@ -1334,16 +1334,16 @@
       </tr>
     </table>
     </div>
-  <%%%-- ======================================================
+  <%%-- ======================================================
      ==  END SAVEAS DIALOG                               ==
      ====================================================== --%>
 </div>
-    <%%%-- XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX --%>
+    <%%-- XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX --%>
 
 
     <script type="text/javascript">
-      var saveMessage = '<%%%= ESAPI.encoder().encodeForJavaScript(saveMessage) %>';
-    </script> <%%% 
+      var saveMessage = '<%%= ESAPI.encoder().encodeForJavaScript(saveMessage) %>';
+    </script> <%% 
   
   switch (saveResult) {
     case ISolutionRepository.FILE_ADD_SUCCESSFUL: 
@@ -1357,12 +1357,12 @@
         fileName = fileName.endsWith(AnalysisSaver.SUFFIX) ? fileName : fileName+AnalysisSaver.SUFFIX;
 
   %> <script type="text/javascript">
-          var path = encodeURIComponent( "<%%%= ESAPI.encoder().encodeForJavaScript(info.getPath()) %>" );
-          var fileName = encodeURIComponent( "<%%%= ESAPI.encoder().encodeForJavaScript(fileName) %>" );
-          var solutionName = encodeURIComponent( "<%%%= ESAPI.encoder().encodeForJavaScript(info.getSolutionName()) %>" );
+          var path = encodeURIComponent( "<%%= ESAPI.encoder().encodeForJavaScript(info.getPath()) %>" );
+          var fileName = encodeURIComponent( "<%%= ESAPI.encoder().encodeForJavaScript(fileName) %>" );
+          var solutionName = encodeURIComponent( "<%%= ESAPI.encoder().encodeForJavaScript(info.getSolutionName()) %>" );
           var uri = "ViewAction?solution=" + solutionName + "&path=" + path + "&action=" + fileName;
           document.location.href = uri;
-        </script> <%%%
+        </script> <%%
       }
       break;
     case ISolutionRepository.FILE_EXISTS:
@@ -1382,7 +1382,7 @@
 
 
     <div id="internal_content">
-      <%%%
+      <%%
       // if there was an overflow, show error message
       // note, if internal error is caused by query.getResult(),
       // no usable log messages make it to the user or the log system
@@ -1391,42 +1391,42 @@
         try {
           _olapModel.getResult();
           if (_olapModel.getResult().isOverflowOccured()) {
-            %><p><strong style="color: red">Resultset overflow occured</strong></p><%%%
+            %><p><strong style="color: red">Resultset overflow occured</strong></p><%%
           }
         } catch (Throwable t) {
             t.printStackTrace();
-          %><p><strong style="color: red">Error Occurred While getting Resultset</strong></p><%%%
+          %><p><strong style="color: red">Error Occurred While getting Resultset</strong></p><%%
         }
       } 
       %>
-    <%%%-- render navigator --%>
-    <div id="<%%%=ESAPI.encoder().encodeForHTMLAttribute(naviId)%>div"><wcf:render ref="<%%%=naviId%>"
+    <%%-- render navigator --%>
+    <div id="<%%=ESAPI.encoder().encodeForHTMLAttribute(naviId)%>div"><wcf:render ref="<%%=naviId%>"
       xslUri="/WEB-INF/jpivot/navi/navigator.xsl" xslCache="true" /></div>
 
-<%%%  if (_mdxEdit.isVisible()) { %>
-    <%%%    if ("true".equalsIgnoreCase(PentahoSystem.getSystemSetting("kiosk-mode", "false"))) { %>
+<%%  if (_mdxEdit.isVisible()) { %>
+    <%%    if ("true".equalsIgnoreCase(PentahoSystem.getSystemSetting("kiosk-mode", "false"))) { %>
     <h3>MDX Query Viewer <font color="red">(editing disabled)</font></h3>
-    <%%% } else { %>
+    <%% } else { %>
     <h3>MDX Query Editor</h3>
-    <%%% } %>
-    <%%%-- edit mdx --%>
-    <wcf:render ref="<%%%=mdxEditId%>" xslUri="/WEB-INF/wcf/wcf.xsl" xslCache="true" /> <%%% } %> 
-    <%%%-- sort properties --%>
-    <wcf:render ref="<%%%=sortFormId%>" xslUri="/WEB-INF/wcf/wcf.xsl" xslCache="true" /> 
-    <%%%-- chart properties --%> 
-    <wcf:render ref="<%%%=chartFormId%>" xslUri="/WEB-INF/wcf/wcf.xsl" xslCache="true" /> 
-    <%%%-- print properties --%>
-    <wcf:render ref="<%%%=printFormId%>" xslUri="/WEB-INF/wcf/wcf.xsl" xslCache="true" />
+    <%% } %>
+    <%%-- edit mdx --%>
+    <wcf:render ref="<%%=mdxEditId%>" xslUri="/WEB-INF/wcf/wcf.xsl" xslCache="true" /> <%% } %> 
+    <%%-- sort properties --%>
+    <wcf:render ref="<%%=sortFormId%>" xslUri="/WEB-INF/wcf/wcf.xsl" xslCache="true" /> 
+    <%%-- chart properties --%> 
+    <wcf:render ref="<%%=chartFormId%>" xslUri="/WEB-INF/wcf/wcf.xsl" xslCache="true" /> 
+    <%%-- print properties --%>
+    <wcf:render ref="<%%=printFormId%>" xslUri="/WEB-INF/wcf/wcf.xsl" xslCache="true" />
 
     <table border="0">
       <tr>
         <td></td>
         <td>
-        <%%% 
+        <%% 
             boolean chartRendered = false;
-              if("top".equals(chartLocation) ) { %> <wcf:render ref="<%%%=chartId%>"
+              if("top".equals(chartLocation) ) { %> <wcf:render ref="<%%=chartId%>"
                 xslUri="/WEB-INF/jpivot/chart/chart.xsl"
-          xslCache="true" /> <%%% 
+          xslCache="true" /> <%% 
               chartRendered = true;
             } 
           %>
@@ -1435,25 +1435,25 @@
       </tr>
       <tr>
         <td valign="top">
-        <%%% if("left".equals(chartLocation) && !chartRendered) { %> <wcf:render ref="<%%%=chartId%>"
-            xslUri="/WEB-INF/jpivot/chart/chart.xsl" xslCache="true" /> <%%% 
+        <%% if("left".equals(chartLocation) && !chartRendered) { %> <wcf:render ref="<%%=chartId%>"
+            xslUri="/WEB-INF/jpivot/chart/chart.xsl" xslCache="true" /> <%% 
             chartRendered = true;
           } %>
         </td>
-        <td valign="top"><!-- render the table --> <%%% if (showGrid) { %>
-        <p><wcf:render ref="<%%%=tableId%>"
-          xslUri="/WEB-INF/jpivot/table/mdxtable.xsl" xslCache="true" /> <%%% } %>
+        <td valign="top"><!-- render the table --> <%% if (showGrid) { %>
+        <p><wcf:render ref="<%%=tableId%>"
+          xslUri="/WEB-INF/jpivot/table/mdxtable.xsl" xslCache="true" /> <%% } %>
         
-        <p><font size="2"> Slicer: <wcf:render ref="<%%%=tableId%>"
+        <p><font size="2"> Slicer: <wcf:render ref="<%%=tableId%>"
           xslUri="/WEB-INF/jpivot/table/mdxslicer.xsl" xslCache="true" /> </font>
         <p><!-- drill through table --> <wcf:render
-          ref="<%%%=drillThroughTableId%>" xslUri="/WEB-INF/wcf/wcf.xsl"
+          ref="<%%=drillThroughTableId%>" xslUri="/WEB-INF/wcf/wcf.xsl"
           xslCache="true" />
         </td>
         <td valign="top">
-        <%%% if("right".equals(chartLocation) && !chartRendered) { %> <wcf:render
-          ref="<%%%=chartId%>" xslUri="/WEB-INF/jpivot/chart/chart.xsl"
-          xslCache="true" /> <%%% 
+        <%% if("right".equals(chartLocation) && !chartRendered) { %> <wcf:render
+          ref="<%%=chartId%>" xslUri="/WEB-INF/jpivot/chart/chart.xsl"
+          xslCache="true" /> <%% 
             chartRendered = true;
           } %>
         </td>
@@ -1461,17 +1461,17 @@
       <tr>
         <td></td>
         <td>
-        <%%% 
+        <%% 
         if(("bottom".equals(chartLocation) || _chart.isVisible()) && !chartRendered) { %>
-        <wcf:render ref="<%%%=chartId%>"
-          xslUri="/WEB-INF/jpivot/chart/chart.xsl" xslCache="true" /> <%%% 
+        <wcf:render ref="<%%=chartId%>"
+          xslUri="/WEB-INF/jpivot/chart/chart.xsl" xslCache="true" /> <%% 
             chartRendered = true;
         } %>
         </td>
         <td></td>
       </tr>
       <table>
-        <%%% } %>
+        <%% } %>
       </table>
       </table>
       </div>
@@ -1494,16 +1494,16 @@
 </body>
 
 </html>
-<%%% 
+<%% 
    } catch (Throwable t ) {
-     %> An error occurred while rendering Pivot.jsp. Please see the log for details. <%%%
+     %> An error occurred while rendering Pivot.jsp. Please see the log for details. <%%
   // TODO log an error
   t.printStackTrace();
    } finally {
       PentahoSystem.systemExitPoint();      
    }
 %>
-<%%%!
+<%%!
 
   private IRuntimeContext getRuntimeForQuery( String actionReference, HttpServletRequest request, IPentahoSession userSession ) {
 
@@ -1543,7 +1543,7 @@
     }
   }
 
-%><%%%
+%><%%
  } finally {
     wcfcontext.invalidate();
  }

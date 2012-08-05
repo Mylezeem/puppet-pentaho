@@ -1,5 +1,5 @@
 
-<%%%@ page language="java" 
+<%%@ page language="java" 
 	import="java.util.ArrayList,
 	java.util.List,
 	org.pentaho.platform.util.web.SimpleUrlFactory,org.pentaho.platform.engine.core.system.PentahoSystem,
@@ -12,7 +12,7 @@
 	org.pentaho.platform.uifoundation.component.xml.PropertiesPanelUIComponent,
 	org.pentaho.platform.web.jsp.messages.Messages,
   org.pentaho.platform.web.http.PentahoHttpSessionHelper"
-%><%%%
+%><%%
 	PentahoSystem.systemEntryPoint();
 	String content = null;
 	IPentahoSession userSession = null;
@@ -44,6 +44,6 @@
 
 <body class="" dir="{text-direction}">
 
-	<%%%= content %>
+	<%%= content %>
 </body>
 </html>
