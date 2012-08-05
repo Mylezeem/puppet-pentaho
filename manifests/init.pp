@@ -9,7 +9,6 @@ class pentaho::data {
 	$solution			=	{}
 }
 
-class pentaho() {
-	require git, tomcat6
-	include pentaho::params, pentaho::install
+class pentaho {
+	include git, tomcat6, pentaho::params, pentaho::install
 }

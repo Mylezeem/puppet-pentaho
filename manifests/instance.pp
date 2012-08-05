@@ -17,7 +17,7 @@ define pentaho::instance (
 						  $hsqldb_path = '/opt/hsqldb',
 						  $sample = 'false',
 						  $user = 'root',
-						  $pass = '0996UX',
+						  $pass = 'pass',
 						  $ip = 'localhost',
                           ) {
 
@@ -113,7 +113,7 @@ define pentaho::instance (
 	dialect				=> $dialect,
 	delegate			=> $delegate,
 	cntstring			=> $cntstring,
-	require				=> File["${dirname}"],
+	require				=> [Class["git"], Class["tomcat6"], File["${dirname}"]],
   } 
 
   #
@@ -172,6 +172,7 @@ $pentaho_datasources = append_instance_name(hiera_hash('datasource'), $instance)
   #
   # Installing the pentaho-style folder related to the ${instance} value
   #
+	Exec {require	=> [Class["git"], Class["tomcat6"]] }
 	exec {"git clone git://github.com/Spredzy/pentaho-style-${version}.git pentaho-style${name}" :
 		cwd	=> "/var/lib/tomcat6/webapps/",
 		path => ["/usr/bin", "/bin"],
