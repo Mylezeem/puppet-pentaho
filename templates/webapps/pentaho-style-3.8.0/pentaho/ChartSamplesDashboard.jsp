@@ -52,11 +52,11 @@
 		<%%
 
     		SimpleParameterProvider parameters = new SimpleParameterProvider();
-      		parameters.setParameter( "image-width", "370"); //$NON-NLS-1$ //$NON-NLS-2$
-      		parameters.setParameter( "image-height", "400"); //$NON-NLS-1$ //$NON-NLS-2$
+      		parameters.setParameter( "image-width", "370"); 
+      		parameters.setParameter( "image-height", "400"); 
 			StringBuffer content = new StringBuffer(); 
       		ArrayList messages = new ArrayList();
-       		ChartHelper.doChart( "steel-wheels", "charts", "barchart.xml", parameters, content, userSession, messages, null ); //$NON-NLS-1$ //$NON-NLS-2$
+       		ChartHelper.doChart( "steel-wheels", "charts", "barchart.xml", parameters, content, userSession, messages, null ); 
 
        	%>
 		<br/>
@@ -68,11 +68,11 @@
     
     	<%%
 	    	parameters = new SimpleParameterProvider();
-      		parameters.setParameter( "image-width", "370"); //$NON-NLS-1$ //$NON-NLS-2$
-      		parameters.setParameter( "image-height", "400"); //$NON-NLS-1$ //$NON-NLS-2$
+      		parameters.setParameter( "image-width", "370"); 
+      		parameters.setParameter( "image-height", "400"); 
 			content = new StringBuffer(); 
       		messages = new ArrayList();
-      		ChartHelper.doChart( "steel-wheels", "charts", "linechart.xml", parameters, content, userSession, messages, null ); //$NON-NLS-1$ //$NON-NLS-2$
+      		ChartHelper.doChart( "steel-wheels", "charts", "linechart.xml", parameters, content, userSession, messages, null ); 
 		%>
 		<br/>
 		<%%= content.toString() %>
@@ -84,11 +84,11 @@
 
     	<%%
 	    	parameters = new SimpleParameterProvider();
-      		parameters.setParameter( "image-width", "370"); //$NON-NLS-1$ //$NON-NLS-2$
-      		parameters.setParameter( "image-height", "400"); //$NON-NLS-1$ //$NON-NLS-2$
+      		parameters.setParameter( "image-width", "370"); 
+      		parameters.setParameter( "image-height", "400"); 
 			content = new StringBuffer(); 
       		messages = new ArrayList();
-      		ChartHelper.doChart( "steel-wheels", "charts", "areachart.xml", parameters, content, userSession, messages, null ); //$NON-NLS-1$ //$NON-NLS-2$
+      		ChartHelper.doChart( "steel-wheels", "charts", "areachart.xml", parameters, content, userSession, messages, null ); 
 		%>
 		<br/>
 		<%%= content.toString() %>
@@ -97,11 +97,11 @@
 
     	<%%
 	    	parameters = new SimpleParameterProvider();
-      		parameters.setParameter( "image-width", "370"); //$NON-NLS-1$ //$NON-NLS-2$
-      		parameters.setParameter( "image-height", "400"); //$NON-NLS-1$ //$NON-NLS-2$
+      		parameters.setParameter( "image-width", "370"); 
+      		parameters.setParameter( "image-height", "400"); 
 			content = new StringBuffer(); 
       		messages = new ArrayList();
-      		ChartHelper.doChart( "steel-wheels", "charts", "piechart.xml", parameters, content, userSession, messages, null ); //$NON-NLS-1$ //$NON-NLS-2$
+      		ChartHelper.doChart( "steel-wheels", "charts", "piechart.xml", parameters, content, userSession, messages, null ); 
 		%>
 		<br/>
 		<%%= content.toString() %>
@@ -113,11 +113,11 @@
 
     	<%%
 	    	parameters = new SimpleParameterProvider();
-      		parameters.setParameter( "image-width", "370"); //$NON-NLS-1$ //$NON-NLS-2$
-      		parameters.setParameter( "image-height", "400"); //$NON-NLS-1$ //$NON-NLS-2$
+      		parameters.setParameter( "image-width", "370"); 
+      		parameters.setParameter( "image-height", "400"); 
 			content = new StringBuffer(); 
       		messages = new ArrayList();
-      		ChartHelper.doChart( "steel-wheels", "charts", "barlinecombochart.xml", parameters, content, userSession, messages, null ); //$NON-NLS-1$ //$NON-NLS-2$
+      		ChartHelper.doChart( "steel-wheels", "charts", "barlinecombochart.xml", parameters, content, userSession, messages, null ); 
 		%>
 		<br/>
 		<%%= content.toString() %>
@@ -126,11 +126,11 @@
 
     	<%%
 	    	parameters = new SimpleParameterProvider();
-      		parameters.setParameter( "image-width", "370"); //$NON-NLS-1$ //$NON-NLS-2$
-      		parameters.setParameter( "image-height", "400"); //$NON-NLS-1$ //$NON-NLS-2$
+      		parameters.setParameter( "image-width", "370"); 
+      		parameters.setParameter( "image-height", "400"); 
 			content = new StringBuffer(); 
       		messages = new ArrayList();
-      		ChartHelper.doChart( "steel-wheels", "charts", "timeserieschart.xml", parameters, content, userSession, messages, null ); //$NON-NLS-1$ //$NON-NLS-2$
+      		ChartHelper.doChart( "steel-wheels", "charts", "timeserieschart.xml", parameters, content, userSession, messages, null ); 
 		%>
 		<br/>
 		<%%= content.toString() %>
@@ -141,11 +141,11 @@
 
     	<%%
 	    	parameters = new SimpleParameterProvider();
-      		parameters.setParameter( "image-width", "740"); //$NON-NLS-1$ //$NON-NLS-2$
-      		parameters.setParameter( "image-height", "400"); //$NON-NLS-1$ //$NON-NLS-2$
+      		parameters.setParameter( "image-width", "740"); 
+      		parameters.setParameter( "image-height", "400"); 
 			content = new StringBuffer(); 
       		messages = new ArrayList();
-      		ChartHelper.doChart( "steel-wheels", "charts", "xychart.xml", parameters, content, userSession, messages, null ); //$NON-NLS-1$ //$NON-NLS-2$
+      		ChartHelper.doChart( "steel-wheels", "charts", "xychart.xml", parameters, content, userSession, messages, null ); 
 		%>
 		<br/>
 		<%%= content.toString() %>
@@ -157,11 +157,11 @@
 
     	<%%
 	    	parameters = new SimpleParameterProvider();
-      		parameters.setParameter( "image-width", "740"); //$NON-NLS-1$ //$NON-NLS-2$
-      		parameters.setParameter( "image-height", "400"); //$NON-NLS-1$ //$NON-NLS-2$
+      		parameters.setParameter( "image-width", "740"); 
+      		parameters.setParameter( "image-height", "400"); 
 			content = new StringBuffer(); 
       		messages = new ArrayList();
-      		ChartHelper.doChart( "steel-wheels", "charts", "piegridchart.xml", parameters, content, userSession, messages, null ); //$NON-NLS-1$ //$NON-NLS-2$
+      		ChartHelper.doChart( "steel-wheels", "charts", "piegridchart.xml", parameters, content, userSession, messages, null ); 
 		%>
 		<br/>
 		<%%= content.toString() %>
@@ -171,24 +171,24 @@
        <td> <!-- -------------------------- BUBBLE CHART ------------------------- -->
     	<%%
 	    	parameters = new SimpleParameterProvider();
-      		parameters.setParameter( "image-width", "370"); //$NON-NLS-1$ //$NON-NLS-2$
-      		parameters.setParameter( "image-height", "400"); //$NON-NLS-1$ //$NON-NLS-2$
+      		parameters.setParameter( "image-width", "370"); 
+      		parameters.setParameter( "image-height", "400"); 
 			content = new StringBuffer(); 
       		messages = new ArrayList();
-      		ChartHelper.doChart( "steel-wheels", "charts", "bubblechart.xml", parameters, content, userSession, messages, null ); //$NON-NLS-1$ //$NON-NLS-2$
+      		ChartHelper.doChart( "steel-wheels", "charts", "bubblechart.xml", parameters, content, userSession, messages, null ); 
 		%>
 		<br/>
 		<%%= content.toString() %>
 	  </td>
     <td> <!-- -------------------------- DIAL CHART ------------------------- -->
     
-    	<%
+    	<%%
 	    	parameters = new SimpleParameterProvider();
-      		parameters.setParameter( "image-width", "370"); //$NON-NLS-1$ //$NON-NLS-2$
-      		parameters.setParameter( "image-height", "400"); //$NON-NLS-1$ //$NON-NLS-2$
+      		parameters.setParameter( "image-width", "370"); 
+      		parameters.setParameter( "image-height", "400"); 
 			content = new StringBuffer(); 
       		messages = new ArrayList();
-      		ChartHelper.doChart( "steel-wheels", "charts", "dialchart.xml", parameters, content, userSession, messages, null ); //$NON-NLS-1$ //$NON-NLS-2$
+      		ChartHelper.doChart( "steel-wheels", "charts", "dialchart.xml", parameters, content, userSession, messages, null ); 
 		%>
 		<br/>
 		<%%= content.toString() %>
