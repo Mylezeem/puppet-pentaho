@@ -1,100 +1,93 @@
-define pentaho::webapps(
-						$instance,
-						$dbtype,
-						$host,
-						$port,
-						$driver,
-						$cntstring,
-						$version,
-						$hsqldb_path,
-						$log_path
-						) {
+define pentaho::webapps($instance,
+$dbtype,
+$host,
+$port,
+$driver,
+$cntstring,
+$version,
+$hsqldb_path,
+$log_path,) {
 
 	$pentaho_solution = hiera('pentaho_solution')
 
-	if $dbtype == "hsql" {
-		$hsql_extra_1 = "<context-param>
-							<param-name>hsqldb-databases</param-name>
-							<param-value>sampledata${instance}@${hsqldb_path}/${instance}/sampledata${instance},hibernate${instance}@${hsqldb_path}/${instance}/hibernate${instance},quartz${instance}@${hsqldb_path}/${instance}/quartz${instance}</param-value>
-						</context-param>
-						<context-param>
-							<param-name>hsqldb-port</param-name>
-					        <param-value>${port}</param-value>
-						</context-param>"
-
-		$hsql_extra_2 = "<listener>
-							<listener-class>org.pentaho.platform.web.http.context.HsqldbStartupListener</listener-class>
-						</listener>"
+	if $dbtype == 'hsql' {
+		$hsql_extra_1    = "<context-param>
+		<param-name>hsqldb-databases</param-name>
+		<param-value>sampledata${instance}@${hsqldb_path}/${instance}/sampledata${instance},hibernate${instance}@${hsqldb_path}/${instance}/hibernate${instance},quartz${instance}@${hsqldb_path}/${instance}/quartz${instance}</param-value>
+		</context-param>
+		<context-param>
+		<param-name>hsqldb-port</param-name>
+		<param-value>${port}</param-value>
+		</context-param>"
+		$hsql_extra_2    = "<listener>
+		<listener-class>org.pentaho.platform.web.http.context.HsqldbStartupListener</listener-class>
+		</listener>"
 		$validationQuery = "select count(*) from INFORMATION_SCHEMA.SYSTEM_SEQUENCES"
 	} else {
-		$hsql_extra_1 = ""
-		$hsql_extra_2 = ""
+		$hsql_extra_1    = ""
+		$hsql_extra_2    = ""
 		$validationQuery = "select 1"
 	}
 
 	$jdbc_driver_name = $dbtype ? {
-		/(mysql|mysql5)/		=>	"mysql-connector-java-5.1.17-bin.jar",
-		'postgresql'			=>	"postgresql-8.4-703.jdbc4.jar",
-		/(oracle|oracle10g)/	=>	"oracle.jdbc.driver.OracleDriver",
-		'hsql'					=>	"hsqldb-1.8.0.jar",
-		default					=>	undef,
+		/(mysql|mysql5)/     => "mysql-connector-java-5.1.17-bin.jar",
+		'postgresql'         => "postgresql-8.4-703.jdbc4.jar",
+		/(oracle|oracle10g)/ => "oracle.jdbc.driver.OracleDriver",
+		'hsql'               => "hsqldb-1.8.0.jar",
+		default              => undef,
 	}
 
 	exec {"git clone git://github.com/Spredzy/pentaho-${version}.git pentaho_${name}" :
-		cwd     =>  "/tmp/pentaho_${name}",
-		path    =>  ["/usr/bin", "/bin"],
-		unless  =>  "ls -la /tmp/pentaho_${name}/pentaho_${name}",
-		require => File["/tmp/pentaho_${name}"],
+		cwd     => "/tmp/pentaho_${name}",
+		path    => ["/usr/bin", "/bin"],
+		unless  => "ls -la /tmp/pentaho_${name}/pentaho_${name}",
+		timeout => 0,
 	}
 
-	exec {"update ${name} pentaho" :
-		command =>  "git pull origin master",
-		cwd     =>  "/tmp/pentaho_${name}/pentaho_${name}",
-		path    =>  ["/usr/bin", "/bin"],
-		onlyif  =>  "ls -la /tmp/pentaho_${name}/pentaho_${name}",
-		require => File["/tmp/pentaho_${name}"],
-	}
-
-
-	file {"/tmp/pentaho_${name}/pentaho_${name}/META-INF/context.xml" :
-		ensure  => present,
-		content =>  template('pentaho/webapps/context.xml'),
-		require =>  [Exec["git clone git://github.com/Spredzy/pentaho-${version}.git pentaho_${name}"], Exec["update ${name} pentaho"]],
+	exec {"Update directory  ${name} pentaho" :
+		command  => "git pull origin master",
+		cwd      => "/tmp/pentaho_${name}/pentaho_${name}",
+		path     => ["/usr/bin", "/bin"],
+		onlyif   => "ls -la /tmp/pentaho_${name}/pentaho_${name}",
+		timeout  => 0,
+		require  => Exec["git clone git://github.com/Spredzy/pentaho-${version}.git pentaho_${name}"],
 	}
 
 	file{"${log_path}/pentaho_${name}" :
-		ensure => directory,
-		mode => '0777',
+		ensure  => directory,
+		mode    => '0644',
+		owner   => 'tomcat',
+		group   => 'tomcat',
 		recurse => true,
 	}
 
+	file{'/usr/share/tomcat6/.kettle' :
+		ensure  => directory,
+		mode    => '0644',
+		owner   => 'tomcat',
+		group   => 'tomcat',
+		recurse => true,
+		before  => Notify["Finish copying ${name} template files"],
+	}
+
+	File { ensure => present, require => Exec["Update directory  ${name} pentaho"], before => Notify["Finish copying ${name} template files"]}
+	file {"/tmp/pentaho_${name}/pentaho_${name}/META-INF/context.xml" :
+		content => template('pentaho/webapps/context.xml'),
+	}
 	file {"/tmp/pentaho_${name}/pentaho_${name}/WEB-INF/lib/${jdbc_driver_name}" :
-		ensure	=>	present,
-		source	=>  "puppet:///modules/pentaho/connectors/${dbtype}/${jdbc_driver_name}",
-		require =>  [File["/tmp/pentaho_${name}/pentaho_${name}/META-INF/context.xml"], File["${log_path}/pentaho_${name}"]],
+		source  => "puppet:///modules/pentaho/connectors/${dbtype}/${jdbc_driver_name}",
 	}
-
    file {"/tmp/pentaho_${name}/pentaho_${name}/WEB-INF/classes/log4j.xml" :
-		ensure  => present,
-		content =>  template('pentaho/webapps/log4j.xml'),
-		require =>  File["/tmp/pentaho_${name}/pentaho_${name}/WEB-INF/lib/${jdbc_driver_name}"],
+		content => template('pentaho/webapps/log4j.xml'),
 	}
-
     file {"/tmp/pentaho_${name}/pentaho_${name}/WEB-INF/web.xml" :
-		ensure  => present,
-		content =>  template("pentaho/webapps/web-${version}.xml"),
-		require =>  File["/tmp/pentaho_${name}/pentaho_${name}/WEB-INF/classes/log4j.xml"],
+		content => template("pentaho/webapps/web-${version}.xml"),
 	}
-
-
 	#
 	# Patching all file so it lookup to pentaho-style${instance} and not only pentaho-style
 	#	
 	# List of those files can be found on /etc/puppet/modules/pentaho/templates/webapps/pentaho-style-${version}/MANIFEST
 	#
-
-#File {ensure => present, require => File["/tmp/pentaho_${name}/pentaho_${name}/WEB-INF/web.xml"], before => Notify["Finish copying ${name} template files"],}
-	File {ensure => present, require =>  [Exec["git clone git://github.com/Spredzy/pentaho-${version}.git pentaho_${name}"], Exec["update ${name} pentaho"]], before => Notify["Finish copying ${name} template files"],}
 	file {"/tmp/pentaho_${name}/pentaho_${name}/adhoc/waqr.html" :
 		content => template("pentaho/webapps/pentaho-style-${version}/pentaho/waqr.html"),
 	}
@@ -139,11 +132,11 @@ define pentaho::webapps(
 	notify {"Finish copying ${name} template files" :}
 
 
-	exec {"mv /tmp/pentaho_${name}/pentaho_${name} /var/lib/tomcat6/webapps/" :
-		cwd		=> "/tmp",
-		path	=> ["/usr/bin", "/bin", "/usr/sbin"],
-		unless  => "ls /var/lib/tomcat6/webapps/pentaho_${name}",
-	require => Notify["Finish copying ${name} template files"],
+	exec {"cp -rf /tmp/pentaho_${name}/pentaho_${name} /var/lib/tomcat6/webapps/" :
+		cwd     => "/tmp",
+		path    => ["/usr/bin", "/bin", "/usr/sbin"],
+		unless  => "diff -x '.git' --recursive /tmp/pentaho_${name}/pentaho_${name} /var/lib/tomcat6/webapps/pentaho_${name}",
+		require => Notify["Finish copying ${name} template files"],
 	}
 
 }

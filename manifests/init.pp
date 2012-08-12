@@ -10,5 +10,8 @@ class pentaho::data {
 }
 
 class pentaho {
-	include git, tomcat6, pentaho::params, pentaho::install
+	class {'tomcat6' :
+		config_hash	=> {'JAVA_OPTS'     => '-Xms1g -Xmx1g',}
+	}
+	include git, pentaho::params, pentaho::install
 }

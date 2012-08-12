@@ -1,68 +1,62 @@
 define pentaho::main_solution ($instance,
-								$pentaho_solution,
-								$dbtype,
-								$user,
-								$pass,
-								$host,
-								$port,
-								$version,
-								$driver,
-								$dialect,
-								$delegate,
-								$cntstring,
-								) {
-
-
-	#
-	# Getting the system and admin folders on a public repo (GitHub)
-	#
+$pentaho_solution,
+$dbtype,
+$user,
+$pass,
+$host,
+$port,
+$version,
+$driver,
+$dialect,
+$delegate,
+$cntstring,) {
 	
-	$to_git_path = pentaho_dirname($pentaho_solution)
-	$pentaho_solution_folder_name = pentaho_basename($pentaho_solution)
-	
-	exec {"Get files Pentaho ${version} for  ${name}" :
-		cwd => $to_git_path,
-		path => ["/usr/bin", "/usr/sbin", "/bin"],
-		command => "git clone https://github.com/Spredzy/pentaho-solutions-${version}.git ${pentaho_solution_folder_name}",
-		unless => "ls ${pentaho_solution}",
-		require => File["${to_git_path}"],
-	}
+  #
+  # Getting the system and admin folders on a public repo (GitHub)
+  #
+  $to_git_path = pentaho_dirname($pentaho_solution)
+  $pentaho_solution_folder_name = pentaho_basename($pentaho_solution)
+  exec {"Get files Pentaho ${version} for  ${name}" :
+	  cwd     => $to_git_path,
+	  path    => ['/usr/bin', '/usr/sbin', '/bin'],
+	  command => "git clone https://github.com/Spredzy/pentaho-solutions-${version}.git ${pentaho_solution_folder_name}",
+	  timeout => 0,
+	  unless  => "ls ${pentaho_solution}",
+	  require => File[$to_git_path],
+  }
+  exec {"Deleting git file in ${name} pentaho solution folder" :
+	  cwd     => $pentaho_solution,
+	  path    => ['/usr/bin', '/usr/sbin', '/bin'],
+	  command => 'rm -rf .git',
+	  onlyif  => "ls ${pentaho_solution}",
+	  require => Exec["Get files Pentaho ${version} for  ${name}"],
+  }
 
-	exec {"Update pentaho solution systeamd & admin folder for  Pentaho ${version} for  ${name}" :
-		cwd => $pentaho_solution,
-		path => ["/usr/bin", "/usr/sbin", "/bin"],
-		command => "git pull origin master",
-		onlyif => "ls ${pentaho_solution}",
-	}
-
-	#
-	# Configuring the database related file for hibernate
-	#
-
-	File { ensure => present, require => [Exec["Get files Pentaho ${version} for  ${name}"], Exec["Update pentaho solution systeamd & admin folder for  Pentaho ${version} for  ${name}"]], }
-
-		#
-		# Authentication related files
-		#
-
-	file {"${pentaho_solution}/system/applicationContext-spring-security-hibernate.properties" :
-		content => template("pentaho/system/applicationContext-spring-security-hibernate-${version}.properties"),
-	}
-	file {"${pentaho_solution}/system/applicationContext-spring-security-jdbc.xml" :
-		content => template("pentaho/system/applicationContext-spring-security-jdbc-${version}.xml"),
-	}
-	file {"${pentaho_solution}/system/hibernate/${dbtype}.hibernate.cfg.xml" :
-		content => template("pentaho/system/${dbtype}.hibernate.cfg-${version}.xml"),
-	}
-	file {"${pentaho_solution}/system/hibernate/hibernate-settings.xml" :
-		content => template("pentaho/system/hibernate-settings-${version}.xml"),
-	}
-	file {"${pentaho_solution}/system/quartz/quartz.properties" :
-		content => template("pentaho/system/quartz-${version}.properties"),
-	}
-	file {"${pentaho_solution}/system/simple-jndi/jdbc.properties" :
-		content => template("pentaho/system/jdbc.properties"),
-	}
+  #
+  # Configuring the database related file for hibernate
+  #
+  File { ensure => present, require => Exec["Deleting git file in ${name} pentaho solution folder"], }
+  #
+  # Authentication related files
+  #
+  file {"${pentaho_solution}/system/applicationContext-spring-security-hibernate.properties" :
+	  content => template("pentaho/system/applicationContext-spring-security-hibernate-${version}.properties")
+  }
+  file {"${pentaho_solution}/system/applicationContext-spring-security-jdbc.xml" :
+	  content => template("pentaho/system/applicationContext-spring-security-jdbc-${version}.xml"),
+  }
+  file {"${pentaho_solution}/system/hibernate/${dbtype}.hibernate.cfg.xml" :
+	  content => template("pentaho/system/${dbtype}.hibernate.cfg-${version}.xml"),
+  }
+  file {"${pentaho_solution}/system/hibernate/hibernate-settings.xml" :
+	  content => template("pentaho/system/hibernate-settings-${version}.xml"),
+  }
+  file {"${pentaho_solution}/system/quartz/quartz.properties" :
+	  content => template("pentaho/system/quartz-${version}.properties"),
+  }
+  file {"${pentaho_solution}/system/simple-jndi/jdbc.properties" :
+	  content => template("pentaho/system/jdbc.properties"),
+  }
 
 		#
 		# Layout file patch
@@ -193,11 +187,19 @@ define pentaho::main_solution ($instance,
 			content => template("pentaho/system/pentaho-style-${version}/parameter_template.html"),
 		}
 	}
-
-	file {"${pentaho_solution}/system/logs" :
-		ensure	=>	directory,
-		mode	=>	'0777',
-		recurse	=> true,
+	
+	file {
+		"${pentaho_solution}/system/logs" :
+			ensure  => directory,
+			mode    => '0644',
+			group   => 'tomcat',
+			owner   => 'tomcat',
+			recurse => true;
+		"${pentaho_solution}/system/tmp" :
+			ensure  => directory,
+			mode    => '0644',
+			group   => 'tomcat',
+			owner   => 'tomcat',
+			recurse => true;
 	}
-
 }	
