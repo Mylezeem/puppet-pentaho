@@ -25,7 +25,7 @@ define pentaho::solution (
 	#
 	File {
 		ensure => present,
-		require => Exec['copy pnetaho-solutions'],
+		require => Exec['copy pentaho-solutions'],
 	}
 	file {"${pentaho_solution}/system/applicationContext-spring-security-hibernate.properties" :
 		content => template("pentaho/${version}/system/applicationContext-spring-security-hibernate.properties")

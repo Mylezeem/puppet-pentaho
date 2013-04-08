@@ -12,7 +12,9 @@ define pentaho::instance (
 	validate_absolute_path($webapps_path)
 	validate_string($version)
 
-	url = "http://sourceforge.net/projects/pentaho/files/Business%20Intelligence%20Server/${version}.0-stable/biserver-manual-ce-${version}.0-stable.zip/download"
+	$url = "http://sourceforge.net/projects/pentaho/files/Business%20Intelligence%20Server/${version}.0-stable/biserver-manual-ce-${version}.0-stable.zip/download"
+
+	Pentaho::Download[$version] -> Pentaho::Solution[$instance_name]
 
 	pentaho::download {$version :
 		pentaho_instance => "${webapps_path}/pentaho_${instance_name}",
@@ -22,9 +24,9 @@ define pentaho::instance (
 	}
 
 	pentaho::solution { $instance_name :
-		solution_path => ${solution_path},
+		solution_path => $solution_path,
 		tmp_path => '/tmp',
-		webapps_path => ${webapps_path},
+		webapps_path => $webapps_path,
 		version => "${version}.0"
 	}
 

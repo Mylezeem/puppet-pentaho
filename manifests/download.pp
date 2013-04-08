@@ -14,7 +14,7 @@ define pentaho::download (
 	exec {"download pentaho ${version}" :
 		cwd => '/',
 		command => "wget -O ${tmp_path}/biserver-manual-ce-${version}-stable.zip ${url}",
-		path => '/usr/bin',
+		path => ['/usr/bin', '/bin'],
 		timeout => 0,
 		unless => "ls ${pentaho_instance}",
 	}
@@ -22,7 +22,7 @@ define pentaho::download (
 	exec {"unzip pentaho ${version}" :
 		cwd => "${tmp_path}",
 		command => "unzip biserver-manual-ce-${version}-stable.zip -d biserver-manual-ce-${version}-stable",
-		path => '/usr/bin',
+		path => ['/usr/bin', '/bin'],
 		unless => "ls ${pentaho_instance}",
 		require => Exec["download pentaho ${version}"],
 	}
