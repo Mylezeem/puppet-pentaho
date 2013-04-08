@@ -1,21 +1,23 @@
-define pentaho::solution(
-						$instance,
-						$pentaho_solution,
-						$icon = 'reporting.png',
-						$visible = 'true',
-						$displaytype = 'list',
-						){
+define pentaho::solution (
+	$solution_path,
+	$tmp_path,
+	$webapps_path,
+	$version
+) {
 
-  $solution_name = remove_instance_name($name, $instance)
-  $description = $solution_name
+	validate_absolute_path($solution_path)
+	validate_absolute_path($tmp_path)
+	validate_absolute_path($webapps_path)
+	validate_string($version)
 
-  File { require => Pentaho::Main_solution["${instance}"], }
-  file {"${pentaho_solution}/${solution_name}" :
-	ensure => directory,
-  }
-  file {"${pentaho_solution}/${solution_name}/index.xml" :
-	ensure => present,
-	content => template("pentaho/solutions/index.xml"),
-  }
+	$h = get_dir_hash_path($solution_path)
+  create_resources('file', $h, {'ensure'	=> 'directory', 'owner' => 'root', 'group' => 'root', 'mode' => '0755'})
+
+	exec {'copy pentaho-solutions' :
+		cwd => '/',
+		path => '/bin',
+		command => "cp -r ${tmp_path}/biserver-manual-ce-${version}-stable/biserver-manual-ce/pentaho-solutions ${solution_path}/pentaho_${name}/",
+		unless => "ls ${solution_path}/pentaho_${name}",
+	}
 
 }

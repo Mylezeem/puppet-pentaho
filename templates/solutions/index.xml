@@ -1,7 +1,0 @@
-<index>
-	<name><%= instance %></name>
-	<description><%= description %></description>
-	<icon><%= icon %></icon>
-	<visible><%= visible %></visible>
-	<display-type><%= displaytype %></display-type>
-</index>
