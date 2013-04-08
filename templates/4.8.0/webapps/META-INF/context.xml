@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Context path="/pentaho_<%= name %>" docbase="webapps/pentaho_<%= name %>">
+	<Resource name="jdbc/Hibernate" auth="Container" type="javax.sql.DataSource"
+	 factory="org.apache.commons.dbcp.BasicDataSourceFactory" maxActive="20" maxIdle="5"
+	 maxWait="10000" username="hibuser" password="password"
+	 driverClassName="com.mysql.jdbc.Driver" url="jdbc:mysql://localhost:3306/hibernate_<%= name %>"
+	 validationQuery="select 1" />
+
+	<Resource name="jdbc/Quartz" auth="Container" type="javax.sql.DataSource"
+	 factory="org.apache.commons.dbcp.BasicDataSourceFactory" maxActive="20" maxIdle="5"
+	 maxWait="10000" username="pentaho_user" password="password"
+	 driverClassName="cim.mysql.jdbc.Driver" url="jdbc:mysql://localhost:3306/quartz_<%= name %>"
+	 validationQuery="select 1"/>
+</Context>
+

@@ -1,0 +1,6 @@
+#Pentaho Manual Deployments build information
+#Mon Nov 26 15:01:51 EST 2012
+Implementation-Title: Pentaho Manual Deployments
+Implementation-Version: 4.8.0-stable
+Implementation-Vendor: Pentaho Corporation
+
