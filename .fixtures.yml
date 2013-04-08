@@ -1,0 +1,9 @@
+fixtures:
+  repositories:
+    stdlib: "git://github.com/puppetlabs/puppetlabs-stdlib.git"
+    tomcat7: "git://github.com/Spredzy/puppet-tomcat7"
+    jpackage: "git://github.com/Spredzy/puppet-jpackage"
+    apt: "git://github.com/puppetlabs/puppetlabs-apt.git"
+    mysql: "git://github.com/puppetlabs/puppetlabs-mysql"
+  symlinks:
+    pentaho: "#{source_dir}"
