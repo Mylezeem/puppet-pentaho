@@ -15,34 +15,32 @@ describe 'pentaho::backend' do
 
 	it 'run create_quartz_mysql.sql' do
 
-		should contain_exec("mysql -uroot -proot < /tmp/biserver-manual-ce-4.8.0-stable/biserver-manual-ce/pentaho-data/create_quartz_mysql.sql").with({
+		should contain_exec('run create_quartz_mysql.sql').with({
 				'cwd'     => '/',
-				'command' =>  "mysql -uroot -proot < /tmp/biserver-manual-ce-4.8.0-stable/biserver-manual-ce/pentaho-data/create_quartz_mysql.sql",
+				'command' => 'mysql -uroot -proot < /tmp/puppet/create_quartz_mysql.sql',
 				'path'    => '/usr/bin',
-				'unless'  => 'mysql-uroot -proot -e "SHOW DATABASES" | grep "quartz"',
+				'unless'  => 'mysql -uroot -proot -e \'SHOW DATABASES\' | grep \'quartz_puppet\'',
 		})
 
 	end
 
 	it 'run create_repository_mysql.sql' do
 
-		should contain_exec("mysql -uroot -proot < /tmp/biserver-manual-ce-4.8.0-stable/biserver-manual-ce/pentaho-data/create_repository_mysql.sql").with({
+		should contain_exec('run create_repository_mysql.sql').with({
 				'cwd'     => '/',
-				'command' =>  "mysql -uroot -proot < /tmp/biserver-manual-ce-4.8.0-stable/biserver-manual-ce/pentaho-data/create_repository_mysql.sql",
+				'command' => 'mysql -uroot -proot < /tmp/puppet/create_repository_mysql.sql',
 				'path'    => '/usr/bin',
-				'unless'  => 'mysql-uroot -proot -e "SHOW DATABASES" | grep "hibernate"',
+				'unless'  => 'mysql -uroot -proot -e \'SHOW DATABASES\' | grep \'hibernate_puppet\'',
 		})
 
 	end
 
 	it 'run create_sample_datasource_mysql.sql (if asked)' do
 
-
-		should contain_exec("mysql -uroot -proot < /tmp/biserver-manual-ce-4.8.0-stable/biserver-manual-ce/pentaho-data/create_sample_datasource_mysql.sql").with({
+		should contain_exec('run create_sample_datasource_mysql.sql').with({
 				'cwd'     => '/',
-				'command' =>  "mysql -uroot -proot < /tmp/biserver-manual-ce-4.8.0-stable/biserver-manual-ce/pentaho-data/create_sample_datasource_mysql.sql",
+				'command' =>  'mysql -uroot -proot < /tmp/puppet/create_sample_datasource_mysql.sql',
 				'path'    => '/usr/bin',
-				'unless'  => 'mysql-uroot -proot -e "SHOW DATABASES" | grep "SampleData"',
 		})
 
 	end
