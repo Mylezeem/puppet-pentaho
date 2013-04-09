@@ -7,6 +7,8 @@ define pentaho::instance (
 		$instance_name = $name,
 		) {
 
+		require pentaho
+
 		validate_string($instance_name)
 		validate_absolute_path($solution_path)
 		validate_absolute_path($log_path)

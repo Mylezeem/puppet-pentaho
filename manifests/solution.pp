@@ -10,14 +10,15 @@ define pentaho::solution (
 	validate_absolute_path($webapps_path)
 	validate_string($version)
 
-	$h = get_dir_hash_path("${solution_path}/${name}")
-  create_resources('file', $h, {'ensure'	=> 'directory', 'owner' => 'root', 'group' => 'root', 'mode' => '0755', 'before' => Exec['copy pentaho-solutions']})
+	$h = get_dir_hash_path("${solution_path}/pentaho_${name}")
+  create_resources('file', $h, {'ensure'	=> 'directory', 'owner' => 'root', 'group' => 'root', 'mode' => '0755'})
 
 	exec {'copy pentaho-solutions' :
 		cwd			=> '/',
 		path		=> '/bin',
 		command => "cp -r ${tmp_path}/biserver-manual-ce-${version}-stable/biserver-manual-ce/pentaho-solutions ${solution_path}/pentaho_${name}/",
 		unless	=> "ls ${solution_path}/pentaho_${name}",
+		require => File["${solution_path}/pentaho_${name}"],
 	}
 	
 	#
@@ -27,22 +28,22 @@ define pentaho::solution (
 		ensure => present,
 		require => Exec['copy pentaho-solutions'],
 	}
-	file {"${pentaho_solution}/system/applicationContext-spring-security-hibernate.properties" :
+	file {"${solution_path}/pentaho_${name}/pentaho-solutions/system/applicationContext-spring-security-hibernate.properties" :
 		content => template("pentaho/${version}/system/applicationContext-spring-security-hibernate.properties")
 	}
-	file {"${pentaho_solution}/system/applicationContext-spring-security-jdbc.xml" :
+	file {"${solution_path}/pentaho_${name}/pentaho-solutions/system/applicationContext-spring-security-jdbc.xml" :
 		content => template("pentaho/${version}/system/applicationContext-spring-security-jdbc.xml"),
 	}
-	file {"${pentaho_solution}/system/hibernate/mysql5.hibernate.cfg.xml" :
+	file {"${solution_path}/pentaho_${name}/pentaho-solutions/system/hibernate/mysql5.hibernate.cfg.xml" :
 		content => template("pentaho/${version}/system/hibernate/mysql5.hibernate.cfg.xml"),
 	}
-	file {"${pentaho_solution}/system/hibernate/hibernate-settings.xml" :
+	file {"${solution_path}/pentaho_${name}/pentaho-solutions/system/hibernate/hibernate-settings.xml" :
 		content => template("pentaho/${version}/system/hibernate/hibernate-settings.xml"),
 	}
-	file {"${pentaho_solution}/system/quartz/quartz.properties" :
+	file {"${solution_path}/pentaho_${name}/pentaho-solutions/system/quartz/quartz.properties" :
 		content => template("pentaho/${version}/system/quartz/quartz.properties"),
 	}
-	file {"${pentaho_solution}/system/simple-jndi/jdbc.properties" :
+	file {"${solution_path}/pentaho_${name}/pentaho-solutions/system/simple-jndi/jdbc.properties" :
 		content => template("pentaho/${version}/system/simple-jndi/jdbc.properties"),
 	}
 

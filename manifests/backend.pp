@@ -10,27 +10,20 @@ define pentaho::backend(
 	validate_string($mysql_user)
 	validate_string($mysql_pass)
 
-	file {"${tmp_path}/${name}/create_quartz_mysql.sql" :
+	File {
 		ensure  => present,
 		owner   => 'root',
 		group   => 'root',
 		mode    => '0644',
+		before  => Exec['run create_repository_mysql.sql'],
+	}
+	file {"${tmp_path}/${name}/create_quartz_mysql.sql" :
 		content => template("pentaho/${version}/data/mysql/create_quartz_mysql.sql"),
 	}
-
 	file {"${tmp_path}/${name}/create_repository_mysql.sql" :
-		ensure  => present,
-		owner   => 'root',
-		group   => 'root',
-		mode    => '0644',
 		content => template("pentaho/${version}/data/mysql/create_repository_mysql.sql"),
 	}
-
 	file {"${tmp_path}/${name}/create_sample_datasource_mysql.sql" :
-		ensure  => present,
-		owner   => 'root',
-		group   => 'root',
-		mode    => '0644',
 		content => template("pentaho/${version}/data/mysql/create_sample_datasource_mysql.sql"),
 	}
 
@@ -39,8 +32,6 @@ define pentaho::backend(
 		path    => ['/usr/bin', '/bin'],
 		command => "mysql -u${mysql_user} -p${mysql_pass} < ${tmp_path}/${name}/create_repository_mysql.sql",
 		unless  => "mysql -u${mysql_user} -p${mysql_pass} -e 'SHOW DATABASES' | grep 'hibernate_${name}'",
-		require => File["${tmp_path}/${name}/create_repository_mysql.sql"],
-		before  => [File['remove temp folder'], Exec['run create_quartz_mysql.sql']],
 	}
 
 	exec {'run create_quartz_mysql.sql' :
@@ -48,21 +39,13 @@ define pentaho::backend(
 		path    => ['/usr/bin', '/bin'],
 		command => "mysql -u${mysql_user} -p${mysql_pass} < ${tmp_path}/${name}/create_quartz_mysql.sql",
 		unless  => "mysql -u${mysql_user} -p${mysql_pass} -e 'SHOW DATABASES' | grep 'quartz_${name}'",
-		require => File["${tmp_path}/${name}/create_quartz_mysql.sql"],
-		before  => File['remove temp folder'],
+		require => File["${tmp_path}/${name}/create_repository_mysql.sql"],
 	}
 
 	exec {'run create_sample_datasource_mysql.sql' :
 		cwd     => '/',
 		path    => ['/usr/bin', '/bin'],
 		command => "mysql -u${mysql_user} -p${mysql_pass} < ${tmp_path}/${name}/create_sample_datasource_mysql.sql",
-		require => File["${tmp_path}/${name}/create_sample_datasource_mysql.sql"],
-		before  => File['remove temp folder'],
+		require => File["${tmp_path}/${name}/create_quartz_mysql.sql"],
 	}
-
-	file {'remove temp folder' :
-		ensure => absent,
-		path   => "${tmp_path}/${name}",
-	}
-
 }
