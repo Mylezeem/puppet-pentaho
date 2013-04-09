@@ -37,6 +37,10 @@
 #
 class pentaho {
 
-	require tomcat7, mysql
+	require tomcat7
+
+	class { 'mysql::server':
+		config_hash => { 'root_password' => 'root' }
+	}
 
 }
