@@ -1,17 +1,10 @@
-class pentaho::data {
-	$port				=	'9001'
-	$dbtype				=	'hsql'
-	$version			=	'3.8.0'
-	$pentaho_solution	=	'/opt/pentaho_test/pentaho-solutions/'
-	$role				=	{}
-	$user				=	{}
-	$datasource			=	{}
-	$solution			=	{}
-}
+class pentaho (
+  $applicationserver_base = $pentaho::params::applicationserver_base,
+  $manage_jdbc_drivers    = $pentaho::params::manage_jdbc_drivers ,
+) inherits pentaho::params {
 
-class pentaho {
-	class {'tomcat6' :
-		config_hash	=> {'JAVA_OPTS'     => '-Xms1g -Xmx1g',}
-	}
-	include git, pentaho::params, pentaho::install
+  anchor {'pentaho::begin' : } ->
+  class { 'pentaho::setup' : } ->
+  anchor {'pentaho::end' : }
+
 }
