@@ -1,6 +1,6 @@
 class pentaho::setup {
 
-  if 'mysql' in $manage_jdbc_drivers {
+  if 'mysql' in $pentaho::manage_jdbc_drivers {
 
     package { 'mysql-connector-java' :
       ensure => installed,
@@ -12,7 +12,7 @@ class pentaho::setup {
 
   }
 
-  if 'pgsql' in $manage_jdbc_drivers {
+  if 'pgsql' in $pentaho::manage_jdbc_drivers {
 
     package { $pentaho::params::postgresql_jdbc_driver_package :
       ensure => installed,
@@ -24,7 +24,7 @@ class pentaho::setup {
 
   }
 
-  if 'h2' in $manage_jdbc_drivers {
+  if 'h2' in $pentaho::manage_jdbc_drivers {
 
     wget::fetch { 'h2.jar' :
       source      => 'http://repo2.maven.org/maven2/com/h2database/h2/1.4.181/h2-1.4.181.jar',
