@@ -35,4 +35,14 @@ class pentaho::setup {
 
   }
 
+  archive { 'pentaho'
+    ensure          => present,
+    extension       => 'zip',
+    checksum        => false,
+    follow_redirect => true,
+    url             => 'http://downloads.sourceforge.net/project/pentaho/Business%20Intelligence%20Server/5.1/biserver-ce-5.1.0.0-752.zip?r=http%3A%2F%2Fsourceforge.net%2Fprojects%2Fpentaho%2Ffiles%2FBusiness%2520Intelligence%2520Server%2F5.1%2F&ts=1409885745&use_mirror=skylink',
+    target          => '/tmp',
+    src_target      => '/tmp',
+  }
+
 }

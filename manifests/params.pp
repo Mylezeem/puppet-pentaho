@@ -1,6 +1,14 @@
 class pentaho::params {
 
+  $db_user     = 'root'
+  $db_password = 'password'
+  $db_host     = '127.0.0.1'
+  $db_charset  = 'utf8'
+  $db_collate  = 'utf8_general_ci'
+
   $applicationserver_base = '/usr/share/tomcat'
+
+  $manage_db              = 'mysql'
   $manage_jdbc_drivers    = ['mysql', 'h2']
 
   case $::osfamily {
