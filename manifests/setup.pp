@@ -5,7 +5,7 @@ class pentaho::setup {
     package { 'mysql-connector-java' :
       ensure => installed,
     }->
-    file { "${pentaho::applicationserver_base}/lib/mysql-connector-javar.jar" : 
+    file { "${pentaho::applicationserver_base}/lib/mysql-connector-java.jar" :
       ensure => 'link',
       target => '/usr/share/java/mysql-connector-java.jar',
     }
