@@ -8,6 +8,7 @@ class pentaho (
   anchor {'pentaho::begin' : } ->
   class { 'pentaho::setup' : } ->
   class { 'pentaho::config' : } ->
+  class { 'pentaho::webapp' : } ->
   anchor {'pentaho::end' : }
 
 }
