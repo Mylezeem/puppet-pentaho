@@ -42,8 +42,6 @@
     <param name="schema" value="postgresql"/>
     <param name="schemaObjectPrefix" value="fs_repos_"/>
   </FileSystem>
-     <param name="path" value="${rep.home}/repository"/>
-  </FileSystem>
   <!--
     data store configuration
   -->
@@ -67,7 +65,6 @@
     <param name="tablePrefix" value=""/>
     <param name="schemaObjectPrefix" value="ds_repos_"/>
   </DataStore>
-  <DataStore class="org.apache.jackrabbit.core.data.FileDataStore"/>
   <!--
       security configuration
   -->
@@ -137,9 +134,6 @@
       <param name="schema" value="postgresql"/>
       <param name="schemaObjectPrefix" value="fs_ws_"/>
     </FileSystem>
-    <FileSystem class="org.apache.jackrabbit.core.fs.local.LocalFileSystem">
-      <param name="path" value="${wsp.home}"/>
-    </FileSystem>
     <!--
         persistence manager of the workspace:
         class: FQN of class implementing the PersistenceManager interface
@@ -159,10 +153,6 @@
       <param name="password" value="password"/>
       <param name="schema" value="postgresql"/>
       <param name="schemaObjectPrefix" value="${wsp.name}_pm_ws_"/>
-    </PersistenceManager>
-    <PersistenceManager class="org.apache.jackrabbit.core.persistence.pool.H2PersistenceManager">
-      <param name="url" value="jdbc:h2:${wsp.home}/db"/>
-      <param name="schemaObjectPrefix" value="${wsp.name}_"/>
     </PersistenceManager>
     <!--
         Search index and the file system it uses.
@@ -216,9 +206,6 @@ value="{0}/etc;org.pentaho.security.publish;jcr:read,jcr:readAccessControl,jcr:w
       <param name="schema" value="postgresql"/>
       <param name="schemaObjectPrefix" value="fs_ver_"/>
     </FileSystem>
-    <FileSystem class="org.apache.jackrabbit.core.fs.local.LocalFileSystem">
-      <param name="path" value="${rep.home}/version" />
-    </FileSystem>
     <!--
         Configures the persistence manager to be used for persisting version state.
         Please note that the current versioning implementation is based on
@@ -240,10 +227,6 @@ value="{0}/etc;org.pentaho.security.publish;jcr:read,jcr:readAccessControl,jcr:w
       <param name="password" value="password"/>
       <param name="schema" value="postgresql"/>
       <param name="schemaObjectPrefix" value="pm_ver_"/>
-    </PersistenceManager>
-    <PersistenceManager class="org.apache.jackrabbit.core.persistence.pool.H2PersistenceManager">
-      <param name="url" value="jdbc:h2:${rep.home}/version/db"/>
-      <param name="schemaObjectPrefix" value="version_"/>
     </PersistenceManager>
   </Versioning>
   <!--

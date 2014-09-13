@@ -1,12 +1,15 @@
 class pentaho::config {
 
   exec { '/bin/mkdir -p /opt/pentaho' :
-    unless => '/bin/stat /opt/pentaho',
+    unless => '/usr/bin/stat /opt/pentaho',
   } ->
   exec { '/bin/cp -r /tmp/biserver-ce/pentaho-solutions /opt/pentaho' :
-    unless => '/bin/stat /opt/pentaho/pentaho-solutions',
+    unless => '/usr/bin/stat /opt/pentaho/pentaho-solutions',
   }
 
+  Augeas {
+    require => Exec['/bin/cp -r /tmp/biserver-ce/pentaho-solutions /opt/pentaho'],
+  }
   # Specify the hibernate file to use
   $hibernate_file = $pentaho::manage_db ? { 
     'mysql' => 'mysql5.hibernate.cfg.xml',
@@ -37,6 +40,12 @@ class pentaho::config {
   file { '/opt/pentaho/pentaho-solutions/system/jackrabbit/repository.xml' :
     ensure  => present,
     content => template("pentaho/jackrabbit/${pentaho::manage_db}/repository.xml.erb"),
+    require => Exec['/bin/cp -r /tmp/biserver-ce/pentaho-solutions /opt/pentaho'],
+  }
+  file { '/opt/pentaho/pentaho-solutions/system/osgi/log4j.xml' :
+    ensure  => present,
+    content => template("pentaho/log4j/log4j_osgi.xml.erb"),
+    require => Exec['/bin/cp -r /tmp/biserver-ce/pentaho-solutions /opt/pentaho'],
   }
 
 }
