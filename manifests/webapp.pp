@@ -54,7 +54,7 @@ class pentaho::webapp {
     ],
   }
 
-  file { '/usr/share/tomcat/pentaho/WEB-INF/classes/log4j.xml' :
+  file { '/usr/share/tomcat/webapps/pentaho/WEB-INF/classes/log4j.xml' :
     ensure  => present,
     content => template("pentaho/log4j/log4j_pentaho.xml.erb"),
     require => File['/usr/share/tomcat/webapps/pentaho/META-INF/context.xml'],
