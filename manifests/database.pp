@@ -12,15 +12,15 @@ class pentaho::database (
   }
 
   file {
-    '/tmp/quartz.sql' :
-      source => "puppet:///modules/pentaho/${pentaho::version}/${pentaho::manage_db}/create_quartz.sql";
-    '/tmp/hibernate.sql' :
-      source => "puppet:///modules/pentaho/${pentaho::version}/${pentaho::manage_db}/create_hibernate.sql";
-    '/tmp/jcr.sql' :
-      source => "puppet:///modules/pentaho/${pentaho::version}/${pentaho::manage_db}/create_jcr.sql";
+    "${pentaho::temp_folder}/quartz.sql" :
+      source => "puppet:///modules/pentaho/${pentaho::version}/${pentaho::db_type}/create_quartz.sql";
+    "${pentaho::temp_folder}/hibernate.sql" :
+      source => "puppet:///modules/pentaho/${pentaho::version}/${pentaho::db_type}/create_hibernate.sql";
+    "${pentaho::temp_folder}/jcr.sql" :
+      source => "puppet:///modules/pentaho/${pentaho::version}/${pentaho::db_type}/create_jcr.sql";
   }
 
-  case $pentaho::manage_db {
+  case $pentaho::db_type {
     'mysql' : {
        include ::mysql::server
 	
@@ -29,21 +29,21 @@ class pentaho::database (
          password => $db_password,
          charset  => $db_charset,
          collate  => $db_collate,
-         sql      => '/tmp/quartz.sql',
+         sql      => "${pentaho::temp_folder}/quartz.sql",
        } ->
        mysql::db { 'hibernate' :
          user     => $db_user,
          password => $db_password,
          charset  => $db_charset,
          collate  => $db_collate,
-         sql      => '/tmp/hibernate.sql',
+         sql      => "${pentaho::temp_folder}/hibernate.sql",
        } ->
        mysql::db { 'jcr' :
          user     => $db_user,
          password => $db_password,
          charset  => $db_charset,
          collate  => $db_collate,
-         sql      => '/tmp/jcr.sql',
+         sql      => "${pentaho::temp_folder}/jcr.sql",
        }
 
     }

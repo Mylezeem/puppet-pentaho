@@ -1,63 +1,63 @@
 class pentaho::webapp {
 
-  exec { '/bin/cp -r /tmp/biserver-ce/tomcat/webapps/pentaho* /usr/share/tomcat/webapps/' :
-    unless => '/usr/bin/stat /usr/share/tomcat/webapps/pentaho',
+  exec { "/bin/cp -r ${pentaho::temp_folder}/biserver-ce/tomcat/webapps/pentaho* ${pentaho::applicationserver_base}/webapps/" :
+    unless => "/usr/bin/stat ${pentaho::applicationserver_base}/webapps/pentaho",
   } ->
-  file { '/usr/share/tomcat/webapps/pentaho/META-INF/context.xml' :
+  file { "${pentaho::applicationserver_base}/webapps/pentaho/META-INF/context.xml" :
     ensure  => present,
-    content => template("pentaho/context/${pentaho::manage_db}/context.xml.erb"),
+    content => template("pentaho/context/${pentaho::db_type}/context.xml.erb"),
   }
 
   Augeas {
-    require => File['/usr/share/tomcat/webapps/pentaho/META-INF/context.xml'],
+    require => File["${pentaho::applicationserver_base}/webapps/pentaho/META-INF/context.xml"],
   }
   augeas { 'base_solution' :
     lens    => 'Xml.lns',
-    incl    => '/usr/share/tomcat/webapps/pentaho/WEB-INF/web.xml',
+    incl    => "${pentaho::applicationserver_base}/webapps/pentaho/WEB-INF/web.xml",
     changes => [
-      "set web-app/context-param[1]/param-value/#text /opt/pentaho/pentaho-solutions",
+      "set web-app/context-param[1]/param-value/#text ${pentaho::pentaho_solutions_path}/pentaho-solutions",
     ],
   }
   augeas { 'listen_address' :
     lens    => 'Xml.lns',
-    incl    => '/usr/share/tomcat/webapps/pentaho/WEB-INF/web.xml',
+    incl    => "${pentaho::applicationserver_base}/webapps/pentaho/WEB-INF/web.xml",
     changes => [
-      "set web-app/context-param[3]/param-value/#text http://${::ipaddress}:8080/pentaho",
+      "set web-app/context-param[3]/param-value/#text http://${pentaho::listen_ip}:8080/pentaho",
     ],
   }
   augeas { 'language' :
     lens    => 'Xml.lns',
-    incl    => '/usr/share/tomcat/webapps/pentaho/WEB-INF/web.xml',
+    incl    => "${pentaho::applicationserver_base}/webapps/pentaho/WEB-INF/web.xml",
     changes => [
-      "set web-app/context-param[4]/param-value/#text fr",
+      "set web-app/context-param[4]/param-value/#text ${pentaho::language}",
     ],
   }
   augeas { 'country' :
     lens    => 'Xml.lns',
-    incl    => '/usr/share/tomcat/webapps/pentaho/WEB-INF/web.xml',
+    incl    => "${pentaho::applicationserver_base}/webapps/pentaho/WEB-INF/web.xml",
     changes => [
-      "set web-app/context-param[5]/param-value/#text FR",
+      "set web-app/context-param[5]/param-value/#text ${pentaho::country}",
     ],
   }
   augeas { 'rm_hsqldb_autostartup' :
     lens    => 'Xml.lns',
-    incl    => '/usr/share/tomcat/webapps/pentaho/WEB-INF/web.xml',
+    incl    => "${pentaho::applicationserver_base}/webapps/pentaho/WEB-INF/web.xml",
     changes => [
-      "rm /files/usr/share/tomcat/webapps/pentaho/WEB-INF/web.xml/web-app/context-param[10]",
+      "rm /files${pentaho::applicationserver_base}/webapps/pentaho/WEB-INF/web.xml/web-app/context-param[10]",
     ],
   }
   augeas { 'rm_hsqldb_listener' :
     lens    => 'Xml.lns',
-    incl    => '/usr/share/tomcat/webapps/pentaho/WEB-INF/web.xml',
+    incl    => "${pentaho::applicationserver_base}/webapps/pentaho/WEB-INF/web.xml",
     changes => [
-      "rm /files/usr/share/tomcat/webapps/pentaho/WEB-INF/web.xml/web-app/listener[3]",
+      "rm /files${pentaho::applicationserver_base}/webapps/pentaho/WEB-INF/web.xml/web-app/listener[3]",
     ],
   }
 
-  file { '/usr/share/tomcat/webapps/pentaho/WEB-INF/classes/log4j.xml' :
+  file { "${pentaho::applicationserver_base}/webapps/pentaho/WEB-INF/classes/log4j.xml" :
     ensure  => present,
     content => template("pentaho/log4j/log4j_pentaho.xml.erb"),
-    require => File['/usr/share/tomcat/webapps/pentaho/META-INF/context.xml'],
+    require => File["${pentaho::applicationserver_base}/webapps/pentaho/META-INF/context.xml"],
   }
 
 }

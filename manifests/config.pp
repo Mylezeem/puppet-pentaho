@@ -1,64 +1,67 @@
 class pentaho::config {
 
-  exec { '/bin/mkdir -p /opt/pentaho' :
-    unless => '/usr/bin/stat /opt/pentaho',
+  exec { "/bin/mkdir -p ${pentaho::pentaho_solutions_path}" :
+    unless => "/usr/bin/stat ${pentaho::pentaho_solutions_path}",
   } ->
-  exec { '/bin/cp -r /tmp/biserver-ce/pentaho-solutions /opt/pentaho' :
-    unless => '/usr/bin/stat /opt/pentaho/pentaho-solutions',
+  exec { "/bin/cp -r ${pentaho::temp_folder}/biserver-ce/pentaho-solutions ${pentaho::pentaho_solutions_path}" :
+    unless => "/usr/bin/stat ${pentaho::solutions_path}/pentaho-solutions",
   }
 
   Augeas {
-    require => Exec['/bin/cp -r /tmp/biserver-ce/pentaho-solutions /opt/pentaho'],
+    require => Exec["/bin/cp -r ${pentaho::temp_folder}/biserver-ce/pentaho-solutions ${pentaho::pentaho_solutions_path}"],
   }
   # Specify the hibernate file to use
-  $hibernate_file = $pentaho::manage_db ? { 
+  $hibernate_file = $pentaho::db_type ? {
     'mysql' => 'mysql5.hibernate.cfg.xml',
     'pgsql' => 'postgresql.hibernate.cfg.xml',
   }
   augeas { 'config_file' :
     lens    => 'Xml.lns',
-    incl    => '/opt/pentaho/pentaho-solutions/system/hibernate/hibernate-settings.xml',
+    incl    => "${pentaho::pentaho_solutions_path}/pentaho-solutions/system/hibernate/hibernate-settings.xml",
     changes => [
       "set settings/config-file/#text system/hibernate/${hibernate_file}",
     ],
   }
 
   # Specify delegate class
-  $delegate_class = $pentaho::manage_db ? { 
+  $delegate_class = $pentaho::db_type ? {
     'mysql' => 'org.quartz.impl.jdbcjobstore.StdJDBCDelegate',
     'pgsql' => 'org.quartz.impl.jdbcjobstore.PostgreSQLDelegate',
   }
 
-  augeas { 'quart_properties' :
+  augeas { 'quartz_properties' :
     lens    => 'simplevars.lns',
-    incl    => '/opt/pentaho/pentaho-solutions/system/quartz/quartz.properties',
+    incl    => "${pentaho::pentaho_solutions_path}/pentaho-solutions/system/quartz/quartz.properties",
     changes => [
       "set org.quartz.jobStore.driverDelegateClass ${delegate_class}",
     ],
   }
 
-  file { '/opt/pentaho/pentaho-solutions/system/jackrabbit/repository.xml' :
-    ensure  => present,
-    content => template("pentaho/jackrabbit/${pentaho::manage_db}/repository.xml.erb"),
-    require => Exec['/bin/cp -r /tmp/biserver-ce/pentaho-solutions /opt/pentaho'],
+  File {
+    require => Exec["/bin/cp -r ${pentaho::temp_folder}/biserver-ce/pentaho-solutions ${pentaho::pentaho_solutions_path}"],
   }
-  file { '/opt/pentaho/pentaho-solutions/system/osgi/log4j.xml' :
+
+  file { "${pentaho::pentaho_solutions_path}/pentaho-solutions/system/jackrabbit/repository.xml" :
+    ensure  => present,
+    content => template("pentaho/jackrabbit/${pentaho::db_type}/repository.xml.erb"),
+  }
+
+  # TODO (spredzy) : Currently use template but final goal
+  #                  is to use augeas currently hitting bug
+  #                  https://github.com/hercules-team/augeas/pull/158
+  file { "${pentaho::pentaho_solutions_path}/pentaho-solutions/system/osgi/log4j.xml" :
     ensure  => present,
     content => template("pentaho/log4j/log4j_osgi.xml.erb"),
-    require => Exec['/bin/cp -r /tmp/biserver-ce/pentaho-solutions /opt/pentaho'],
   }
 
   # Fixing incorrect permissions
-  file { '/opt/pentaho/pentaho-solutions/system/osgi' :
-    ensure => directory,
-    owner  => 'tomcat',
-    group  => 'tomcat',
-  }
+  $directories = ["${pentaho::pentaho_solutions_path}/pentaho-solutions/system/osgi", "${pentaho::pentaho_solutions_path}/pentaho-solutions/system/logs", "${pentaho::pentaho_solutions_path}/pentaho-solutions/system/logs/audit", "${pentaho::pentaho_solutions_path}/pentaho-solutions/system/jackrabbit"]
 
-  file { ['/opt/pentaho/pentaho-solutions/logs', '/opt/pentaho/pentaho-solutions/logs/audit'] :
-    ensure => directory,
-    owner  => 'tomcat',
-    group  => 'tomcat',
+  file { $directories :
+    ensure  => directory,
+    owner   => 'tomcat',
+    group   => 'tomcat',
+    mode    => '0755',
   }
 
 }

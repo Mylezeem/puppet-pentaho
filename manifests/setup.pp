@@ -27,10 +27,10 @@ class pentaho::setup {
   if 'h2' in $pentaho::manage_jdbc_drivers {
 
     wget::fetch { 'h2.jar' :
-      source      => 'http://repo2.maven.org/maven2/com/h2database/h2/1.4.181/h2-1.4.181.jar',
-      destination => "${pentaho::applicationserver_base}/lib/h2-1.4.181.jar",
+      source      => $pentaho::h2driver_source_url,
+      destination => "${pentaho::applicationserver_base}/lib/h2.jar",
       timeout     => 0,
-      verbose     => false
+      verbose     => false,
     }
 
   }
@@ -40,9 +40,9 @@ class pentaho::setup {
     extension        => 'zip',
     checksum         => false,
     follow_redirects => true,
-    url              => 'http://downloads.sourceforge.net/project/pentaho/Business%20Intelligence%20Server/5.1/biserver-ce-5.1.0.0-752.zip?r=&ts=1410402175&use_mirror=iweb',
-    target           => '/tmp',
-    src_target       => '/tmp',
+    url              => $pentaho::pentaho_source_url,
+    target           => $pentaho::temp_folder,
+    src_target       => $pentaho::temp_folder,
     timeout          => 0,
   }
 
