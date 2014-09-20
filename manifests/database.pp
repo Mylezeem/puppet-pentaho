@@ -9,14 +9,14 @@ class pentaho::database (
 
   File {
     ensure => present,
-    before => Mysql::db['quartz'],
+    before => Mysql::Db['quartz'],
   }
 
   file {
     "${pentaho::temp_folder}/quartz.sql" :
       source => "puppet:///modules/pentaho/${pentaho::version}/${pentaho::db_type}/create_quartz.sql";
-    "${pentaho::temp_folder}/hibernate.sql" :
-      source => "puppet:///modules/pentaho/${pentaho::version}/${pentaho::db_type}/create_hibernate.sql";
+    "${pentaho::temp_folder}/repository.sql" :
+      source => "puppet:///modules/pentaho/${pentaho::version}/${pentaho::db_type}/create_repository.sql";
     "${pentaho::temp_folder}/jcr.sql" :
       source => "puppet:///modules/pentaho/${pentaho::version}/${pentaho::db_type}/create_jcr.sql";
   }
@@ -31,12 +31,12 @@ class pentaho::database (
          sql      => "${pentaho::temp_folder}/quartz.sql",
          require  => Class['mysql::server'],
        } ->
-       mysql::db { 'hibernate' :
+       mysql::db { 'repository' :
          user     => $db_user,
          password => $db_password,
          charset  => $db_charset,
          collate  => $db_collate,
-         sql      => "${pentaho::temp_folder}/hibernate.sql",
+         sql      => "${pentaho::temp_folder}/repository.sql",
        } ->
        mysql::db { 'jcr' :
          user     => $db_user,
@@ -50,7 +50,7 @@ class pentaho::database (
     'pgsql' : {
       notice('not implemented yet')
     }
-    default { notice('not supported') }
+    default : { notice('not supported') }
   }
 
 }
