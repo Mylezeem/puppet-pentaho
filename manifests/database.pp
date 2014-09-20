@@ -1,10 +1,13 @@
 class pentaho::database (
-  $db_type     = $pentaho::params::db_type,
-  $db_user     = $pentaho::params::db_user,
-  $db_password = $pentaho::params::db_password,
-  $db_host     = $pentaho::params::db_host,
-  $db_charset  = $pentaho::params::db_charset,
-  $db_collate  = $pentaho::params::db_collate,
+  $db_type                = $pentaho::params::db_type,
+  $quartz_db_user         = $pentaho::params::quartz_db_user,
+  $quartz_db_password     = $pentaho::params::quartz_db_password,
+  $hibernate_db_user      = $pentaho::params::hibernate_db_user,
+  $hibernate_db_password  = $pentaho::params::hibernate_db_password,
+  $jackrabbit_db_user     = $pentaho::params::jackrabbit_db_user,
+  $jackrabbit_db_password = $pentaho::params::jackrabbit_db_password,
+  $db_charset             = $pentaho::params::db_charset,
+  $db_collate             = $pentaho::params::db_collate,
 ) inherits pentaho::params {
 
   File {
@@ -24,23 +27,23 @@ class pentaho::database (
   case $pentaho::db_type {
     'mysql' : {
        mysql::db { 'quartz' :
-         user     => $db_user,
-         password => $db_password,
+         user     => $quartz_db_user,
+         password => $quartz_db_password,
          charset  => $db_charset,
          collate  => $db_collate,
          sql      => "${pentaho::temp_folder}/quartz.sql",
          require  => Class['mysql::server'],
        } ->
        mysql::db { 'repository' :
-         user     => $db_user,
-         password => $db_password,
+         user     => $hibernate_db_user,
+         password => $hibernate_db_password,
          charset  => $db_charset,
          collate  => $db_collate,
          sql      => "${pentaho::temp_folder}/repository.sql",
        } ->
        mysql::db { 'jcr' :
-         user     => $db_user,
-         password => $db_password,
+         user     => $jackrabbit_db_user,
+         password => $jackrabbit_db_password,
          charset  => $db_charset,
          collate  => $db_collate,
          sql      => "${pentaho::temp_folder}/jcr.sql",

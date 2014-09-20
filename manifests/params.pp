@@ -1,5 +1,7 @@
 class pentaho::params {
 
+  $version = '5.1'
+
   # Application Server
   $applicationserver_base  = '/usr/share/tomcat'
   $applicationserver_user  = 'tomcat'
@@ -10,11 +12,14 @@ class pentaho::params {
   $manage_jdbc_drivers = ['mysql', 'h2']
   $h2driver_source_url = 'http://repo2.maven.org/maven2/com/h2database/h2/1.4.181/h2-1.4.181.jar'
 
-  $db_user     = 'root'
-  $db_password = 'rd'
-  $db_host     = '127.0.0.1'
-  $db_charset  = 'utf8'
-  $db_collate  = 'utf8_general_ci'
+  $quartz_db_user         = 'pentaho_user'
+  $quartz_db_password     = 'password'
+  $hibernate_db_user      = 'hibuser'
+  $hibernate_db_password  = 'password'
+  $jackrabbit_db_user     = 'jackrabbit'
+  $jackrabbit_db_password = 'password'
+  $db_charset             = 'utf8'
+  $db_collate             = 'utf8_general_ci'
 
   # Pentaho
   $listen_ip              = $::ipaddress

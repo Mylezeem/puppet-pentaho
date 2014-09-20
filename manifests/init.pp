@@ -1,4 +1,5 @@
 class pentaho (
+  $version                 = $pentaho::params::version,
   $applicationserver_base  = $pentaho::params::applicationserver_base,
   $applicationserver_user  = $pentaho::params::applicationserver_user,
   $applicationserver_group = $pentaho::params::applicationserver_user,
