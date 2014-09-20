@@ -1,4 +1,5 @@
 class pentaho::database (
+  $db_type     = $pentaho::params::db_type,
   $db_user     = $pentaho::params::db_user,
   $db_password = $pentaho::params::db_password,
   $db_host     = $pentaho::params::db_host,
@@ -22,14 +23,13 @@ class pentaho::database (
 
   case $pentaho::db_type {
     'mysql' : {
-       include ::mysql::server
-	
        mysql::db { 'quartz' :
          user     => $db_user,
          password => $db_password,
          charset  => $db_charset,
          collate  => $db_collate,
          sql      => "${pentaho::temp_folder}/quartz.sql",
+         require  => Class['mysql::server'],
        } ->
        mysql::db { 'hibernate' :
          user     => $db_user,
