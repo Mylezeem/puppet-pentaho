@@ -48,4 +48,17 @@ class pentaho::config {
     require => Exec['/bin/cp -r /tmp/biserver-ce/pentaho-solutions /opt/pentaho'],
   }
 
+  # Fixing incorrect permissions
+  file { '/opt/pentaho/pentaho-solutions/system/osgi' :
+    ensure => directory,
+    owner  => 'tomcat',
+    group  => 'tomcat',
+  }
+
+  file { ['/opt/pentaho/pentaho-solutions/logs', '/opt/pentaho/pentaho-solutions/logs/audit'] :
+    ensure => directory,
+    owner  => 'tomcat',
+    group  => 'tomcat',
+  }
+
 }
