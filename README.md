@@ -9,9 +9,9 @@
 1. [Overview](#overview)
 2. [Module Description - What the module does and why it is useful](#module-description)
 3. [Setup - The basics of getting started with Pentaho](#setup)
-    * [What Pentaho affects](#what-Pentaho-affects)
+    * [What Pentaho affects](#what-pentaho-affects)
     * [Setup requirements](#setup-requirements)
-    * [Beginning with Pentaho](#beginning-with-Pentaho)
+    * [Beginning with Pentaho](#beginning-with-pentaho)
 4. [Usage - Configuration options and additional functionality](#usage)
 5. [Reference - An under-the-hood peek at what the module is doing and how](#reference)
 5. [Limitations - OS compatibility, etc.](#limitations)
@@ -38,7 +38,7 @@ should work with any other application server.
 * Pentaho's tomcat configuration
 * Database backend data
 
-### Setup Requirements **OPTIONAL**
+### Setup Requirements
 
 As stated above, this module only handle the Pentaho installation and configuration.
 One needs to properly configure the other pieces needed to have a working environment,
