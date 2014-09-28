@@ -5,11 +5,11 @@
 # org.quartz.jobStore.driverDelegateClass = org.quartz.impl.jdbcjobstore.StdJDBCDelegate
 #
 
-CREATE DATABASE IF NOT EXISTS `quartz` DEFAULT CHARACTER SET latin1;
+#CREATE DATABASE IF NOT EXISTS `quartz` DEFAULT CHARACTER SET latin1;
 
-grant all on quartz.* to 'pentaho_user'@'localhost' identified by 'password';
+#grant all on quartz.* to 'pentaho_user'@'localhost' identified by 'password';
 
-USE `quartz`;
+#USE `quartz`;
 
 DROP TABLE IF EXISTS QRTZ5_JOB_LISTENERS;
 DROP TABLE IF EXISTS QRTZ5_TRIGGER_LISTENERS;

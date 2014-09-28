@@ -55,7 +55,7 @@ class pentaho::config {
   }
 
   # Fixing incorrect permissions
-  $directories = ["${pentaho::pentaho_solutions_path}/pentaho-solutions/system/osgi", "${pentaho::pentaho_solutions_path}/pentaho-solutions/system/logs", "${pentaho::pentaho_solutions_path}/pentaho-solutions/system/logs/audit", "${pentaho::pentaho_solutions_path}/pentaho-solutions/system/jackrabbit"]
+  $directories = ["${pentaho::pentaho_solutions_path}/pentaho-solutions/system/osgi", "${pentaho::pentaho_solutions_path}/pentaho-solutions/system/logs", "${pentaho::pentaho_solutions_path}/pentaho-solutions/system/logs/audit", "${pentaho::pentaho_solutions_path}/pentaho-solutions/system/jackrabbit", $pentaho::log_directory]
 
   file { $directories :
     ensure  => directory,

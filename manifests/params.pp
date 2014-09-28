@@ -9,6 +9,8 @@ class pentaho::params {
 
   # Database
   $db_type             = 'mysql'
+  $db_host             = 'localhost'
+  $db_port             = 3306
   $manage_jdbc_drivers = ['mysql', 'h2']
   $h2driver_source_url = 'http://repo2.maven.org/maven2/com/h2database/h2/1.4.181/h2-1.4.181.jar'
 
@@ -16,7 +18,7 @@ class pentaho::params {
   $quartz_db_password     = 'password'
   $hibernate_db_user      = 'hibuser'
   $hibernate_db_password  = 'password'
-  $jackrabbit_db_user     = 'jackrabbit'
+  $jackrabbit_db_user     = 'jcr_user'
   $jackrabbit_db_password = 'password'
   $db_charset             = 'utf8'
   $db_collate             = 'utf8_general_ci'

@@ -25,20 +25,6 @@ class pentaho::webapp {
       "set web-app/context-param[3]/param-value/#text http://${pentaho::listen_ip}:8080/pentaho",
     ],
   }
-  augeas { 'language' :
-    lens    => 'Xml.lns',
-    incl    => "${pentaho::applicationserver_base}/webapps/pentaho/WEB-INF/web.xml",
-    changes => [
-      "set web-app/context-param[4]/param-value/#text ${pentaho::language}",
-    ],
-  }
-  augeas { 'country' :
-    lens    => 'Xml.lns',
-    incl    => "${pentaho::applicationserver_base}/webapps/pentaho/WEB-INF/web.xml",
-    changes => [
-      "set web-app/context-param[5]/param-value/#text ${pentaho::country}",
-    ],
-  }
   augeas { 'rm_hsqldb_autostartup' :
     lens    => 'Xml.lns',
     incl    => "${pentaho::applicationserver_base}/webapps/pentaho/WEB-INF/web.xml",

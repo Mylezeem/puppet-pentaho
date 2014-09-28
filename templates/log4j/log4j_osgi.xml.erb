@@ -16,7 +16,7 @@
    <!-- ================================= -->
    <!-- A time/date based rolling appender -->
    <appender name="PENTAHOFILE" class="org.apache.log4j.DailyRollingFileAppender">
-      <param name="File" value="/tmp/osgi_pentaho.log"/>
+      <param name="File" value="<%= @log_directory %>/osgi_pentaho.log"/>
       <param name="Append" value="false"/>
       <!-- Rollover at midnight each day -->
       <param name="DatePattern" value="'.'yyyy-MM-dd"/>
