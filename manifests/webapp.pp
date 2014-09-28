@@ -1,4 +1,9 @@
+# == Class: pentaho::webapp
 class pentaho::webapp {
+
+  if $caller_module_name != $module_name {
+    fail("Use of private class ${name} by ${caller_module_name}")
+  }
 
   exec { "/bin/cp -r ${pentaho::temp_folder}/biserver-ce/tomcat/webapps/pentaho* ${pentaho::applicationserver_base}/webapps/" :
     unless => "/usr/bin/stat ${pentaho::applicationserver_base}/webapps/pentaho",
@@ -42,7 +47,7 @@ class pentaho::webapp {
 
   file { "${pentaho::applicationserver_base}/webapps/pentaho/WEB-INF/classes/log4j.xml" :
     ensure  => present,
-    content => template("pentaho/log4j/log4j_pentaho.xml.erb"),
+    content => template('pentaho/log4j/log4j_pentaho.xml.erb'),
     require => File["${pentaho::applicationserver_base}/webapps/pentaho/META-INF/context.xml"],
   }
 

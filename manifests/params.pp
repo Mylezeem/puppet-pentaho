@@ -1,3 +1,4 @@
+# == Class: pentaho::params
 class pentaho::params {
 
   $version = '5.1'

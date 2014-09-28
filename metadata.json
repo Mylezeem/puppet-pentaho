@@ -38,6 +38,10 @@
   "project_page": "http://github.com/Mylezeem/puppet-pentaho",
   "dependencies": [
     {
+      "name": "puppetlabs/stdlib",
+      "version_requirement": ">= 4.3.2"
+    },
+    {
       "name": "camptocamp/archive",
       "version_requirement": ">= 0.1.2"
     },

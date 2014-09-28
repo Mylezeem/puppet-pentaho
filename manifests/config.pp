@@ -1,4 +1,9 @@
+# == Class: pentaho::config
 class pentaho::config {
+
+  if $caller_module_name != $module_name {
+    fail("Use of private class ${name} by ${caller_module_name}")
+  }
 
   exec { "/bin/mkdir -p ${pentaho::pentaho_solutions_path}" :
     unless => "/usr/bin/stat ${pentaho::pentaho_solutions_path}",
@@ -51,17 +56,17 @@ class pentaho::config {
   #                  https://github.com/hercules-team/augeas/pull/158
   file { "${pentaho::pentaho_solutions_path}/pentaho-solutions/system/osgi/log4j.xml" :
     ensure  => present,
-    content => template("pentaho/log4j/log4j_osgi.xml.erb"),
+    content => template('pentaho/log4j/log4j_osgi.xml.erb'),
   }
 
   # Fixing incorrect permissions
   $directories = ["${pentaho::pentaho_solutions_path}/pentaho-solutions/system/osgi", "${pentaho::pentaho_solutions_path}/pentaho-solutions/system/logs", "${pentaho::pentaho_solutions_path}/pentaho-solutions/system/logs/audit", "${pentaho::pentaho_solutions_path}/pentaho-solutions/system/jackrabbit", $pentaho::log_directory]
 
   file { $directories :
-    ensure  => directory,
-    owner   => 'tomcat',
-    group   => 'tomcat',
-    mode    => '0755',
+    ensure => directory,
+    owner  => 'tomcat',
+    group  => 'tomcat',
+    mode   => '0755',
   }
 
 }

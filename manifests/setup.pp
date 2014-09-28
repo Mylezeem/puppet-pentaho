@@ -1,4 +1,9 @@
+# == Class: pentaho::setup
 class pentaho::setup {
+
+  if $caller_module_name != $module_name {
+    fail("Use of private class ${name} by ${caller_module_name}")
+  }
 
   if 'mysql' in $pentaho::manage_jdbc_drivers {
 
@@ -17,7 +22,7 @@ class pentaho::setup {
     package { $pentaho::params::postgresql_jdbc_driver_package :
       ensure => installed,
     }->
-    file { "${pentaho::applicationserver_base}/lib/postgresql-jdbc.jar" : 
+    file { "${pentaho::applicationserver_base}/lib/postgresql-jdbc.jar" :
       ensure => 'link',
       target => '/usr/share/java/postgresql-jdbc.jar',
     }
