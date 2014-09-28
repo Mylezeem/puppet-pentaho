@@ -1,0 +1,49 @@
+{
+  "operatingsystem_support": [
+    {
+      "operatingsystem": "RedHat",
+      "operatingsystemrelease": [
+        "5",
+        "6"
+      ]
+    },
+    {
+      "operatingsystem": "CentOS",
+      "operatingsystemrelease": [
+        "5",
+        "6"
+      ]
+    },
+    {
+      "operatingsystem": "Fedora",
+      "operatingsystemrelease": [
+        "19",
+        "20"
+      ]
+    }
+  ],
+  "requirements": [
+    {
+      "name": "puppet",
+      "version_requirement": "3.x"
+    }
+  ],
+  "name": "yguenane-pentaho",
+  "version": "0.1.0",
+  "source": "https://github.com/Mylezeem/puppet-pentaho",
+  "author": "Yanis Guenane",
+  "license": "Apache Version 2.0",
+  "summary": "A puppet module that installs and configures the Pentaho BA Server for the 5.x branch",
+  "description": "A puppet module that installs and configures the Pentaho BA Server for the 5.x branch",
+  "project_page": "http://github.com/Mylezeem/puppet-pentaho",
+  "dependencies": [
+    {
+      "name": "camptocamp/archive",
+      "version_requirement": ">= 0.1.2"
+    },
+    {
+      "name": "maestrodev/wget",
+      "version_requirement": ">= 1.5.6"
+    }
+  ]
+}
