@@ -28,7 +28,7 @@ class pentaho::params {
   $listen_ip              = $::ipaddress
   $language               = 'en'
   $country                = 'US'
-  $pentaho_solutions_path = '/opt/pentaho/'
+  $pentaho_solutions_path = '/opt/pentaho'
   $pentaho_source_url     = 'http://downloads.sourceforge.net/project/pentaho/Business%20Intelligence%20Server/5.1/biserver-ce-5.1.0.0-752.zip?r=&ts=1410402175&use_mirror=iweb'
   $temp_folder            = '/var/tmp'
   $log_directory          = '/var/log/pentaho'

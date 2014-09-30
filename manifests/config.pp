@@ -9,7 +9,7 @@ class pentaho::config {
     unless => "/usr/bin/stat ${pentaho::pentaho_solutions_path}",
   } ->
   exec { "/bin/cp -r ${pentaho::temp_folder}/biserver-ce/pentaho-solutions ${pentaho::pentaho_solutions_path}" :
-    unless => "/usr/bin/stat ${pentaho::solutions_path}/pentaho-solutions",
+    unless => "/usr/bin/stat ${pentaho::pentaho_solutions_path}/pentaho-solutions",
   }
 
   Augeas {
@@ -64,8 +64,8 @@ class pentaho::config {
 
   file { $directories :
     ensure => directory,
-    owner  => 'tomcat',
-    group  => 'tomcat',
+    owner  => $pentaho::applicationserver_user,
+    group  => $pentaho::applicationserver_group,
     mode   => '0755',
   }
 

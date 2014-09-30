@@ -9,5 +9,8 @@ fixtures:
     'archive':
       repo: 'git://github.com/camptocamp/puppet-archive.git'
       ref: '0.1.3'
+    'mysql':
+      repo: 'git://github.com/puppetlabs/puppetlabs-mysql.git'
+      ref: '2.3.1'
   symlinks:
     pentaho: "#{source_dir}"
