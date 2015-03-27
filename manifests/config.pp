@@ -47,7 +47,7 @@ class pentaho::config {
   }
 
   file { "${pentaho::pentaho_solutions_path}/pentaho-solutions/system/jackrabbit/repository.xml" :
-    ensure  => present,
+    ensure  => file,
     content => template("pentaho/jackrabbit/${pentaho::db_type}/repository.xml.erb"),
   }
 
@@ -55,7 +55,7 @@ class pentaho::config {
   #                  is to use augeas currently hitting bug
   #                  https://github.com/hercules-team/augeas/pull/158
   file { "${pentaho::pentaho_solutions_path}/pentaho-solutions/system/osgi/log4j.xml" :
-    ensure  => present,
+    ensure  => file,
     content => template('pentaho/log4j/log4j_osgi.xml.erb'),
   }
 

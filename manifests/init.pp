@@ -132,9 +132,9 @@ class pentaho (
   include ::stdlib
 
   anchor {'pentaho::begin' : } ->
-  class { 'pentaho::setup' : } ->
-  class { 'pentaho::config' : } ->
-  class { 'pentaho::webapp' : } ->
+  class { '::pentaho::setup' : } ->
+  class { '::pentaho::config' : } ->
+  class { '::pentaho::webapp' : } ->
   anchor {'pentaho::end' : }
 
 }

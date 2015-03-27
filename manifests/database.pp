@@ -85,7 +85,7 @@ class pentaho::database (
 ) inherits pentaho::params {
 
   file { "${pentaho::temp_folder}/quartz.sql" :
-    ensure => present,
+    ensure => file,
     source => "puppet:///modules/pentaho/${pentaho::version}/${pentaho::db_type}/create_quartz.sql",
     before => Mysql::Db['quartz'],
   }

@@ -9,7 +9,7 @@ class pentaho::webapp {
     unless => "/usr/bin/stat ${pentaho::applicationserver_base}/webapps/pentaho",
   } ->
   file { "${pentaho::applicationserver_base}/webapps/pentaho/META-INF/context.xml" :
-    ensure  => present,
+    ensure  => file,
     content => template("pentaho/context/${pentaho::db_type}/context.xml.erb"),
   }
 
@@ -46,7 +46,7 @@ class pentaho::webapp {
   }
 
   file { "${pentaho::applicationserver_base}/webapps/pentaho/WEB-INF/classes/log4j.xml" :
-    ensure  => present,
+    ensure  => file,
     content => template('pentaho/log4j/log4j_pentaho.xml.erb'),
     require => File["${pentaho::applicationserver_base}/webapps/pentaho/META-INF/context.xml"],
   }
