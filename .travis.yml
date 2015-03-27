@@ -1,15 +1,19 @@
+# Managed by modulesync
+# Configs https://github.com/Mylezeem/mylezeem-msync
+#
+---
 language: ruby
-script: "bundle install --gemfile .gemfile && BUNDLE_GEMFILE=.gemfile bundle exec rake test SPEC_OPTS='--format documentation --color --backtrace'"
-rvm:
- - 1.9.3
- - 2.0.0
-env:
-  matrix:
-    - PUPPET_GEM_VERSION="~> 3.2.0"
-    - PUPPET_GEM_VERSION="~> 3.3.0"
-    - PUPPET_GEM_VERSION="~> 3.4.0"
-    - PUPPET_GEM_VERSION="~> 3.5.0"
-    - PUPPET_GEM_VERSION="~> 3.6.0"
-    - PUPPET_GEM_VERSION="~> 3.7.0"
+bundler_args: --without system_tests
+script: "bundle exec rake validate && bundle exec rake lint && bundle exec rake spec SPEC_OPTS='--format documentation'"
+sudo: false
+matrix:
+  fast_finish: true
+  include:
+  - rvm: 1.9.3
+    env: PUPPET_GEM_VERSION="~> 3.4"
+  - rvm: 2.0.0
+    env: PUPPET_GEM_VERSION="~> 3.4"
+  - rvm: 2.0.0
+    env: PUPPET_GEM_VERSION="~> 3.7"
 notifications:
   email: false
