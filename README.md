@@ -1,7 +1,8 @@
 # Pentaho
 
 [![Build Status](https://api.travis-ci.org/Mylezeem/puppet-pentaho.svg?branch=master)](https://travis-ci.org/Mylezeem/puppet-pentaho)
-[![Puppet Forge](http://img.shields.io/puppetforge/v/yguenane/pentaho.svg)](https://forge.puppetlabs.com/yguenane/pentaho)
+[![Puppet Forge Version](http://img.shields.io/puppetforge/v/yguenane/pentaho.svg)](https://forge.puppetlabs.com/yguenane/pentaho)
+[![Puppet Forge Downloads](http://img.shields.io/puppetforge/dt/yguenane/pentaho.svg)](https://forge.puppetlabs.com/yguenane/pentaho)
 [![License](http://img.shields.io/:license-apache-blue.svg)](http://www.apache.org/licenses/LICENSE-2.0.html)
 
 #### Table of Contents
