@@ -84,6 +84,11 @@
 #    (string) The log directory
 #    Default: /var/log/pentaho
 #
+#  [*install_samples*]
+#    (boolean) If to install samples reports and mondrian datasources in /public. Controls if samples.zip is copied to default-content.
+#    Default: true
+#
+#
 # === Examples
 #
 #  include pentaho
@@ -124,9 +129,12 @@ class pentaho (
   $jackrabbit_db_password  = $pentaho::params::jackrabbit_db_password,
   $pentaho_solutions_path  = $pentaho::params::pentaho_solutions_path,
   $pentaho_source_url      = $pentaho::params::pentaho_source_url,
+  $pentaho_source_checksum = $pentaho::params::pentaho_source_checksum,
   $h2driver_source_url     = $pentaho::params::h2driver_source_url,
   $temp_folder             = $pentaho::params::temp_folder,
   $log_directory           = $pentaho::params::log_directory,
+  $manage_tomcat_web_xml   = $pentaho::params::manage_tomcat_web_xml,
+  $install_samples         = $pentaho::params::install_samples,
 ) inherits pentaho::params {
 
   include ::stdlib
