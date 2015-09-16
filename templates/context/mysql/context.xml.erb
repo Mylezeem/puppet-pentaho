@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Context path="/pentaho" docbase="webapps/pentaho/">
+<Context path="/pentaho" docBase="webapps/pentaho/">
   <Resource validationQuery="select 1" url="jdbc:mysql://<%= @db_host %>:<%= @db_port %>/hibernate" driverClassName="com.mysql.jdbc.Driver"
             password="<%= @hibernate_db_password %>" username="<%= @hibernate_db_user %>" maxWait="10000" maxIdle="5" maxActive="20"
             factory="org.apache.commons.dbcp.BasicDataSourceFactory" type="javax.sql.DataSource"

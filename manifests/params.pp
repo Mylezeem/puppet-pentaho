@@ -1,8 +1,15 @@
 # == Class: pentaho::params
 class pentaho::params {
 
+  # JOE
+	if $::osfamily == 'Windows' { 
+	  $default_temp_folder = 'c:/Temp'
+	} else { 
+	  $default_temp_folder = '/var/tmp'
+	}
+  
   $version = '5.1'
-
+  
   # Application Server
   $applicationserver_base  = '/usr/share/tomcat'
   $applicationserver_user  = 'tomcat'
@@ -30,8 +37,14 @@ class pentaho::params {
   $country                = 'US'
   $pentaho_solutions_path = '/opt/pentaho'
   $pentaho_source_url     = 'http://downloads.sourceforge.net/project/pentaho/Business%20Intelligence%20Server/5.1/biserver-ce-5.1.0.0-752.zip?r=&ts=1410402175&use_mirror=iweb'
-  $temp_folder            = '/var/tmp'
+  $pentaho_source_checksum = false
+  $temp_folder            = $default_temp_folder
   $log_directory          = '/var/log/pentaho'
+  
+  # Tomcat
+  $manage_tomcat_web_xml  = true
+  
+  $install_samples        = true
 
   case $::osfamily {
     'RedHat' : {
@@ -39,6 +52,9 @@ class pentaho::params {
     }
     'Debian' : {
       $postgresql_jdbc_driver_package = 'libpostgresql-jdbc-java'
+    }
+    'Windows' : {
+      warning('Experimental support for Windows.')
     }
     default : { fail("The ${::osfamily} operating system is not supported with the pentaho module") }
   }

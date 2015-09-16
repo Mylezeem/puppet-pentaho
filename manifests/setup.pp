@@ -7,14 +7,21 @@ class pentaho::setup {
 
   if 'mysql' in $pentaho::manage_jdbc_drivers {
 
-    package { 'mysql-connector-java' :
-      ensure => installed,
+    # Ubuntu fix -JOE
+    # http://stackoverflow.com/questions/18128966/where-is-the-mysql-jdbc-jar-file-in-ubuntu
+    case $::osfamily {
+	    'RedHat' : {
+	      package { 'mysql-connector-java': ensure => installed, }
+	    }
+	    'Debian' : {
+	      package { 'libmysql-java' : ensure => installed, }
+	    }
+	    default : { fail("Installation of MySQL JDBC drivert for ${::osfamily} not implemented.") }
     }->
     file { "${pentaho::applicationserver_base}/lib/mysql-connector-java.jar" :
       ensure => 'link',
       target => '/usr/share/java/mysql-connector-java.jar',
     }
-
   }
 
   if 'pgsql' in $pentaho::manage_jdbc_drivers {
@@ -40,15 +47,15 @@ class pentaho::setup {
 
   }
 
+  # Comment away this to improve speed. -JOE
   archive { 'pentaho' :
     ensure           => present,
     extension        => 'zip',
-    checksum         => false,
+    checksum         => $pentaho::pentaho_source_checksum,
     follow_redirects => true,
     url              => $pentaho::pentaho_source_url,
     target           => $pentaho::temp_folder,
     src_target       => $pentaho::temp_folder,
     timeout          => 0,
   }
-
 }

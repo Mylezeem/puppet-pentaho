@@ -84,10 +84,21 @@ class pentaho::database (
   $db_collate             = $pentaho::params::db_collate,
 ) inherits pentaho::params {
 
+  # JOE*
+  /*
+  if $::osfamily == 'Windows' {
+    $mysql_service = Service['MySQL']
+  } else { 
+    $mysql_service = Class['mysql::server']
+  }
+  */
+  $mysql_service = Class['mysql::server']
+  
   file { "${pentaho::temp_folder}/quartz.sql" :
     ensure => file,
     source => "puppet:///modules/pentaho/${pentaho::version}/${pentaho::db_type}/create_quartz.sql",
     before => Mysql::Db['quartz'],
+    source_permissions => ignore,
   }
 
   case $pentaho::db_type {
@@ -98,7 +109,7 @@ class pentaho::database (
         charset  => $db_charset,
         collate  => $db_collate,
         sql      => "${pentaho::temp_folder}/quartz.sql",
-        require  => Class['mysql::server'],
+        require  => $mysql_service,
       } ->
       mysql::db { 'repository' :
         user     => $hibernate_db_user,
